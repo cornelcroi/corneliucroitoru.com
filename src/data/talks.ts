@@ -1,4 +1,5 @@
-// Only entries verified on a page that names him (search of 26 Sep 2026). Newest first.
+// Entries verified on a page that names him (search of 26 Sep 2026), plus MEE202, confirmed by him.
+// Newest first. `url` is null where no public page or recording was found.
 // `year` is null where the page shows no date; nothing is inferred.
 export const TALKS = [
   {
@@ -28,6 +29,13 @@ export const TALKS = [
     year: 2023,
     format: "Workshop, co-presented",
     url: "https://d1.awsstatic.com/events/Summits/reinvent2023/MAE301_Build-a-complete-livestreaming-workflow-using-automated-deployments.pdf",
+  },
+  {
+    title: "Securing access to live video streams, with Sportall (MEE202)",
+    event: "AWS Summit Paris",
+    year: 2023,
+    format: "Talk, co-presented",
+    url: null,
   },
   {
     title: "Protecting live streams from piracy with Secure Media Delivery at the Edge",

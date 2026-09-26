@@ -56,9 +56,10 @@ import { TALKS } from "../data/talks";
 
     <section>
       <h2 class="eyebrow">Talks, podcasts, workshops</h2>
+      <p class="talks__lede">10 talks, workshops and bootcamps at AWS, including AWS re:Invent and AWS Summits. The ones with a public trace:</p>
       <ul class="plain">
         {TALKS.map((talk) => (
-          <li><a href={talk.url}>{talk.title}</a> <span class="meta">{[talk.event, talk.year, talk.format].filter(Boolean).join(" · ")}</span></li>
+          <li>{talk.url ? <a href={talk.url}>{talk.title}</a> : talk.title} <span class="meta">{[talk.event, talk.year, talk.format].filter(Boolean).join(" · ")}</span></li>
         ))}
         <li>The <a href="https://github.com/aws-samples/serverless-genai-food-analyzer-app">Food Analyzer</a> GenAI app, co-created and demoed at AWS Summits.</li>
         <li>AWS workshops authored: <a href="https://catalog.us-east-1.prod.workshops.aws/workshops/e507820e-bd46-421f-b417-107cd608a3b2/en-US">A/B Testing at the Edge</a>, <a href="https://catalog.us-east-1.prod.workshops.aws/workshops/f238037c-8f0b-446e-9c15-ebcc4908901a/en-US">Scaling cost effective architectures</a>.</li>
@@ -106,6 +107,7 @@ import { TALKS } from "../data/talks";
   .job ul { margin: 6px 0 0; padding-left: 20px; }
   .job li { margin-bottom: 4px; }
   .plain { margin: 12px 0 0; padding-left: 20px; }
+  .talks__lede { margin: 12px 0 0; font-family: var(--serif); font-size: 17px; line-height: 1.5; color: var(--text); }
   .plain li { margin-bottom: 8px; }
   .skills { display: grid; grid-template-columns: 170px 1fr; gap: 10px 24px; margin: 12px 0 0; }
   .skills dt { font-weight: 600; font-size: 15px; padding-top: 2px; }
