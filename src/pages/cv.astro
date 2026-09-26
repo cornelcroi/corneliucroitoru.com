@@ -1,0 +1,117 @@
+---
+import Base from "../layouts/Base.astro";
+import { SITE } from "../site";
+import { encodedEmailLink } from "../lib/content";
+import { OPEN_SOURCE } from "../data/projects";
+import { CERTIFICATIONS, EDUCATION, EXPERIENCE, LANGUAGES, SIDE_PROJECTS, SKILLS } from "../data/experience";
+---
+<Base title="CV" description="Corneliu Croitoru: Staff GenAI Solutions Architect at Betclic. 7 years at AWS, 30+ GenAI prototypes, co-author of Agent Squad.">
+  <main class="wrap cv">
+    <header class="cv__head">
+      <h1 class="page-title">Corneliu Croitoru</h1>
+      <p class="cv__role">Staff GenAI Solutions Architect · Paris</p>
+      <p class="meta cv__contact">
+        <Fragment set:html={encodedEmailLink(SITE.email)} />
+        <a href={SITE.links.linkedin}>linkedin.com/in/corneliucroitoru</a>
+        <a href={SITE.links.github}>github.com/cornelcroi</a>
+      </p>
+      <p class="cv__summary">23 years of shipping software. The last few, with AI. I build prototypes that are ready for production, and I care about the whole product: architecture, code, design, UX.</p>
+    </header>
+
+    <section>
+      <h2 class="eyebrow">Experience</h2>
+      {EXPERIENCE.map((job) => (
+        <article class="job">
+          <div class="job__row"><h3>{job.role}, {job.org}</h3><span class="meta">{job.period}</span></div>
+          {job.summary && <p>{job.summary}</p>}
+          {job.points.length > 0 && <ul>{job.points.map((point) => <li>{point}</li>)}</ul>}
+        </article>
+      ))}
+    </section>
+
+    <section>
+      <h2 class="eyebrow">Side projects</h2>
+      {SIDE_PROJECTS.map((p) => (
+        <article class="job">
+          <div class="job__row"><h3>{p.url ? <a href={p.url}>{p.name}</a> : p.name}, {p.role}</h3><span class="meta">{p.period}</span></div>
+          <p>{p.text}</p>
+        </article>
+      ))}
+    </section>
+
+    <section>
+      <h2 class="eyebrow">Open source</h2>
+      <ul class="plain">
+        {OPEN_SOURCE.map((p) => <li><a href={p.url}>{p.name}</a> <span class="meta">{p.role}</span> · {p.text}</li>)}
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="eyebrow">Speaking and writing</h2>
+      <ul class="plain">
+        <li>Speaker at AWS re:Invent and AWS Summits on applied AI architectures.</li>
+        <li>The <a href="https://github.com/aws-samples/serverless-genai-food-analyzer-app">Food Analyzer</a> GenAI app, co-created and demoed at AWS Summits worldwide.</li>
+        <li>AWS workshops: <a href="https://catalog.us-east-1.prod.workshops.aws/workshops/e507820e-bd46-421f-b417-107cd608a3b2/en-US">A/B Testing at the Edge</a>, <a href="https://catalog.us-east-1.prod.workshops.aws/workshops/f238037c-8f0b-446e-9c15-ebcc4908901a/en-US">Scaling cost effective architectures</a>.</li>
+        <li>Articles on the <a href="/writing/">writing</a> page: AWS Blog, community.aws, dev.to.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="eyebrow">Skills</h2>
+      <dl class="skills">
+        {SKILLS.map((s) => (<><dt>{s.area}</dt><dd>{s.items}</dd></>))}
+      </dl>
+    </section>
+
+    <section class="cv__two">
+      <div>
+        <h2 class="eyebrow">Education</h2>
+        <p>{EDUCATION.degree}<br><span class="meta">{EDUCATION.school}</span></p>
+        <h2 class="eyebrow">Languages</h2>
+        <p>{LANGUAGES}</p>
+      </div>
+      <div>
+        <h2 class="eyebrow">Certifications</h2>
+        <ul class="plain">{CERTIFICATIONS.map((c) => <li>{c}</li>)}</ul>
+      </div>
+    </section>
+  </main>
+</Base>
+
+<style>
+  .cv { max-width: calc(820px + 2 * var(--gutter)); }
+  .cv__head { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+  .cv__role { margin: 0; font-size: 19px; font-weight: 600; }
+  .cv__contact { margin: 0; display: flex; flex-wrap: wrap; gap: 6px 20px; }
+  .cv__contact :global(a), .cv a { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  .cv__summary { margin: 12px 0 0; font-family: var(--serif); font-size: 19px; line-height: 1.5; color: var(--text); }
+  section { margin-top: 40px; }
+  section > h2 { margin: 0 0 8px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); font-weight: 400; }
+  .job { padding-block: 16px; border-bottom: 1px solid var(--rule); }
+  .job:last-child { border-bottom: 0; }
+  .job__row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+  .job h3 { margin: 0; font-size: 17px; font-weight: 600; }
+  .job p, .job li, .plain li, .skills dd, .cv__two p { font-family: var(--serif); font-size: 17px; line-height: 1.5; color: var(--text); }
+  .job p { margin: 6px 0 0; }
+  .job ul { margin: 6px 0 0; padding-left: 20px; }
+  .job li { margin-bottom: 4px; }
+  .plain { margin: 12px 0 0; padding-left: 20px; }
+  .plain li { margin-bottom: 8px; }
+  .skills { display: grid; grid-template-columns: 120px 1fr; gap: 10px 24px; margin: 12px 0 0; }
+  .skills dt { font-weight: 600; font-size: 15px; padding-top: 2px; }
+  .skills dd { margin: 0; }
+  .cv__two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; }
+  .cv__two h2 { margin: 0 0 8px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); font-weight: 400; }
+  .cv__two p { margin: 12px 0 24px; }
+  @media (max-width: 640px) {
+    .skills { grid-template-columns: 1fr; gap: 2px; }
+    .skills dd { margin-bottom: 10px; }
+    .cv__two { grid-template-columns: 1fr; gap: 0; }
+  }
+  @media print {
+    :global(header.nav--bar), :global(.footer) { display: none; }
+    .cv { max-width: none; padding: 0; }
+    section { break-inside: avoid-page; margin-top: 20px; }
+    .job { break-inside: avoid; }
+  }
+</style>

@@ -4,6 +4,7 @@ import Base from "../layouts/Base.astro";
 import PostRow from "../components/PostRow.astro";
 import { SITE } from "../site";
 import { BUILDING, OPEN_SOURCE } from "../data/projects";
+import { EXPERIENCE } from "../data/experience";
 import { PHOTO_QUALITY, getAllPosts, getSeries } from "../lib/content";
 
 const LATEST_POSTS = 5;
@@ -16,6 +17,7 @@ const hero = heroSeries.data.photos[SITE.hero.photo] ?? heroSeries.data.photos[0
 const tiles = series.filter((s) => s.id !== heroSeries.id).slice(0, PHOTO_TILES);
 const photoCount = series.reduce((n, s) => n + s.data.photos.length, 0);
 const agentSquad = OPEN_SOURCE[0];
+const RECENT_JOBS = 3;
 ---
 <Base overlayNav>
   <header class="hero">
@@ -24,7 +26,7 @@ const agentSquad = OPEN_SOURCE[0];
     <nav class="nav wrap hero__nav" aria-label="Main">
       <a class="nav__name" href="/">{SITE.name}</a>
       <div class="nav__links">
-        <a href="/writing/">Writing</a><a href="/projects/">Projects</a><a href="/photography/">Photography</a><a href="/about/">About</a>
+        <a href="/writing/">Writing</a><a href="/projects/">Projects</a><a href="/photography/">Photography</a><a href="/cv/">CV</a><a href="/about/">About</a>
       </div>
     </nav>
     <div class="wrap hero__text">
@@ -34,15 +36,15 @@ const agentSquad = OPEN_SOURCE[0];
   </header>
 
   <section class="wrap summary">
-    <p>20+ years of shipping software. The last few, shipping with AI.</p>
-    <p>Staff GenAI Solutions Architect at Betclic. Before that, 7 years at AWS, building 30+ GenAI prototypes with customers across EMEA. Always with the path to production in mind. I know what it takes.</p>
+    <p>23 years of shipping software. The last few, shipping with AI.</p>
+    <p>Staff GenAI Solutions Architect at Betclic. Before that, 7 years at AWS: architect for hundreds of customers, then 30+ GenAI prototypes. Always with the path to production in mind. I know what it takes.</p>
     <p>Not just the code. The product, the design, the UX. I like to own it end to end.</p>
     <p>On the side, two travel products in production: <a href="https://streetlensapp.com">StreetLens</a> and <a href="https://www.backfrommytrip.com">Back From My Trip</a>. That is where I test the patterns I write about.</p>
     <p>And I photograph the places I travel to.</p>
   </section>
 
   <section class="wrap facts" aria-label="In numbers">
-    <span><strong>20+</strong> years of software</span>
+    <span><strong>23</strong> years of software</span>
     <span><strong>7</strong> years at AWS</span>
     <span><strong>30+</strong> GenAI prototypes</span>
     <span><strong>7.7k</strong> stars on Agent Squad</span>
@@ -56,6 +58,27 @@ const agentSquad = OPEN_SOURCE[0];
       <div><h3>Prototype to production</h3><p>Prototypes that survive contact with real users. Serverless, AWS, cost and failure modes from day one.</p></div>
       <div><h3>The product end to end</h3><p>Architecture, code, design, UX. From the first sketch to the thing people use.</p></div>
     </div>
+  </section>
+
+  <section class="wrap exp" aria-labelledby="exp-title">
+    <h2 id="exp-title" class="eyebrow">Experience</h2>
+    {EXPERIENCE.slice(0, RECENT_JOBS).map((job) => (
+      <div class="exp__row">
+        <span class="meta exp__when">{job.period}</span>
+        <div class="exp__what">
+          <span class="exp__role">{job.role} · <strong>{job.org}</strong></span>
+          <span class="exp__text">{job.summary}</span>
+        </div>
+      </div>
+    ))}
+    <div class="exp__row">
+      <span class="meta exp__when">2003 – 2018</span>
+      <div class="exp__what">
+        <span class="exp__role">Software engineer, tech lead, product owner</span>
+        <span class="exp__text">Banking and insurance (Société Générale, BNP Paribas), then La Centrale, where I led the move to AWS.</span>
+      </div>
+    </div>
+    <a class="meta exp__more" href="/cv/">Full CV →</a>
   </section>
 
   <div class="wrap home">
@@ -120,6 +143,17 @@ const agentSquad = OPEN_SOURCE[0];
   .does h3 { margin: 0 0 8px; font-size: 18px; font-weight: 600; }
   .does p { margin: 0; font-family: var(--serif); font-size: 17px; line-height: 1.5; color: var(--muted); }
   @media (max-width: 760px) { .does__grid { grid-template-columns: 1fr; gap: 24px; } }
+
+  .exp { padding-top: 56px; display: flex; flex-direction: column; }
+  .exp h2 { margin: 0 0 4px; padding-bottom: 12px; border-bottom: 1px solid var(--rule); font-weight: 400; }
+  .exp__row { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 24px; padding-block: 16px; border-bottom: 1px solid var(--rule); }
+  .exp__when { padding-top: 3px; }
+  .exp__what { display: flex; flex-direction: column; gap: 4px; }
+  .exp__role { font-size: 17px; }
+  .exp__role strong { font-weight: 600; }
+  .exp__text { font-family: var(--serif); font-size: 17px; line-height: 1.5; color: var(--muted); }
+  .exp__more { margin-top: 14px; }
+  @media (max-width: 640px) { .exp__row { grid-template-columns: 1fr; gap: 4px; } }
 
   .home { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: clamp(48px, 7vw, 96px); padding-top: 72px; }
   .home__title { margin: 0 0 4px; font-family: var(--serif); font-size: 30px; }
