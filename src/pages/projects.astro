@@ -1,6 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import { AGENT_SQUAD, BUILDING, BUILT_AT_AWS, CONTEXT_LENS, EXPERIMENT } from "../data/projects";
+import { AGENT_SQUAD, BUILDING, BUILT_AT_AWS, CONTEXT_LENS, EXPERIMENTS } from "../data/projects";
 import { SITE } from "../site";
 ---
 <Base title="Projects" description="The products Corneliu Croitoru co-founded, the open source he maintains, and what he built at AWS.">
@@ -28,7 +28,10 @@ import { SITE } from "../site";
       <span class="item__row"><span class="item__name">{CONTEXT_LENS.name}</span><span class="meta">{CONTEXT_LENS.role}</span></span>
       <span class="item__text">{CONTEXT_LENS.text}</span>
     </a>
-    <p class="more">Smaller experiments, one idea each: <a href={EXPERIMENT.url}>{EXPERIMENT.name}</a>, {EXPERIMENT.text}. The rest is on <a href={SITE.links.github}>GitHub</a>.</p>
+    <h3 class="sub-group">Experiments, one idea each</h3>
+    <ul class="experiments">
+      {EXPERIMENTS.map((e) => <li><a href={e.url}>{e.name}</a>, {e.text}</li>)}
+    </ul>
 
     <h2 class="eyebrow group">Built at AWS</h2>
     {BUILT_AT_AWS.map((p) => (
@@ -50,8 +53,9 @@ import { SITE } from "../site";
   .item__name { font-family: var(--serif); font-size: 22px; font-weight: 700; }
   .item__text { font-family: var(--serif); font-size: 17px; line-height: 1.5; color: var(--muted); }
   .shot { width: 100%; height: auto; margin-top: 14px; border: 1px solid var(--rule); border-radius: 6px; }
-  .more { margin: 4px 0 0; font-family: var(--serif); font-size: 16px; line-height: 1.5; color: var(--muted); }
-  .more a { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  .sub-group { margin: 20px 0 6px; font-size: 13px; font-weight: 600; color: var(--faint); letter-spacing: 0.04em; }
+  .experiments { margin: 0; padding-left: 18px; font-family: var(--serif); font-size: 16px; line-height: 1.6; color: var(--muted); }
+  .experiments a { font-weight: 600; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
   .mcp { margin: 4px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
   .mcp a { font-weight: 600; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 </style>

@@ -32,12 +32,12 @@ export const CONTEXT_LENS = {
   role: "Author",
 };
 
-// Small experiments, one idea each: named in one line, never listed as projects.
-export const EXPERIMENT = {
-  name: "Ask James",
-  url: "https://github.com/cornelcroi/ask-james",
-  text: "a second model as reviewer instead of author, inside your assistant",
-};
+// Small experiments, one idea each: a short list, never full entries.
+export const EXPERIMENTS = [
+  { name: "Ask James", url: "https://github.com/cornelcroi/ask-james", text: "a second opinion from another LLM, inside your assistant" },
+  { name: "Data Lens", url: "https://github.com/cornelcroi/data-lens", text: "ask questions about spreadsheets in plain English" },
+  { name: "Bookmark Lens", url: "https://github.com/cornelcroi/bookmark-lens", text: "your bookmarks, searchable by meaning" },
+];
 
 export const BUILT_AT_AWS = [
   {
