@@ -42,6 +42,10 @@ TITLES = {
 }
 
 
+# EXIF model codes that are not the name photographers know the camera by.
+CAMERA_NAMES = {"ILCE-7C": "Sony A7C"}
+
+
 def slugify(text):
     ascii_text = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode()
     return re.sub(r"[^a-z0-9]+", "-", ascii_text.lower()).strip("-")
@@ -78,7 +82,7 @@ def shooting_data(tags):
     if not camera and " back " in lens:
         camera = lens.split(" back ")[0]
     if camera:
-        data["camera"] = camera
+        data["camera"] = CAMERA_NAMES.get(camera, camera)
     if lens and not lens.startswith(camera or "\0"):
         data["lens"] = lens
     focal35 = tags.get("FocalLengthIn35mmFilm")

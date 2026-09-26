@@ -5,7 +5,7 @@ year: 2021
 cover: ./01.jpg
 photos:
   - src: ./01.jpg
-    camera: "ILCE-7C"
+    camera: "Sony A7C"
     lens: "FE 20mm F1.8 G"
     focal: "20 mm eq."
     aperture: "f/8"
@@ -13,7 +13,7 @@ photos:
     iso: "ISO 4000"
     taken: "2021-01-16"
   - src: ./02.jpg
-    camera: "ILCE-7C"
+    camera: "Sony A7C"
     lens: "FE 20mm F1.8 G"
     focal: "20 mm eq."
     aperture: "f/2.2"
@@ -21,7 +21,7 @@ photos:
     iso: "ISO 2500"
     taken: "2021-01-16"
   - src: ./03.jpg
-    camera: "ILCE-7C"
+    camera: "Sony A7C"
     lens: "FE 20mm F1.8 G"
     focal: "20 mm eq."
     aperture: "f/22"
@@ -29,7 +29,7 @@ photos:
     iso: "ISO 2500"
     taken: "2021-01-16"
   - src: ./04.jpg
-    camera: "ILCE-7C"
+    camera: "Sony A7C"
     lens: "FE 20mm F1.8 G"
     focal: "20 mm eq."
     aperture: "f/8"
@@ -37,7 +37,7 @@ photos:
     iso: "ISO 2500"
     taken: "2021-01-16"
   - src: ./05.jpg
-    camera: "ILCE-7C"
+    camera: "Sony A7C"
     lens: "FE 20mm F1.8 G"
     focal: "20 mm eq."
     aperture: "f/9"
@@ -45,7 +45,7 @@ photos:
     iso: "ISO 6400"
     taken: "2021-01-16"
   - src: ./06.jpg
-    camera: "ILCE-7C"
+    camera: "Sony A7C"
     lens: "FE 20mm F1.8 G"
     focal: "20 mm eq."
     aperture: "f/9"
@@ -53,7 +53,7 @@ photos:
     iso: "ISO 6400"
     taken: "2021-01-16"
   - src: ./07.jpg
-    camera: "ILCE-7C"
+    camera: "Sony A7C"
     lens: "FE 20mm F1.8 G"
     focal: "20 mm eq."
     aperture: "f/9"
@@ -61,7 +61,7 @@ photos:
     iso: "ISO 6400"
     taken: "2021-01-16"
   - src: ./08.jpg
-    camera: "ILCE-7C"
+    camera: "Sony A7C"
     lens: "FE 20mm F1.8 G"
     focal: "20 mm eq."
     aperture: "f/3.5"
@@ -69,7 +69,7 @@ photos:
     iso: "ISO 2500"
     taken: "2021-01-16"
   - src: ./09.jpg
-    camera: "ILCE-7C"
+    camera: "Sony A7C"
     lens: "FE 20mm F1.8 G"
     focal: "20 mm eq."
     aperture: "f/8"
@@ -77,7 +77,7 @@ photos:
     iso: "ISO 2500"
     taken: "2021-01-16"
   - src: ./10.jpg
-    camera: "ILCE-7C"
+    camera: "Sony A7C"
     lens: "FE 20mm F1.8 G"
     focal: "20 mm eq."
     aperture: "f/8"
@@ -85,7 +85,7 @@ photos:
     iso: "ISO 2500"
     taken: "2021-01-16"
   - src: ./11.jpg
-    camera: "ILCE-7C"
+    camera: "Sony A7C"
     lens: "FE 20mm F1.8 G"
     focal: "20 mm eq."
     aperture: "f/8"
@@ -93,7 +93,7 @@ photos:
     iso: "ISO 2500"
     taken: "2021-01-16"
   - src: ./12.jpg
-    camera: "ILCE-7C"
+    camera: "Sony A7C"
     lens: "FE 20mm F1.8 G"
     focal: "20 mm eq."
     aperture: "f/8"
