@@ -60,7 +60,7 @@ const tiles = series.filter((s) => s.id !== heroSeries.id).slice(0, PHOTO_TILES)
 
     <section class="block">
       <div class="block__head"><h2>Photography</h2></div>
-      <p class="block__lede">Photography is my other passion. I shoot the places I travel to: a Canon, a Sony A7C, and lately my iPhone.</p>
+      <p class="block__lede">Photography is my other passion. I shoot the places I travel to. For years that meant a Canon, APS-C then full frame, and later a Sony mirrorless. Now it's mostly my iPhone: the best camera is the one you always have with you, and the Pro models have been really good these last few years.</p>
       <div class="tiles">
         {tiles.map((s) => (
           <a href={`/photography/${s.id}/`} class="tile">
