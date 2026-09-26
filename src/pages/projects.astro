@@ -13,6 +13,7 @@ import { AGENT_SQUAD, BUILDING, BUILT_AT_AWS, MCP_SERVERS } from "../data/projec
         <span class="item__row"><span class="item__name">{p.name}</span><span class="meta">{p.role}</span></span>
         <span class="item__text">{p.text}</span>
         <span class="meta">{p.line}</span>
+        {p.image && <img class="shot" src={p.image.src} alt={p.image.alt} width={p.image.width} height={p.image.height} loading="lazy" decoding="async">}
       </a>
     ))}
 
@@ -48,6 +49,7 @@ import { AGENT_SQUAD, BUILDING, BUILT_AT_AWS, MCP_SERVERS } from "../data/projec
   .item__row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
   .item__name { font-family: var(--serif); font-size: 22px; font-weight: 700; }
   .item__text { font-family: var(--serif); font-size: 17px; line-height: 1.5; color: var(--muted); }
+  .shot { width: 100%; height: auto; margin-top: 14px; border: 1px solid var(--rule); border-radius: 6px; }
   .mcp { margin: 4px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
   .mcp a { font-weight: 600; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 </style>

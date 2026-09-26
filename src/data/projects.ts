@@ -5,6 +5,7 @@ export const BUILDING = [
     line: "GPS audio guides · 6 cities · 8 languages",
     text: "Hear the story of the places around you, in your language. Facts are extracted from sources first, the story is written from them, then checked against them.",
     role: "Co-founder",
+    image: { src: "/img/projects/streetlens.jpg", alt: "StreetLens on iPhone: searching Honfleur, a story of Notre-Dame in Japanese, and the lock screen playing", width: 1400, height: 900 },
   },
   {
     name: "Back From My Trip",
@@ -12,6 +13,7 @@ export const BUILDING = [
     line: "Trip reports. Would I go back?",
     text: "Travellers write trip reports that end with one question: would I go back? The AI moderates, extracts places and verifies photos. It never touches the story.",
     role: "Co-founder",
+    image: { src: "/img/projects/backfrommytrip.jpg", alt: "The Back From My Trip home page: the trip report of the week, its verdict and its verified badge", width: 1280, height: 680 },
   },
 ];
 
