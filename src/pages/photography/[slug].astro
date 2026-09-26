@@ -21,7 +21,7 @@ const images = await Promise.all(
 const largest = (img: (typeof images)[number]) => img.srcSet.values.at(-1)?.url ?? img.src;
 const og = await getImage({ src: series.data.cover, width: 1200, format: "jpg" });
 ---
-<Base title={title} description={description ?? `${title}: ${photos.length} photographs by ${SITE.name}.`} image={og.src}>
+<Base title={title} description={description ?? `${title}${year ? `, ${year}` : ""}: ${photos.length} travel photographs by ${SITE.name}, with the camera settings under each one.`} image={og.src} imageAlt={`${title}, photograph by ${SITE.name}`}>
   <main class="wrap">
     <header class="series__head">
       <a class="meta" href="/photography/">← Photography</a>

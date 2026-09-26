@@ -2,19 +2,41 @@
 import "../styles/global.css";
 import { SITE } from "../site";
 import { encodedEmailLink } from "../lib/content";
+import { graph } from "../lib/seo";
 
 interface Props {
   title?: string;
+  // Replaces "<title> · <name>" when a page needs its own full title (the home page).
+  fullTitle?: string;
   description?: string;
   image?: string;
+  imageAlt?: string;
+  type?: "website" | "article" | "profile";
+  published?: Date;
+  // Extra schema.org nodes for this page, added to the site-wide WebSite + Person graph.
+  schema?: object[];
   // Home page: the nav sits over the hero photograph instead of above the page.
   overlayNav?: boolean;
 }
 
-const { title, description = SITE.bio, image, overlayNav = false } = Astro.props;
-const fullTitle = title ? `${title} · ${SITE.name}` : SITE.name;
-const canonical = new URL(Astro.url.pathname, SITE.url);
-const ogImage = image ? new URL(image, SITE.url) : undefined;
+const {
+  title,
+  fullTitle,
+  description = SITE.bio,
+  image = SITE.shareImage,
+  imageAlt = SITE.shareImageAlt,
+  type = "website",
+  published,
+  schema = [],
+  overlayNav = false,
+} = Astro.props;
+// Search results cut titles around 60 characters: a long title goes out without the name suffix.
+const TITLE_LIMIT = 60;
+const suffixed = title ? `${title} · ${SITE.name}` : SITE.name;
+const pageTitle = fullTitle ?? (title && suffixed.length > TITLE_LIMIT ? title : suffixed);
+const canonical = new URL(Astro.url.pathname, SITE.url).href;
+const ogImage = new URL(image, SITE.url).href;
+const isDefaultImage = image === SITE.shareImage;
 const path = Astro.url.pathname;
 const nav = [
   { href: "/writing/", label: "Writing" },
@@ -29,22 +51,45 @@ const nav = [
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{fullTitle}</title>
+  <title>{pageTitle}</title>
   <meta name="description" content={description}>
+  <meta name="author" content={SITE.name}>
   <link rel="canonical" href={canonical}>
+
+  <link rel="preload" href="/fonts/source-serif-4-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/instrument-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta name="theme-color" content="#ffffff">
+
   <link rel="alternate" type="application/rss+xml" title={SITE.name} href="/rss.xml">
   <link rel="sitemap" href="/sitemap-index.xml">
-  <meta property="og:title" content={title ?? SITE.name}>
+  <link rel="me" href={SITE.links.linkedin}>
+  <link rel="me" href={SITE.links.github}>
+
+  <meta property="og:site_name" content={SITE.name}>
+  <meta property="og:locale" content="en_US">
+  <meta property="og:type" content={type}>
+  <meta property="og:title" content={pageTitle}>
   <meta property="og:description" content={description}>
   <meta property="og:url" content={canonical}>
-  <meta property="og:type" content={path.startsWith("/writing/") && path !== "/writing/" ? "article" : "website"}>
-  {ogImage && <meta property="og:image" content={ogImage}>}
-  <meta name="twitter:card" content={ogImage ? "summary_large_image" : "summary"}>
-  <meta name="author" content={SITE.name}>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap">
+  <meta property="og:image" content={ogImage}>
+  <meta property="og:image:alt" content={imageAlt}>
+  {isDefaultImage && <meta property="og:image:width" content="1200">}
+  {isDefaultImage && <meta property="og:image:height" content="630">}
+  {type === "article" && published && <meta property="article:published_time" content={published.toISOString()}>}
+  {type === "article" && <meta property="article:author" content={SITE.links.linkedin}>}
+  {type === "profile" && <meta property="profile:first_name" content="Corneliu">}
+  {type === "profile" && <meta property="profile:last_name" content="Croitoru">}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content={pageTitle}>
+  <meta name="twitter:description" content={description}>
+  <meta name="twitter:image" content={ogImage}>
+  <meta name="twitter:image:alt" content={imageAlt}>
+
+  <script type="application/ld+json" set:html={JSON.stringify(graph(...schema))} />
   <slot name="head" />
 </head>
 <body>
@@ -65,10 +110,10 @@ const nav = [
     <span>{SITE.name} · Paris</span>
     <div class="footer__links">
       <Fragment set:html={encodedEmailLink(SITE.email, "Email")} />
-      <a href={SITE.links.github}>GitHub</a>
-      <a href={SITE.links.linkedin}>LinkedIn</a>
-      <a href={SITE.links.devto}>dev.to</a>
-      <a href={SITE.links.instagram}>Instagram</a>
+      <a href={SITE.links.github} rel="me">GitHub</a>
+      <a href={SITE.links.linkedin} rel="me">LinkedIn</a>
+      <a href={SITE.links.devto} rel="me">dev.to</a>
+      <a href={SITE.links.instagram} rel="me">Instagram</a>
       <a href="/rss.xml">RSS</a>
     </div>
   </footer>

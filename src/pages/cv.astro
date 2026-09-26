@@ -6,11 +6,11 @@ import { BUILT_AT_AWS, MCP_SERVERS } from "../data/projects";
 import { CERTIFICATIONS, EDUCATION, EXPERIENCE, LANGUAGES, SIDE_PROJECTS, SKILLS, WHAT_I_DO } from "../data/experience";
 import { TALKS } from "../data/talks";
 ---
-<Base title="CV" description="Corneliu Croitoru: Staff GenAI Solutions Architect at Betclic. 7 years at AWS, 30+ GenAI prototypes, co-author of Agent Squad.">
+<Base title="CV" type="profile" description="Corneliu Croitoru, AI Architect & Product Builder: 23 years of software, 7 at AWS, 30+ GenAI prototypes, co-author of Agent Squad.">
   <main class="wrap cv">
     <header class="cv__head">
       <h1 class="page-title">Corneliu Croitoru</h1>
-      <p class="cv__role">Staff GenAI Solutions Architect · Paris</p>
+      <p class="cv__role">{SITE.role} · Paris</p>
       <p class="meta cv__contact">
         <Fragment set:html={encodedEmailLink(SITE.email)} />
         <a href={SITE.links.linkedin}>linkedin.com/in/corneliucroitoru</a>

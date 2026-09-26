@@ -7,7 +7,7 @@ import { PHOTO_QUALITY, getSeries } from "../../lib/content";
 const series = await getSeries();
 const photoCount = series.reduce((n, s) => n + s.data.photos.length, 0);
 ---
-<Base title="Photography" description="Travel photography by Corneliu Croitoru, one series per trip.">
+<Base title="Photography" description={`Travel photography by Corneliu Croitoru: ${series.length} series, one per trip, with the camera settings under every photo.`}>
   <main class="wrap">
     <header class="head">
       <div>

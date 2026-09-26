@@ -15,7 +15,7 @@ const heroSeries = series.find((s) => s.id === SITE.hero.series) ?? series[0];
 const hero = heroSeries.data.photos[SITE.hero.photo] ?? heroSeries.data.photos[0];
 const tiles = series.filter((s) => s.id !== heroSeries.id).slice(0, PHOTO_TILES);
 ---
-<Base overlayNav>
+<Base overlayNav fullTitle={`${SITE.name} · ${SITE.role}`}>
   <header class="hero">
     <Image src={hero.src} alt={heroSeries.data.title} widths={[800, 1200, 1600, 2000]} sizes="100vw" quality={PHOTO_QUALITY} loading="eager" fetchpriority="high" class="hero__img" />
     <div class="hero__shade"></div>
@@ -34,7 +34,7 @@ const tiles = series.filter((s) => s.id !== heroSeries.id).slice(0, PHOTO_TILES)
   <main class="wrap col">
     <section class="intro">
       <p class="intro__lead">23 years of shipping software. The last few, with AI.</p>
-      <p>Staff GenAI Solutions Architect at Betclic, leading GenAI architecture and MCP adoption across the company. Before that, 7 years at AWS and 30+ GenAI prototypes: agents, LLM pipelines, evaluation.</p>
+      <p>I design and build GenAI systems: agents, LLM pipelines, evaluation. Today as Staff GenAI Solutions Architect at Betclic, leading GenAI architecture and MCP adoption. Before that, 7 years at AWS and 30+ GenAI prototypes.</p>
       <p>What I love is the whole product, not just the AI: the idea, the architecture, the code, the UX. Two of mine are live, built on the side: <a href="https://streetlensapp.com">StreetLens</a> and <a href="https://www.backfrommytrip.com">Back From My Trip</a>.</p>
       <p>And I photograph the places I travel to.</p>
       <p class="facts">
@@ -59,8 +59,8 @@ const tiles = series.filter((s) => s.id !== heroSeries.id).slice(0, PHOTO_TILES)
     </section>
 
     <section class="block">
-      <div class="block__head"><h2>Photography</h2><a href="/photography/">{series.length} series →</a></div>
-      <p class="block__lede">Photography is my other passion. I shoot the places I travel to: a Canon, a Sony A7C, and lately my iPhone. {series.length} trips so far.</p>
+      <div class="block__head"><h2>Photography</h2></div>
+      <p class="block__lede">Photography is my other passion. I shoot the places I travel to: a Canon, a Sony A7C, and lately my iPhone.</p>
       <div class="tiles">
         {tiles.map((s) => (
           <a href={`/photography/${s.id}/`} class="tile">
@@ -69,6 +69,7 @@ const tiles = series.filter((s) => s.id !== heroSeries.id).slice(0, PHOTO_TILES)
           </a>
         ))}
       </div>
+      <a class="more" href="/photography/">See all {series.length} series →</a>
     </section>
   </main>
 </Base>
@@ -102,7 +103,7 @@ const tiles = series.filter((s) => s.id !== heroSeries.id).slice(0, PHOTO_TILES)
   .post { display: flex; flex-direction: column; gap: 6px; padding-block: 20px; border-bottom: 0; }
   .post:hover { text-decoration: none; }
   .post:hover .post__title { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
-  .more { display: inline-block; margin-top: 12px; font-size: 15px; font-weight: 500; }
+  .more { display: inline-block; margin-top: 16px; font-size: 15px; font-weight: 500; }
   .post__title { font-family: var(--serif); font-size: 22px; line-height: 1.25; font-weight: 700; }
   .post__excerpt { font-family: var(--serif); font-size: 17px; line-height: 1.5; color: var(--muted); }
 
