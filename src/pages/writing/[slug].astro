@@ -14,6 +14,8 @@ const { article } = Astro.props;
 const { Content } = await render(article);
 const { title, description, date, cover, devto, tags } = article.data;
 const url = `${SITE.url}/writing/${article.id}/`;
+// 1200x630 version of the cover for link previews, made by scripts/make_share_images.sh.
+const shareImage = cover ? `/og/writing/${article.id}.jpg` : undefined;
 const posting = {
   "@type": "BlogPosting",
   "@id": `${url}#article`,
@@ -22,14 +24,14 @@ const posting = {
   datePublished: date.toISOString(),
   url,
   mainEntityOfPage: url,
-  image: cover ? `${SITE.url}${cover}` : `${SITE.url}${SITE.shareImage}`,
+  image: `${SITE.url}${shareImage ?? SITE.shareImage}`,
   author: { "@id": PERSON_ID },
   publisher: { "@id": PERSON_ID },
   keywords: tags.join(", "),
   inLanguage: "en",
 };
 ---
-<Base title={title} description={description} image={cover} imageAlt={title} type="article" published={date} schema={[posting]}>
+<Base title={title} description={description} image={shareImage} imageAlt={title} type="article" published={date} schema={[posting]}>
   <article class="wrap article">
     <header class="article__head">
       <span class="meta">{formatDate(date)} · {readingMinutes(article.body ?? "")} min read</span>

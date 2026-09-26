@@ -27,6 +27,8 @@ git add -A && git commit && git push    # deploys
 
 **Home page photo:** `hero` in `src/site.ts` (series slug + position + caption).
 
+**Share images:** `sh scripts/make_share_images.sh` after changing the hero photo, the role, or adding an article cover (it fits each cover into 1200x630 for link previews). Check the result with `npm run build && python3 scripts/preview_share.py`.
+
 ## Run
 
 ```bash
