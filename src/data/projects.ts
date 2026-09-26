@@ -15,12 +15,45 @@ export const BUILDING = [
   },
 ];
 
-export const OPEN_SOURCE = [
-  { name: "Agent Squad", url: "https://github.com/2fastlabs/agent-squad", line: "Multi-agent orchestration · 7.7k stars", text: "Lightweight multi-agent orchestration in Python, TypeScript and Swift. Formerly at AWS Labs.", role: "Co-author" },
-  { name: "Context Lens", url: "https://github.com/cornelcroi/context-lens", text: "MCP server for semantic search over local files and GitHub repositories.", role: "Author" },
-  { name: "Data Lens", url: "https://github.com/cornelcroi/data-lens", text: "MCP server to ask questions about spreadsheets in plain English. Excel, CSV, Parquet, on DuckDB.", role: "Author" },
-  { name: "Ask James", url: "https://github.com/cornelcroi/ask-james", text: "MCP server that gets a second opinion from another LLM inside your assistant.", role: "Author" },
-  { name: "French Tax MCP", url: "https://github.com/cornelcroi/french-tax-mcp", text: "MCP server that gives AI assistants French income tax calculations.", role: "Author" },
-  { name: "Bookmark Lens", url: "https://github.com/cornelcroi/bookmark-lens", text: "Semantic bookmark engine for MCP-enabled AI agents.", role: "Author" },
-  { name: "CloudFront Hosting Toolkit", url: "https://github.com/awslabs/cloudfront-hosting-toolkit", text: "CLI to deploy fast and secure frontends on Amazon CloudFront.", role: "Main maintainer" },
+export const AGENT_SQUAD = {
+  name: "Agent Squad",
+  url: "https://github.com/2fastlabs/agent-squad",
+  line: "Multi-agent orchestration · 7.7k stars",
+  text: "Routes each request to the right agent and keeps the conversation across them. Python and TypeScript, plus a Swift runtime that runs entirely on the device. Includes GroundedAgent: the agent that calls the tools never writes the reply. Started at AWS Labs as Multi-Agent Orchestrator.",
+  role: "Co-author, lead maintainer",
+};
+
+export const MCP_SERVERS = [
+  { name: "Context Lens", url: "https://github.com/cornelcroi/context-lens", text: "Semantic search over local files and GitHub repositories." },
+  { name: "Data Lens", url: "https://github.com/cornelcroi/data-lens", text: "Ask questions about spreadsheets in plain English. Excel, CSV, Parquet, on DuckDB." },
+  { name: "Ask James", url: "https://github.com/cornelcroi/ask-james", text: "A second opinion from another LLM, inside your assistant." },
+  { name: "French Tax MCP", url: "https://github.com/cornelcroi/french-tax-mcp", text: "French income tax calculations for AI assistants." },
+  { name: "Bookmark Lens", url: "https://github.com/cornelcroi/bookmark-lens", text: "A bookmark manager with semantic search for AI assistants." },
+];
+
+export const BUILT_AT_AWS = [
+  {
+    name: "Food Analyzer",
+    url: "https://github.com/aws-samples/serverless-genai-food-analyzer-app",
+    role: "Co-creator",
+    text: "A GenAI nutrition app on Amazon Bedrock with Claude Haiku and Sonnet. Built at a hackathon, demoed at AWS Summits.",
+  },
+  {
+    name: "Secure Media Delivery at the Edge",
+    url: "https://github.com/aws-solutions-library-samples/secure-media-delivery-at-the-edge-on-aws",
+    role: "Sole developer",
+    text: "Protects premium video delivered through CloudFront. Now maintained by the AWS Solutions team.",
+  },
+  {
+    name: "A/B Testing at the Edge",
+    url: "https://github.com/aws-samples/ab-testing-at-edge",
+    role: "Owner, maintainer",
+    text: "A/B testing on CloudFront with Lambda@Edge, CloudFront Functions and KeyValueStore. Comes with an AWS workshop.",
+  },
+  {
+    name: "CloudFront Hosting Toolkit",
+    url: "https://github.com/awslabs/cloudfront-hosting-toolkit",
+    role: "Main maintainer",
+    text: "A CLI that builds a full frontend deployment pipeline on S3 and CloudFront in two commands.",
+  },
 ];

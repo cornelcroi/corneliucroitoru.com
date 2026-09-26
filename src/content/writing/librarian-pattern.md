@@ -4,6 +4,7 @@ description: "One index file, one doc per feature flow, and a 40-line bash hook.
 date: 2026-08-26
 tags: [ai, programming, productivity, claudecode]
 cover: /covers/librarian-pattern.png
+featured: true
 devto: https://dev.to/cornelcroi/the-librarian-pattern-how-i-keep-my-ai-coding-assistant-from-breaking-my-app-5396
 ---
 

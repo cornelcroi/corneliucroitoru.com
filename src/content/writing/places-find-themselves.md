@@ -4,6 +4,7 @@ description: "You write the trip the way you would tell a friend. Minutes later 
 date: 2026-09-07
 tags: [ai, llm, webdev, buildinpublic]
 cover: /covers/places-find-themselves.png
+featured: true
 devto: https://dev.to/cornelcroi/you-just-write-the-places-find-themselves-2f2a
 ---
 

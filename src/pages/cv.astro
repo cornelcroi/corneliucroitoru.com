@@ -2,7 +2,7 @@
 import Base from "../layouts/Base.astro";
 import { SITE } from "../site";
 import { encodedEmailLink } from "../lib/content";
-import { OPEN_SOURCE } from "../data/projects";
+import { BUILT_AT_AWS, MCP_SERVERS } from "../data/projects";
 import { CERTIFICATIONS, EDUCATION, EXPERIENCE, LANGUAGES, SIDE_PROJECTS, SKILLS, WHAT_I_DO } from "../data/experience";
 import { TALKS } from "../data/talks";
 ---
@@ -30,7 +30,7 @@ import { TALKS } from "../data/talks";
       <h2 class="eyebrow">Experience</h2>
       {EXPERIENCE.map((job) => (
         <article class="job">
-          <div class="job__row"><h3>{job.role}, {job.org}</h3><span class="meta">{job.period}</span></div>
+          <div class="job__row"><h3>{job.label ?? `${job.role}, ${job.org}`}</h3><span class="meta">{job.period}</span></div>
           {job.summary && <p>{job.summary}</p>}
           {job.points.length > 0 && <ul>{job.points.map((point) => <li>{point}</li>)}</ul>}
         </article>
@@ -48,9 +48,12 @@ import { TALKS } from "../data/talks";
     </section>
 
     <section>
-      <h2 class="eyebrow">Open source</h2>
+      <h2 class="eyebrow">Open source and AWS projects</h2>
       <ul class="plain">
-        {OPEN_SOURCE.map((p) => <li><a href={p.url}>{p.name}</a> <span class="meta">{p.role}</span> · {p.text}</li>)}
+        <li><a href="https://github.com/2fastlabs/agent-squad">Agent Squad</a>, co-author and lead maintainer. Multi-agent orchestration in Python, TypeScript and Swift, 7.7k stars. Formerly at AWS Labs.</li>
+        <li>Five MCP servers: {MCP_SERVERS.map((s, i) => <>{i > 0 && ", "}<a href={s.url}>{s.name}</a></>)}.</li>
+        <li>Built at AWS: {BUILT_AT_AWS.map((s, i) => <>{i > 0 && ", "}<a href={s.url}>{s.name}</a></>)}.</li>
+        <li>Details on the <a href="/projects/">projects</a> page.</li>
       </ul>
     </section>
 
@@ -61,7 +64,6 @@ import { TALKS } from "../data/talks";
         {TALKS.map((talk) => (
           <li>{talk.url ? <a href={talk.url}>{talk.title}</a> : talk.title} <span class="meta">{[talk.event, talk.year, talk.format].filter(Boolean).join(" · ")}</span></li>
         ))}
-        <li>The <a href="https://github.com/aws-samples/serverless-genai-food-analyzer-app">Food Analyzer</a> GenAI app, co-created and demoed at AWS Summits.</li>
         <li>AWS workshops authored: <a href="https://catalog.us-east-1.prod.workshops.aws/workshops/e507820e-bd46-421f-b417-107cd608a3b2/en-US">A/B Testing at the Edge</a>, <a href="https://catalog.us-east-1.prod.workshops.aws/workshops/f238037c-8f0b-446e-9c15-ebcc4908901a/en-US">Scaling cost effective architectures</a>.</li>
         <li>Articles on the <a href="/writing/">writing</a> page: AWS Blog, community.aws, dev.to.</li>
       </ul>

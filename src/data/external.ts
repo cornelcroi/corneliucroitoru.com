@@ -16,10 +16,11 @@ export const EXTERNAL = [
   },
   {
     title: "Beyond auto-replies: building an AI-powered e-commerce support system",
-    description: "A multi-agent customer support system for e-commerce.",
+    description: "A customer support system where several AI agents share the work, built on Multi-Agent Orchestrator (now Agent Squad).",
     date: new Date("2024-09-12"),
     url: "https://community.aws/content/2lq6cYYwTYGc7S3Zmz28xZoQNQj/beyond-auto-replies-building-an-ai-powered-e-commerce-support-system",
     where: "community.aws",
+    featured: true,
   },
   {
     title: "Introducing CloudFront Hosting Toolkit",

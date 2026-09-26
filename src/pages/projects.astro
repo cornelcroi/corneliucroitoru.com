@@ -1,11 +1,11 @@
 ---
 import Base from "../layouts/Base.astro";
-import { BUILDING, OPEN_SOURCE } from "../data/projects";
+import { AGENT_SQUAD, BUILDING, BUILT_AT_AWS, MCP_SERVERS } from "../data/projects";
 ---
-<Base title="Projects" description="Products in production and open-source projects by Corneliu Croitoru.">
+<Base title="Projects" description="Side projects in production, open source, and what Corneliu Croitoru built at AWS.">
   <main class="wrap narrow">
     <h1 class="page-title">Projects</h1>
-    <p class="page-lede">Two travel products I build on the side, both in production, and the open source I wrote along the way.</p>
+    <p class="page-lede">Two products I build on the side, the open source I maintain, and what I built at AWS.</p>
 
     <h2 class="eyebrow group">Side projects</h2>
     {BUILDING.map((p) => (
@@ -17,7 +17,20 @@ import { BUILDING, OPEN_SOURCE } from "../data/projects";
     ))}
 
     <h2 class="eyebrow group">Open source</h2>
-    {OPEN_SOURCE.map((p) => (
+    <a class="item" href={AGENT_SQUAD.url}>
+      <span class="item__row"><span class="item__name">{AGENT_SQUAD.name}</span><span class="meta">{AGENT_SQUAD.role}</span></span>
+      <span class="item__text">{AGENT_SQUAD.text}</span>
+      <span class="meta">{AGENT_SQUAD.line}</span>
+    </a>
+    <div class="item">
+      <span class="item__row"><span class="item__name">MCP servers</span><span class="meta">Author</span></span>
+      <ul class="mcp">
+        {MCP_SERVERS.map((s) => <li><a href={s.url}>{s.name}</a> <span class="item__text">{s.text}</span></li>)}
+      </ul>
+    </div>
+
+    <h2 class="eyebrow group">Built at AWS</h2>
+    {BUILT_AT_AWS.map((p) => (
       <a class="item" href={p.url}>
         <span class="item__row"><span class="item__name">{p.name}</span><span class="meta">{p.role}</span></span>
         <span class="item__text">{p.text}</span>
@@ -28,11 +41,13 @@ import { BUILDING, OPEN_SOURCE } from "../data/projects";
 
 <style>
   .narrow { max-width: calc(760px + 2 * var(--gutter)); }
-  .group { margin: 40px 0 0; padding-bottom: 12px; border-bottom: 1px solid var(--rule); font-weight: 400; }
-  .item { display: flex; flex-direction: column; gap: 6px; padding-block: 22px; border-bottom: 1px solid var(--rule); }
-  .item:hover { text-decoration: none; }
-  .item:hover .item__name { text-decoration: underline; text-underline-offset: 3px; }
+  .group { margin: 48px 0 0; font-weight: 400; }
+  .item { display: flex; flex-direction: column; gap: 6px; padding-block: 20px; }
+  a.item:hover { text-decoration: none; }
+  a.item:hover .item__name { text-decoration: underline; text-underline-offset: 3px; }
   .item__row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
   .item__name { font-family: var(--serif); font-size: 22px; font-weight: 700; }
   .item__text { font-family: var(--serif); font-size: 17px; line-height: 1.5; color: var(--muted); }
+  .mcp { margin: 4px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .mcp a { font-weight: 600; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 </style>

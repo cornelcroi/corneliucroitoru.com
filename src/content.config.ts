@@ -12,6 +12,8 @@ const writing = defineCollection({
     cover: z.string().optional(),
     devto: z.string().url().optional(),
     draft: z.boolean().default(false),
+    // Shown on the home page. Pick three that show range, not the three newest.
+    featured: z.boolean().default(false),
   }),
 });
 

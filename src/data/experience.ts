@@ -20,7 +20,7 @@ export const EXPERIENCE = [
     role: "Senior GenAI Prototyping Architect",
     period: "Apr 2021 – Aug 2025",
     place: "Paris",
-    summary: "30+ prototypes for AWS customers across EMEA, 2 to 6 weeks each. GenAI only from the ChatGPT launch on.",
+    summary: "30+ prototypes for AWS customers across EMEA, 2 to 6 weeks each. GenAI-only after ChatGPT launched.",
     points: [
       "Owned the full cycle: qualification, solution design, building inside the customer's own AWS accounts, then training their team to carry it forward.",
       "Banking, manufacturing, business information, media and sports streaming, online classifieds, e-commerce.",
@@ -66,6 +66,7 @@ export const EXPERIENCE = [
   {
     org: "Consultant",
     role: "Software engineer, then technical lead",
+    label: "Consultant: software engineer, then technical lead",
     period: "Jul 2003 – Dec 2012",
     place: "Paris",
     summary: "Client missions in banking and insurance: Société Générale CIB, BNP Paribas CIB, BNP Paribas Cardif, BNP Paribas retail. Also Karavel and Française des Jeux. Java/J2EE, Oracle, grid computing.",

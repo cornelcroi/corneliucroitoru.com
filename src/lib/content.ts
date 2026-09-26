@@ -9,6 +9,7 @@ export type ListedPost = {
   // Set for articles hosted elsewhere; the row then links out.
   where?: string;
   minutes?: number;
+  featured?: boolean;
 };
 
 const WORDS_PER_MINUTE = 230;
@@ -31,6 +32,7 @@ export async function getAllPosts(): Promise<ListedPost[]> {
     date: a.data.date,
     href: `/writing/${a.id}/`,
     minutes: readingMinutes(a.body ?? ""),
+    featured: a.data.featured,
   }));
   const external = EXTERNAL.map((e) => ({ ...e, href: e.url }));
   return [...own, ...external].sort((a, b) => b.date.getTime() - a.date.getTime());

@@ -13,6 +13,7 @@ const photoCount = series.reduce((n, s) => n + s.data.photos.length, 0);
       <div>
         <h1 class="page-title">Photography</h1>
         <p class="page-lede">Places I have been, one series per trip. {series.length} series, {photoCount} photographs.</p>
+        <p class="meta">My first photo site ran on a serverless stack I built: CloudFront, S3, Lambda, Rekognition. <a class="u" href="https://github.com/cornelcroi/photo-sharing-website">The code</a> · <a class="u" href="https://youtu.be/5_B92oE9vpQ">how it was made</a>.</p>
       </div>
       <a class="meta" href={SITE.links.instagram}>Instagram ↗</a>
     </header>
@@ -31,6 +32,7 @@ const photoCount = series.reduce((n, s) => n + s.data.photos.length, 0);
 </Base>
 
 <style>
+  .u { text-decoration: underline; text-underline-offset: 3px; }
   .head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
   .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px 28px; }
   .card { display: flex; flex-direction: column; gap: 12px; }

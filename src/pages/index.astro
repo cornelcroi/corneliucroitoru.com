@@ -8,7 +8,8 @@ const LATEST_POSTS = 3;
 const PHOTO_TILES = 4;
 
 const allPosts = await getAllPosts();
-const posts = allPosts.slice(0, LATEST_POSTS);
+const featured = allPosts.filter((p) => p.featured);
+const posts = (featured.length ? featured : allPosts).slice(0, LATEST_POSTS);
 const series = await getSeries();
 const heroSeries = series.find((s) => s.id === SITE.hero.series) ?? series[0];
 const hero = heroSeries.data.photos[SITE.hero.photo] ?? heroSeries.data.photos[0];
@@ -33,13 +34,14 @@ const tiles = series.filter((s) => s.id !== heroSeries.id).slice(0, PHOTO_TILES)
   <main class="wrap col">
     <section class="intro">
       <p class="intro__lead">23 years of shipping software. The last few, with AI.</p>
-      <p>Staff GenAI Solutions Architect at Betclic. Before that, 7 years at AWS and 30+ GenAI prototypes, always built for production.</p>
+      <p>Staff GenAI Solutions Architect at Betclic, leading GenAI architecture and MCP adoption across the company. Before that, 7 years at AWS and 30+ GenAI prototypes, always built for production.</p>
+      <p>Agents, LLM pipelines, evaluation. And the product around them: design, UX.</p>
       <p>On the side, two travel products: <a href="https://streetlensapp.com">StreetLens</a> and <a href="https://www.backfrommytrip.com">Back From My Trip</a>. And I photograph the places I travel to.</p>
       <p class="facts">
-        <span><strong>7</strong> years at AWS</span>
-        <span><strong>30+</strong> GenAI prototypes</span>
         <span><strong>7.7k</strong> stars on Agent Squad</span>
-        <span>AWS re:Invent speaker</span>
+        <span><strong>10</strong> talks, including re:Invent</span>
+        <span><strong>3</strong> AWS certifications</span>
+        <span>French, English, Romanian</span>
         <a href="/cv/">CV →</a>
       </p>
     </section>
