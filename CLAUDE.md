@@ -21,7 +21,7 @@ git add -A && git commit && git push    # deploys
 - To choose a series cover: set `cover:` to another file of the series.
 - Folder names become titles through `TITLES` in the script; add an entry there for a new odd name, or edit `title:` in `index.md` after import.
 
-**Add an article.** `src/content/writing/<slug>.md` with `title`, `description` (one or two sentences, used as the excerpt), `date`, `tags`, `cover` (`/covers/<slug>.png`, 1000×420, in `public/covers/`), and `devto` once cross-posted. The dev.to copy sets `canonical_url: https://corneliucroitoru.com/writing/<slug>/`. `draft: true` hides it; `featured: true` puts it on the home page (keep three, chosen for range, not recency; `featured: true` also works on entries in `src/data/external.ts`). Images go in `public/img/`.
+**Add an article.** `src/content/writing/<slug>.md` with `title`, `description` (one or two sentences, used as the excerpt), `date`, `tags`, `cover` (`/covers/<slug>.png`, 1000×420 rendered at 2×, in `public/covers/`; made in `~/projects/publications/covers/` with the Night plate, like every article image), and `devto` once cross-posted. The dev.to copy sets `canonical_url: https://corneliucroitoru.com/writing/<slug>/`. `draft: true` hides it; `featured: true` puts it on the home page (keep three, chosen for range, not recency; `featured: true` also works on entries in `src/data/external.ts`). Images go in `public/img/`.
 
 **Articles published elsewhere** (AWS Blog, Medium…) go in `src/data/external.ts`; they link out.
 
