@@ -35,10 +35,27 @@ const agentSquad = OPEN_SOURCE[0];
 
   <section class="wrap summary">
     <p>20+ years of shipping software. The last few, shipping with AI.</p>
-    <p>I build prototypes, like the 30+ I built with customers at AWS. Always with the path to production in mind. I know what it takes.</p>
+    <p>Staff GenAI Solutions Architect at Betclic. Before that, 7 years at AWS, building 30+ GenAI prototypes with customers across EMEA. Always with the path to production in mind. I know what it takes.</p>
     <p>Not just the code. The product, the design, the UX. I like to own it end to end.</p>
-    <p>Now Staff GenAI Solutions Architect at Betclic. On the side, two travel products: <a href="https://streetlensapp.com">StreetLens</a> and <a href="https://www.backfrommytrip.com">Back From My Trip</a>.</p>
-    <p>And I photograph the places I travel to. <a href="/photography/">{series.length} trips so far.</a></p>
+    <p>On the side, two travel products in production: <a href="https://streetlensapp.com">StreetLens</a> and <a href="https://www.backfrommytrip.com">Back From My Trip</a>. That is where I test the patterns I write about.</p>
+    <p>And I photograph the places I travel to.</p>
+  </section>
+
+  <section class="wrap facts" aria-label="In numbers">
+    <span><strong>20+</strong> years of software</span>
+    <span><strong>7</strong> years at AWS</span>
+    <span><strong>30+</strong> GenAI prototypes</span>
+    <span><strong>7.7k</strong> stars on Agent Squad</span>
+    <span>Speaker at <strong>AWS re:Invent</strong></span>
+  </section>
+
+  <section class="wrap does" aria-labelledby="does-title">
+    <h2 id="does-title" class="eyebrow">What I do</h2>
+    <div class="does__grid">
+      <div><h3>GenAI systems</h3><p>LLM pipelines, agents, MCP servers. Models where they belong, plain code everywhere else.</p></div>
+      <div><h3>Prototype to production</h3><p>Prototypes that survive contact with real users. Serverless, AWS, cost and failure modes from day one.</p></div>
+      <div><h3>The product end to end</h3><p>Architecture, code, design, UX. From the first sketch to the thing people use.</p></div>
+    </div>
   </section>
 
   <div class="wrap home">
@@ -49,13 +66,21 @@ const agentSquad = OPEN_SOURCE[0];
     </main>
     <aside class="home__aside">
       <section>
-        <h2 class="eyebrow">Building</h2>
-        {[...BUILDING, agentSquad].map((p) => (
+        <h2 class="eyebrow">Side projects</h2>
+        {BUILDING.map((p) => (
           <a class="proj" href={p.url}>
             <span class="proj__name">{p.name}</span>
             <span class="meta">{p.line}</span>
           </a>
         ))}
+      </section>
+      <section>
+        <h2 class="eyebrow">Open source</h2>
+        <a class="proj" href={agentSquad.url}>
+          <span class="proj__name">{agentSquad.name}</span>
+          <span class="meta">{agentSquad.line}</span>
+        </a>
+        <a class="meta" href="/projects/">All projects →</a>
       </section>
       <section>
         <h2 class="eyebrow">Photography</h2>
@@ -86,6 +111,15 @@ const agentSquad = OPEN_SOURCE[0];
   .summary p { margin: 0; max-width: 700px; font-family: var(--serif); font-size: clamp(19px, 2vw, 22px); line-height: 1.5; color: var(--text); }
   .summary p:first-child { font-size: clamp(22px, 2.6vw, 28px); line-height: 1.3; color: var(--ink); font-weight: 600; }
   .summary a { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+
+  .facts { display: flex; flex-wrap: wrap; gap: 12px 32px; padding-top: 40px; font-size: 15px; color: var(--faint); }
+  .facts strong { color: var(--ink); font-weight: 600; }
+  .does { padding-top: 56px; display: flex; flex-direction: column; gap: 20px; }
+  .does h2 { margin: 0; font-weight: 400; }
+  .does__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; border-top: 1px solid var(--rule); padding-top: 24px; }
+  .does h3 { margin: 0 0 8px; font-size: 18px; font-weight: 600; }
+  .does p { margin: 0; font-family: var(--serif); font-size: 17px; line-height: 1.5; color: var(--muted); }
+  @media (max-width: 760px) { .does__grid { grid-template-columns: 1fr; gap: 24px; } }
 
   .home { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: clamp(48px, 7vw, 96px); padding-top: 72px; }
   .home__title { margin: 0 0 4px; font-family: var(--serif); font-size: 30px; }
