@@ -60,6 +60,7 @@ const tiles = series.filter((s) => s.id !== heroSeries.id).slice(0, PHOTO_TILES)
 
     <section class="block">
       <div class="block__head"><h2>Photography</h2><a href="/photography/">{series.length} series →</a></div>
+      <p class="block__lede">Photography is my other passion. I shoot the places I travel to: a Canon, a Sony A7C, and lately my iPhone. {series.length} trips so far.</p>
       <div class="tiles">
         {tiles.map((s) => (
           <a href={`/photography/${s.id}/`} class="tile">
@@ -95,6 +96,7 @@ const tiles = series.filter((s) => s.id !== heroSeries.id).slice(0, PHOTO_TILES)
   .block { padding-top: 88px; }
   .block__head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
   .block__head h2 { margin: 0; font-family: var(--serif); font-size: 26px; }
+  .block__lede { margin: 4px 0 0; max-width: 620px; font-family: var(--serif); font-size: 18px; line-height: 1.5; color: var(--text); }
   .block__head a { font-size: 14px; color: var(--faint); }
 
   .post { display: flex; flex-direction: column; gap: 6px; padding-block: 20px; border-bottom: 0; }
