@@ -2,12 +2,12 @@
 import Base from "../layouts/Base.astro";
 import { AGENT_SQUAD, BUILDING, BUILT_AT_AWS, MCP_SERVERS } from "../data/projects";
 ---
-<Base title="Projects" description="Side projects in production, open source, and what Corneliu Croitoru built at AWS.">
+<Base title="Projects" description="The products Corneliu Croitoru co-founded, the open source he maintains, and what he built at AWS.">
   <main class="wrap narrow">
     <h1 class="page-title">Projects</h1>
-    <p class="page-lede">Two products I build on the side, the open source I maintain, and what I built at AWS.</p>
+    <p class="page-lede">Two products I co-founded, both live, the open source I maintain, and what I built at AWS.</p>
 
-    <h2 class="eyebrow group">Side projects</h2>
+    <h2 class="eyebrow group">Co-founder</h2>
     {BUILDING.map((p) => (
       <a class="item" href={p.url}>
         <span class="item__row"><span class="item__name">{p.name}</span><span class="meta">{p.role}</span></span>
