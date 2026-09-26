@@ -2,7 +2,7 @@
 import Base from "../layouts/Base.astro";
 import { SITE } from "../site";
 import { encodedEmailLink } from "../lib/content";
-import { BUILT_AT_AWS, MCP_SERVERS } from "../data/projects";
+import { BUILT_AT_AWS, CONTEXT_LENS } from "../data/projects";
 import { CERTIFICATIONS, EDUCATION, EXPERIENCE, LANGUAGES, SIDE_PROJECTS, SKILLS, WHAT_I_DO } from "../data/experience";
 import { TALKS } from "../data/talks";
 ---
@@ -51,7 +51,7 @@ import { TALKS } from "../data/talks";
       <h2 class="eyebrow">Open source and AWS projects</h2>
       <ul class="plain">
         <li><a href="https://github.com/2fastlabs/agent-squad">Agent Squad</a>, co-author and lead maintainer. Multi-agent orchestration in Python, TypeScript and Swift, 7.7k stars. Formerly at AWS Labs.</li>
-        <li>Five MCP servers: {MCP_SERVERS.map((s, i) => <>{i > 0 && ", "}<a href={s.url}>{s.name}</a></>)}.</li>
+        <li><a href={CONTEXT_LENS.url}>{CONTEXT_LENS.name}</a>, author. An MCP server for semantic search over local files and GitHub repositories.</li>
         <li>Built at AWS: {BUILT_AT_AWS.map((s, i) => <>{i > 0 && ", "}<a href={s.url}>{s.name}</a></>)}.</li>
         <li>Details on the <a href="/projects/">projects</a> page.</li>
       </ul>

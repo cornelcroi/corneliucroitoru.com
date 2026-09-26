@@ -25,13 +25,19 @@ export const AGENT_SQUAD = {
   role: "Co-author, lead maintainer",
 };
 
-export const MCP_SERVERS = [
-  { name: "Context Lens", url: "https://github.com/cornelcroi/context-lens", text: "Semantic search over local files and GitHub repositories." },
-  { name: "Data Lens", url: "https://github.com/cornelcroi/data-lens", text: "Ask questions about spreadsheets in plain English. Excel, CSV, Parquet, on DuckDB." },
-  { name: "Ask James", url: "https://github.com/cornelcroi/ask-james", text: "A second opinion from another LLM, inside your assistant." },
-  { name: "French Tax MCP", url: "https://github.com/cornelcroi/french-tax-mcp", text: "French income tax calculations for AI assistants." },
-  { name: "Bookmark Lens", url: "https://github.com/cornelcroi/bookmark-lens", text: "A bookmark manager with semantic search for AI assistants." },
-];
+export const CONTEXT_LENS = {
+  name: "Context Lens",
+  url: "https://github.com/cornelcroi/context-lens",
+  text: "An MCP server for semantic search over local files and GitHub repositories. Think of it as SQLite for AI embeddings.",
+  role: "Author",
+};
+
+// Small experiments, one idea each: named in one line, never listed as projects.
+export const EXPERIMENT = {
+  name: "Ask James",
+  url: "https://github.com/cornelcroi/ask-james",
+  text: "a second model as reviewer instead of author, inside your assistant",
+};
 
 export const BUILT_AT_AWS = [
   {
