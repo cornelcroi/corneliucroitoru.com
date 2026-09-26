@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import { SITE } from "../site";
+import { encodedEmailLink } from "../lib/content";
 
 interface Props {
   title?: string;
@@ -62,6 +63,7 @@ const nav = [
   <footer class="footer wrap">
     <span>{SITE.name} · Paris</span>
     <div class="footer__links">
+      <Fragment set:html={encodedEmailLink(SITE.email, "Email")} />
       <a href={SITE.links.github}>GitHub</a>
       <a href={SITE.links.linkedin}>LinkedIn</a>
       <a href={SITE.links.devto}>dev.to</a>

@@ -1,12 +1,13 @@
 ---
 import Base from "../layouts/Base.astro";
 import { SITE } from "../site";
+import { encodedEmailLink } from "../lib/content";
 ---
 <Base title="About" description="Corneliu Croitoru: 20+ years of software engineering, 7 at AWS, now Staff GenAI Solutions Architect at Betclic.">
   <main class="wrap narrow">
     <h1 class="page-title">About</h1>
     <div class="prose">
-      <p>I'm Corneliu. I have been shipping software for 20+ years, starting in 2005 with Java, then PHP, Python and TypeScript. I spent 7 years at AWS as a Solutions Architect, then as a Senior GenAI Prototyping Architect, building more than 30 LLM prototypes with customers across EMEA. Since September 2025 I am Staff GenAI Solutions Architect at Betclic.</p>
+      <p>I'm Corneliu. I have been shipping software since 2003: Java first, then PHP, Python and TypeScript. I spent 7 years at AWS as a Solutions Architect, then as a Senior GenAI Prototyping Architect, building more than 30 LLM prototypes with customers across EMEA. Since September 2025 I am Staff GenAI Solutions Architect at Betclic.</p>
       <p>On the side I co-founded two travel products that are live: <a href="https://streetlensapp.com">StreetLens</a>, GPS audio guides, and <a href="https://www.backfrommytrip.com">Back From My Trip</a>, trip reports with one verdict. I co-wrote <a href="https://github.com/2fastlabs/agent-squad">Agent Squad</a> and a handful of MCP servers.</p>
 
       <h2>How I build with AI</h2>
@@ -21,7 +22,7 @@ import { SITE } from "../site";
       <p>I photograph the places I travel to. The series are <a href="/photography/">here</a>, and on <a href={SITE.links.instagram}>Instagram</a>.</p>
 
       <h2>Contact</h2>
-      <p>Paris. The fastest way to reach me is <a href={SITE.links.linkedin}>LinkedIn</a>. Code is on <a href={SITE.links.github}>GitHub</a>.</p>
+      <p>Paris. Write to me at <Fragment set:html={encodedEmailLink(SITE.email)} />, or find me on <a href={SITE.links.linkedin}>LinkedIn</a>. Code is on <a href={SITE.links.github}>GitHub</a>.</p>
     </div>
   </main>
 </Base>

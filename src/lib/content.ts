@@ -53,3 +53,10 @@ export function shootingParts(photo: CollectionEntry<"photos">["data"]["photos"]
 export function formatDate(date: Date) {
   return date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
 }
+
+// Email written as HTML entities: people and browsers read it normally,
+// naive scrapers that grep the page source for addresses do not.
+export function encodedEmailLink(email: string, label = email) {
+  const encode = (text: string) => [...text].map((ch) => `&#${ch.codePointAt(0)};`).join("");
+  return `<a href="${encode(`mailto:${email}`)}">${encode(label)}</a>`;
+}
