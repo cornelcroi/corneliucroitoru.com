@@ -116,3 +116,9 @@ export const EDUCATION = {
   degree: "Engineer's Degree (Diplôme d'Ingénieur), Computer Science and Automation",
   school: "Dunărea de Jos University of Galați, 1998 – 2003",
 };
+
+export const WHAT_I_DO = [
+  { title: "GenAI systems", text: "LLM pipelines, agents, MCP servers. Models where they belong, plain code everywhere else." },
+  { title: "Prototype to production", text: "Prototypes that survive contact with real users. Serverless, AWS, cost and failure modes from day one." },
+  { title: "The product end to end", text: "Architecture, code, design, UX. From the first sketch to the thing people use." },
+];

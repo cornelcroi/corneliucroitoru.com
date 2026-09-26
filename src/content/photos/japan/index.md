@@ -2,7 +2,7 @@
 title: "Japan"
 source: "Japon"
 year: 2024
-cover: ./01.jpg
+cover: ./09.jpg
 photos:
   - src: ./01.jpg
     camera: "iPhone 13 Pro"
