@@ -13,7 +13,7 @@ magick "$PHOTO" -resize 1200x630^ -gravity center -extent 1200x630 \
   -gravity southwest -fill white \
   -font "$SERIF_BOLD" -pointsize 64 -annotate +72+150 "Corneliu Croitoru" \
   -font "$SERIF" -pointsize 34 -fill "rgba(255,255,255,0.9)" -annotate +72+96 "AI Architect & Product Builder" \
-  -pointsize 24 -fill "rgba(255,255,255,0.7)" -annotate +72+52 "corneliucroitoru.com" \
+  -pointsize 24 -fill "rgba(255,255,255,0.7)" -annotate +72+52 "CorneliuCroitoru.com" \
   -strip -quality 85 public/og/default.jpg
 
 # Article covers are 1000x420 (dev.to's shape); link previews crop anything wider than 1.91:1.

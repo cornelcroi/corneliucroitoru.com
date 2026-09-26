@@ -1,4 +1,4 @@
-# corneliucroitoru.com
+# CorneliuCroitoru.com
 
 My personal site: writing on building software with AI, the projects behind it, and travel photography.
 

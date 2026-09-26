@@ -1,4 +1,4 @@
-# corneliucroitoru.com
+# CorneliuCroitoru.com
 
 Personal site: writing, projects, photography. Astro 7, static, deployed to GitHub Pages on every push to `main` (`.github/workflows/deploy.yml`). Domain `corneliucroitoru.com` via `public/CNAME`.
 
@@ -44,3 +44,4 @@ If the dev server shows a page without its styles or misses a front-matter chang
 - Light only, two faces: Instrument Sans (UI) and Source Serif 4 (titles, reading). Tokens in `src/styles/global.css`.
 - Photos are served through Astro's image pipeline at webp quality `PHOTO_QUALITY` (`src/lib/content.ts`). Don't add width variants without checking `du -sh dist` (GitHub Pages limit: 1 GB).
 - No client-side JavaScript. No analytics without asking.
+- The domain, wherever it is displayed (covers, share images, headings, text), is written **CorneliuCroitoru.com**. Lowercase only in URLs, `CNAME` and code.
