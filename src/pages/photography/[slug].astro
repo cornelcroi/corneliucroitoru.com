@@ -2,7 +2,7 @@
 import { getImage } from "astro:assets";
 import Base from "../../layouts/Base.astro";
 import { SITE } from "../../site";
-import { PHOTO_QUALITY, getSeries, shootingLine } from "../../lib/content";
+import { PHOTO_QUALITY, getSeries, shootingParts } from "../../lib/content";
 
 export async function getStaticPaths() {
   const series = await getSeries();
@@ -36,7 +36,9 @@ const og = await getImage({ src: series.data.cover, width: 1200, format: "jpg" }
             width={images[i].attributes.width} height={images[i].attributes.height}
             alt={`${title}, photograph ${i + 1}`} loading={i < 2 ? "eager" : "lazy"} decoding="async" />
         </a>
-        {shootingLine(photo) && <figcaption class="meta">{shootingLine(photo)}</figcaption>}
+        {shootingParts(photo).length > 0 && (
+          <figcaption class="meta">{shootingParts(photo).map((part) => <span>{part}</span>)}</figcaption>
+        )}
       </figure>
     ))}
     <footer class="series__foot">
@@ -51,5 +53,8 @@ const og = await getImage({ src: series.data.cover, width: 1200, format: "jpg" }
   .series__head .page-title { margin-top: 24px; }
   figure { margin: 0 0 48px; display: flex; flex-direction: column; gap: 10px; }
   figure img { width: 100%; }
+  figcaption { display: flex; flex-wrap: wrap; column-gap: 6px; }
+  figcaption span { white-space: nowrap; }
+  figcaption span + span::before { content: "·"; margin-right: 6px; }
   .series__foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding-top: 24px; border-top: 1px solid var(--rule); font-size: 15px; color: var(--faint); }
 </style>

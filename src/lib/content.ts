@@ -41,13 +41,13 @@ export async function getSeries() {
   return all.sort((a, b) => (b.data.year ?? 0) - (a.data.year ?? 0) || a.data.title.localeCompare(b.data.title));
 }
 
-export function shootingLine(photo: CollectionEntry<"photos">["data"]["photos"][number]) {
+export function shootingParts(photo: CollectionEntry<"photos">["data"]["photos"][number]) {
   const taken = photo.taken
     ? new Date(photo.taken).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })
     : undefined;
-  return [photo.camera, photo.lens, photo.focal, photo.aperture, photo.shutter, photo.iso, taken]
-    .filter(Boolean)
-    .join(" · ");
+  return [photo.camera, photo.lens, photo.focal, photo.aperture, photo.shutter, photo.iso, taken].filter(
+    (part): part is string => Boolean(part),
+  );
 }
 
 export function formatDate(date: Date) {
