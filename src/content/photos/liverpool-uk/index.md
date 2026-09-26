@@ -1,0 +1,91 @@
+---
+title: "Liverpool, UK"
+source: "Liverpool"
+year: 2023
+cover: ./01.jpg
+photos:
+  - src: ./01.jpg
+    camera: "iPhone 13 Pro"
+    focal: "14 mm eq."
+    aperture: "f/1.8"
+    shutter: "1/3125 s"
+    iso: "ISO 32"
+    taken: "2023-06-23"
+  - src: ./02.jpg
+    camera: "iPhone 13 Pro"
+    focal: "14 mm eq."
+    aperture: "f/1.8"
+    shutter: "1/3650 s"
+    iso: "ISO 32"
+    taken: "2023-06-23"
+  - src: ./03.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/9434 s"
+    iso: "ISO 50"
+    taken: "2023-06-23"
+  - src: ./04.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/6579 s"
+    iso: "ISO 50"
+    taken: "2023-06-23"
+  - src: ./05.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/11364 s"
+    iso: "ISO 50"
+    taken: "2023-06-23"
+  - src: ./06.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/1808 s"
+    iso: "ISO 50"
+    taken: "2023-06-24"
+  - src: ./07.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/5076 s"
+    iso: "ISO 50"
+    taken: "2023-06-26"
+  - src: ./08.jpg
+    camera: "iPhone 13 Pro"
+    focal: "14 mm eq."
+    aperture: "f/1.8"
+    shutter: "1/99 s"
+    iso: "ISO 40"
+    taken: "2023-06-26"
+  - src: ./09.jpg
+    camera: "iPhone 13 Pro"
+    focal: "77 mm eq."
+    aperture: "f/2.8"
+    shutter: "1/153 s"
+    iso: "ISO 32"
+    taken: "2023-06-27"
+  - src: ./10.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/5076 s"
+    iso: "ISO 50"
+    taken: "2023-06-27"
+  - src: ./11.jpg
+    camera: "iPhone 13 Pro"
+    focal: "14 mm eq."
+    aperture: "f/1.8"
+    shutter: "1/2096 s"
+    iso: "ISO 32"
+    taken: "2023-06-27"
+  - src: ./12.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/5882 s"
+    iso: "ISO 50"
+    taken: "2023-06-29"
+---

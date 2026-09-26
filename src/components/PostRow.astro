@@ -1,0 +1,12 @@
+---
+import { formatDate, type ListedPost } from "../lib/content";
+
+interface Props { post: ListedPost }
+const { post } = Astro.props;
+const meta = [formatDate(post.date), post.where ? `${post.where} ↗` : `${post.minutes} min read`].join(" · ");
+---
+<a class="post" href={post.href}>
+  <span class="meta">{meta}</span>
+  <span class="post__title">{post.title}</span>
+  <span class="post__excerpt">{post.description}</span>
+</a>

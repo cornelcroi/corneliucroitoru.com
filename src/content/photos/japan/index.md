@@ -1,0 +1,91 @@
+---
+title: "Japan"
+source: "Japon"
+year: 2024
+cover: ./01.jpg
+photos:
+  - src: ./01.jpg
+    camera: "iPhone 13 Pro"
+    focal: "14 mm eq."
+    aperture: "f/1.8"
+    shutter: "1/100 s"
+    iso: "ISO 80"
+    taken: "2024-04-09"
+  - src: ./02.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/50 s"
+    iso: "ISO 250"
+    taken: "2024-04-09"
+  - src: ./03.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/5076 s"
+    iso: "ISO 50"
+    taken: "2024-04-10"
+  - src: ./04.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/371 s"
+    iso: "ISO 50"
+    taken: "2024-04-10"
+  - src: ./05.jpg
+    camera: "iPhone 13 Pro"
+    focal: "14 mm eq."
+    aperture: "f/1.8"
+    shutter: "1/100 s"
+    iso: "ISO 250"
+    taken: "2024-04-10"
+  - src: ./06.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/119 s"
+    iso: "ISO 80"
+    taken: "2024-04-10"
+  - src: ./07.jpg
+    camera: "iPhone 13 Pro"
+    focal: "14 mm eq."
+    aperture: "f/1.8"
+    shutter: "1/60 s"
+    iso: "ISO 400"
+    taken: "2024-04-11"
+  - src: ./08.jpg
+    camera: "iPhone 13 Pro"
+    focal: "14 mm eq."
+    aperture: "f/1.8"
+    shutter: "1/60 s"
+    iso: "ISO 160"
+    taken: "2024-04-11"
+  - src: ./09.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/9434 s"
+    iso: "ISO 50"
+    taken: "2024-04-12"
+  - src: ./10.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/2045 s"
+    iso: "ISO 50"
+    taken: "2024-04-13"
+  - src: ./11.jpg
+    camera: "iPhone 13 Pro"
+    focal: "14 mm eq."
+    aperture: "f/1.8"
+    shutter: "1/968 s"
+    iso: "ISO 32"
+    taken: "2024-04-16"
+  - src: ./12.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/11364 s"
+    iso: "ISO 50"
+    taken: "2024-04-19"
+---

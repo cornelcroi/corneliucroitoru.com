@@ -1,0 +1,96 @@
+---
+import { Image } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import PostRow from "../components/PostRow.astro";
+import { SITE } from "../site";
+import { BUILDING, OPEN_SOURCE } from "../data/projects";
+import { PHOTO_QUALITY, getAllPosts, getSeries } from "../lib/content";
+
+const LATEST_POSTS = 5;
+const PHOTO_TILES = 4;
+
+const posts = (await getAllPosts()).slice(0, LATEST_POSTS);
+const series = await getSeries();
+const heroSeries = series.find((s) => s.id === SITE.hero.series) ?? series[0];
+const hero = heroSeries.data.photos[SITE.hero.photo] ?? heroSeries.data.photos[0];
+const tiles = series.filter((s) => s.id !== heroSeries.id).slice(0, PHOTO_TILES);
+const photoCount = series.reduce((n, s) => n + s.data.photos.length, 0);
+const agentSquad = OPEN_SOURCE[0];
+---
+<Base overlayNav>
+  <header class="hero">
+    <Image src={hero.src} alt={`${heroSeries.data.title}`} widths={[800, 1200, 1600, 2000]} sizes="100vw" quality={PHOTO_QUALITY} loading="eager" fetchpriority="high" class="hero__img" />
+    <div class="hero__shade"></div>
+    <nav class="nav wrap hero__nav" aria-label="Main">
+      <a class="nav__name" href="/">{SITE.name}</a>
+      <div class="nav__links">
+        <a href="/writing/">Writing</a><a href="/projects/">Projects</a><a href="/photography/">Photography</a><a href="/about/">About</a>
+      </div>
+    </nav>
+    <div class="wrap hero__text">
+      <h1>{SITE.tagline}</h1>
+      <p>{SITE.bio}</p>
+    </div>
+    <a class="hero__caption" href={`/photography/${heroSeries.id}/`}>{SITE.hero.caption}</a>
+  </header>
+
+  <div class="wrap home">
+    <main>
+      <h2 class="home__title">Writing</h2>
+      {posts.map((post) => <PostRow post={post} />)}
+      <a class="home__more" href="/writing/">All writing →</a>
+    </main>
+    <aside class="home__aside">
+      <section>
+        <h2 class="eyebrow">Building</h2>
+        {[...BUILDING, agentSquad].map((p) => (
+          <a class="proj" href={p.url}>
+            <span class="proj__name">{p.name}</span>
+            <span class="meta">{p.line}</span>
+          </a>
+        ))}
+      </section>
+      <section>
+        <h2 class="eyebrow">Photography</h2>
+        <div class="tiles">
+          {tiles.map((s) => (
+            <a href={`/photography/${s.id}/`} title={s.data.title}>
+              <Image src={s.data.cover} alt={s.data.title} width={340} height={220} quality={PHOTO_QUALITY} class="tile" />
+            </a>
+          ))}
+        </div>
+        <a class="meta" href="/photography/">{series.length} series, {photoCount} photographs →</a>
+      </section>
+    </aside>
+  </div>
+</Base>
+
+<style>
+  .hero { position: relative; height: min(720px, 82vh); min-height: 480px; overflow: hidden; color: #fff; }
+  .hero__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .hero__shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,12,16,.45) 0%, rgba(10,12,16,0) 30%, rgba(10,12,16,0) 50%, rgba(10,12,16,.72) 100%); }
+  .hero__nav { position: relative; }
+  .hero__nav .nav__links { color: #fff; }
+  .hero__text { position: absolute; left: 0; right: 0; bottom: clamp(32px, 7vh, 56px); display: flex; flex-direction: column; gap: 16px; }
+  .hero__text h1 { margin: 0; max-width: 760px; font-family: var(--serif); font-size: clamp(32px, 5vw, 52px); line-height: 1.1; font-weight: 600; letter-spacing: -0.015em; }
+  .hero__text p { margin: 0; max-width: 640px; font-size: clamp(16px, 1.6vw, 18px); color: rgba(255,255,255,.88); }
+  .hero__caption { position: absolute; right: var(--gutter); top: 84px; font-size: 13px; color: rgba(255,255,255,.8); }
+
+  .home { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: clamp(48px, 7vw, 96px); padding-top: 64px; }
+  .home__title { margin: 0 0 4px; font-family: var(--serif); font-size: 30px; }
+  .home__more { display: inline-block; margin-top: 12px; font-size: 15px; color: var(--faint); }
+  .home__aside { display: flex; flex-direction: column; gap: 40px; padding-top: 10px; }
+  .home__aside section { display: flex; flex-direction: column; gap: 14px; }
+  .home__aside h2 { margin: 0; font-weight: 400; }
+  .proj { display: flex; flex-direction: column; gap: 2px; }
+  .proj__name { font-weight: 600; font-size: 17px; }
+  .tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .tile { width: 100%; height: 110px; object-fit: cover; }
+
+  @media (max-width: 900px) {
+    .home { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .hero__caption { display: none; }
+  }
+</style>

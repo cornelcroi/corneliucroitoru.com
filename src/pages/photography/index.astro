@@ -1,0 +1,44 @@
+---
+import { Image } from "astro:assets";
+import Base from "../../layouts/Base.astro";
+import { SITE } from "../../site";
+import { PHOTO_QUALITY, getSeries } from "../../lib/content";
+
+const series = await getSeries();
+const photoCount = series.reduce((n, s) => n + s.data.photos.length, 0);
+---
+<Base title="Photography" description="Travel photography by Corneliu Croitoru, one series per trip.">
+  <main class="wrap">
+    <header class="head">
+      <div>
+        <h1 class="page-title">Photography</h1>
+        <p class="page-lede">Places I have been, one series per trip. {series.length} series, {photoCount} photographs.</p>
+      </div>
+      <a class="meta" href={SITE.links.instagram}>Instagram ↗</a>
+    </header>
+    <div class="grid">
+      {series.map((s) => (
+        <a class="card" href={`/photography/${s.id}/`}>
+          <Image src={s.data.cover} alt={s.data.title} widths={[400, 700]} sizes="(max-width: 700px) 100vw, 360px" quality={PHOTO_QUALITY} class="card__img" />
+          <span class="card__row">
+            <span class="card__title">{s.data.title}</span>
+            <span class="meta">{[s.data.year, `${s.data.photos.length} photos`].filter(Boolean).join(" · ")}</span>
+          </span>
+        </a>
+      ))}
+    </div>
+  </main>
+</Base>
+
+<style>
+  .head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
+  .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px 28px; }
+  .card { display: flex; flex-direction: column; gap: 12px; }
+  .card:hover { text-decoration: none; }
+  .card:hover .card__title { text-decoration: underline; text-underline-offset: 3px; }
+  .card__img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+  .card__row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .card__title { font-family: var(--serif); font-size: 20px; font-weight: 600; }
+  @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
+</style>

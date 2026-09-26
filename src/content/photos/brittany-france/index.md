@@ -1,0 +1,91 @@
+---
+title: "Brittany, France"
+source: "Brittany - France"
+year: 2023
+cover: ./01.jpg
+photos:
+  - src: ./01.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/4831 s"
+    iso: "ISO 50"
+    taken: "2023-08-20"
+  - src: ./02.jpg
+    camera: "iPhone 13 Pro"
+    focal: "14 mm eq."
+    aperture: "f/1.8"
+    shutter: "1/2179 s"
+    iso: "ISO 32"
+    taken: "2023-08-21"
+  - src: ./03.jpg
+    camera: "iPhone 13 Pro"
+    focal: "77 mm eq."
+    aperture: "f/2.8"
+    shutter: "1/1206 s"
+    iso: "ISO 32"
+    taken: "2023-08-21"
+  - src: ./04.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/6579 s"
+    iso: "ISO 50"
+    taken: "2023-08-21"
+  - src: ./05.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/2762 s"
+    iso: "ISO 50"
+    taken: "2023-08-21"
+  - src: ./06.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/8000 s"
+    iso: "ISO 50"
+    taken: "2023-08-21"
+  - src: ./07.jpg
+    camera: "iPhone 13 Pro"
+    focal: "14 mm eq."
+    aperture: "f/1.8"
+    shutter: "1/218 s"
+    iso: "ISO 32"
+    taken: "2023-08-21"
+  - src: ./08.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/2841 s"
+    iso: "ISO 50"
+    taken: "2023-08-21"
+  - src: ./09.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/4274 s"
+    iso: "ISO 50"
+    taken: "2023-08-23"
+  - src: ./10.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/3831 s"
+    iso: "ISO 50"
+    taken: "2023-08-23"
+  - src: ./11.jpg
+    camera: "iPhone 13 Pro"
+    focal: "14 mm eq."
+    aperture: "f/1.8"
+    shutter: "1/525 s"
+    iso: "ISO 32"
+    taken: "2023-08-26"
+  - src: ./12.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/6579 s"
+    iso: "ISO 50"
+    taken: "2023-08-28"
+---

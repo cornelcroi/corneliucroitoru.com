@@ -1,0 +1,91 @@
+---
+title: "Fuerteventura, Spain"
+source: "Fuerteventura - Spain"
+year: 2021
+cover: ./01.jpg
+photos:
+  - src: ./01.jpg
+    camera: "iPhone 13 Pro"
+    focal: "13 mm eq."
+    aperture: "f/1.8"
+    shutter: "1/2320 s"
+    iso: "ISO 32"
+    taken: "2021-10-24"
+  - src: ./02.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/10309 s"
+    iso: "ISO 50"
+    taken: "2021-10-26"
+  - src: ./03.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/8696 s"
+    iso: "ISO 50"
+    taken: "2021-10-26"
+  - src: ./04.jpg
+    camera: "iPhone 13 Pro"
+    focal: "13 mm eq."
+    aperture: "f/1.8"
+    shutter: "1/4587 s"
+    iso: "ISO 40"
+    taken: "2021-10-26"
+  - src: ./05.jpg
+    camera: "iPhone 13 Pro"
+    focal: "13 mm eq."
+    aperture: "f/1.8"
+    shutter: "1/2597 s"
+    iso: "ISO 32"
+    taken: "2021-10-26"
+  - src: ./06.jpg
+    camera: "iPhone 13 Pro"
+    focal: "13 mm eq."
+    aperture: "f/1.8"
+    shutter: "1/3425 s"
+    iso: "ISO 32"
+    taken: "2021-10-26"
+  - src: ./07.jpg
+    camera: "iPhone 13 Pro"
+    focal: "13 mm eq."
+    aperture: "f/1.8"
+    shutter: "1/2732 s"
+    iso: "ISO 32"
+    taken: "2021-10-26"
+  - src: ./08.jpg
+    camera: "iPhone 13 Pro"
+    focal: "13 mm eq."
+    aperture: "f/1.8"
+    shutter: "1/3650 s"
+    iso: "ISO 32"
+    taken: "2021-10-26"
+  - src: ./09.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/8000 s"
+    iso: "ISO 50"
+    taken: "2021-10-26"
+  - src: ./10.jpg
+    camera: "iPhone 13 Pro"
+    focal: "13 mm eq."
+    aperture: "f/1.8"
+    shutter: "1/1672 s"
+    iso: "ISO 32"
+    taken: "2021-10-26"
+  - src: ./11.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/6211 s"
+    iso: "ISO 50"
+    taken: "2021-10-27"
+  - src: ./12.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/9434 s"
+    iso: "ISO 50"
+    taken: "2021-10-28"
+---

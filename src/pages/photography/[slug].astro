@@ -1,0 +1,55 @@
+---
+import { getImage } from "astro:assets";
+import Base from "../../layouts/Base.astro";
+import { SITE } from "../../site";
+import { PHOTO_QUALITY, getSeries, shootingLine } from "../../lib/content";
+
+export async function getStaticPaths() {
+  const series = await getSeries();
+  return series.map((s, i) => ({
+    params: { slug: s.id },
+    props: { series: s, next: series[(i + 1) % series.length] },
+  }));
+}
+
+const { series, next } = Astro.props;
+const { title, description, year, photos } = series.data;
+// One set of variants per photo; the link opens the largest one, so nothing is generated twice.
+const images = await Promise.all(
+  photos.map((p) => getImage({ src: p.src, widths: [800, 1600], format: "webp", quality: PHOTO_QUALITY })),
+);
+const largest = (img: (typeof images)[number]) => img.srcSet.values.at(-1)?.url ?? img.src;
+const og = await getImage({ src: series.data.cover, width: 1200, format: "jpg" });
+---
+<Base title={title} description={description ?? `${title}: ${photos.length} photographs by ${SITE.name}.`} image={og.src}>
+  <main class="wrap">
+    <header class="series__head">
+      <a class="meta" href="/photography/">← Photography</a>
+      <h1 class="page-title">{title}</h1>
+      <p class="meta">{[year, `${photos.length} photographs`].filter(Boolean).join(" · ")}</p>
+      {description && <p class="page-lede">{description}</p>}
+    </header>
+    {photos.map((photo, i) => (
+      <figure>
+        <a href={largest(images[i])}>
+          <img src={images[i].src} srcset={images[i].srcSet.attribute} sizes="(max-width: 1180px) 100vw, 1100px"
+            width={images[i].attributes.width} height={images[i].attributes.height}
+            alt={`${title}, photograph ${i + 1}`} loading={i < 2 ? "eager" : "lazy"} decoding="async" />
+        </a>
+        {shootingLine(photo) && <figcaption class="meta">{shootingLine(photo)}</figcaption>}
+      </figure>
+    ))}
+    <footer class="series__foot">
+      <a href={SITE.links.instagram}>More on Instagram ↗</a>
+      <a href={`/photography/${next.id}/`}>Next: {next.data.title} →</a>
+    </footer>
+  </main>
+</Base>
+
+<style>
+  .series__head { display: flex; flex-direction: column; gap: 4px; margin: 32px 0 40px; }
+  .series__head .page-title { margin-top: 24px; }
+  figure { margin: 0 0 48px; display: flex; flex-direction: column; gap: 10px; }
+  figure img { width: 100%; }
+  .series__foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding-top: 24px; border-top: 1px solid var(--rule); font-size: 15px; color: var(--faint); }
+</style>

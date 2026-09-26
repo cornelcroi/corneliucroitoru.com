@@ -1,0 +1,91 @@
+---
+title: "Naples, Italy"
+source: "Naples"
+year: 2024
+cover: ./01.jpg
+photos:
+  - src: ./01.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/6993 s"
+    iso: "ISO 50"
+    taken: "2024-02-23"
+  - src: ./02.jpg
+    camera: "iPhone 13 Pro"
+    focal: "14 mm eq."
+    aperture: "f/1.8"
+    shutter: "1/1876 s"
+    iso: "ISO 32"
+    taken: "2024-02-23"
+  - src: ./03.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/6993 s"
+    iso: "ISO 50"
+    taken: "2024-02-23"
+  - src: ./04.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/5319 s"
+    iso: "ISO 50"
+    taken: "2024-02-23"
+  - src: ./05.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/6579 s"
+    iso: "ISO 50"
+    taken: "2024-02-23"
+  - src: ./06.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/3968 s"
+    iso: "ISO 50"
+    taken: "2024-02-23"
+  - src: ./07.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/1361 s"
+    iso: "ISO 50"
+    taken: "2024-02-23"
+  - src: ./08.jpg
+    camera: "iPhone 13 Pro"
+    focal: "14 mm eq."
+    aperture: "f/1.8"
+    shutter: "1/5814 s"
+    iso: "ISO 40"
+    taken: "2024-02-24"
+  - src: ./09.jpg
+    camera: "iPhone 13 Pro"
+    focal: "77 mm eq."
+    aperture: "f/2.8"
+    shutter: "1/235 s"
+    iso: "ISO 32"
+    taken: "2024-02-24"
+  - src: ./10.jpg
+    camera: "iPhone 13 Pro"
+    focal: "14 mm eq."
+    aperture: "f/1.8"
+    shutter: "1/316 s"
+    iso: "ISO 32"
+    taken: "2024-02-24"
+  - src: ./11.jpg
+    camera: "iPhone 13 Pro"
+    focal: "77 mm eq."
+    aperture: "f/2.8"
+    shutter: "1/99 s"
+    iso: "ISO 50"
+    taken: "2024-02-24"
+  - src: ./12.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/100 s"
+    iso: "ISO 50"
+    taken: "2024-02-24"
+---

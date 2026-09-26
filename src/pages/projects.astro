@@ -1,0 +1,38 @@
+---
+import Base from "../layouts/Base.astro";
+import { BUILDING, OPEN_SOURCE } from "../data/projects";
+---
+<Base title="Projects" description="Products in production and open-source projects by Corneliu Croitoru.">
+  <main class="wrap narrow">
+    <h1 class="page-title">Projects</h1>
+    <p class="page-lede">Two travel products in production, and the open source I wrote along the way.</p>
+
+    <h2 class="eyebrow group">Building</h2>
+    {BUILDING.map((p) => (
+      <a class="item" href={p.url}>
+        <span class="item__row"><span class="item__name">{p.name}</span><span class="meta">{p.role}</span></span>
+        <span class="item__text">{p.text}</span>
+        <span class="meta">{p.line}</span>
+      </a>
+    ))}
+
+    <h2 class="eyebrow group">Open source</h2>
+    {OPEN_SOURCE.map((p) => (
+      <a class="item" href={p.url}>
+        <span class="item__row"><span class="item__name">{p.name}</span><span class="meta">{p.role}</span></span>
+        <span class="item__text">{p.text}</span>
+      </a>
+    ))}
+  </main>
+</Base>
+
+<style>
+  .narrow { max-width: calc(760px + 2 * var(--gutter)); }
+  .group { margin: 40px 0 0; padding-bottom: 12px; border-bottom: 1px solid var(--rule); font-weight: 400; }
+  .item { display: flex; flex-direction: column; gap: 6px; padding-block: 22px; border-bottom: 1px solid var(--rule); }
+  .item:hover { text-decoration: none; }
+  .item:hover .item__name { text-decoration: underline; text-underline-offset: 3px; }
+  .item__row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+  .item__name { font-family: var(--serif); font-size: 22px; font-weight: 700; }
+  .item__text { font-family: var(--serif); font-size: 17px; line-height: 1.5; color: var(--muted); }
+</style>

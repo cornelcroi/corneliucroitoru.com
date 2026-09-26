@@ -1,0 +1,91 @@
+---
+title: "Honfleur at night"
+source: "Honfleur - Night"
+year: 2025
+cover: ./01.jpg
+photos:
+  - src: ./01.jpg
+    camera: "iPhone 17 Pro"
+    focal: "14 mm eq."
+    aperture: "f/2.2"
+    shutter: "1/20 s"
+    iso: "ISO 2500"
+    taken: "2025-10-30"
+  - src: ./02.jpg
+    camera: "iPhone 17 Pro"
+    focal: "14 mm eq."
+    aperture: "f/2.2"
+    shutter: "1/20 s"
+    iso: "ISO 2500"
+    taken: "2025-10-30"
+  - src: ./03.jpg
+    camera: "iPhone 17 Pro"
+    focal: "24 mm eq."
+    aperture: "f/1.78"
+    shutter: "1/25 s"
+    iso: "ISO 1600"
+    taken: "2025-10-30"
+  - src: ./04.jpg
+    camera: "iPhone 17 Pro"
+    focal: "14 mm eq."
+    aperture: "f/2.2"
+    shutter: "1/6 s"
+    iso: "ISO 1600"
+    taken: "2025-10-30"
+  - src: ./05.jpg
+    camera: "iPhone 17 Pro"
+    focal: "14 mm eq."
+    aperture: "f/2.2"
+    shutter: "1/6 s"
+    iso: "ISO 1250"
+    taken: "2025-10-30"
+  - src: ./06.jpg
+    camera: "iPhone 17 Pro"
+    focal: "24 mm eq."
+    aperture: "f/1.78"
+    shutter: "1/25 s"
+    iso: "ISO 1250"
+    taken: "2025-10-30"
+  - src: ./07.jpg
+    camera: "iPhone 17 Pro"
+    focal: "14 mm eq."
+    aperture: "f/2.2"
+    shutter: "1/4 s"
+    iso: "ISO 1250"
+    taken: "2025-10-30"
+  - src: ./08.jpg
+    camera: "iPhone 17 Pro"
+    focal: "14 mm eq."
+    aperture: "f/2.2"
+    shutter: "1/4 s"
+    iso: "ISO 1250"
+    taken: "2025-10-30"
+  - src: ./09.jpg
+    camera: "iPhone 17 Pro"
+    focal: "14 mm eq."
+    aperture: "f/2.2"
+    shutter: "1/8 s"
+    iso: "ISO 1250"
+    taken: "2025-10-30"
+  - src: ./10.jpg
+    camera: "iPhone 17 Pro"
+    focal: "14 mm eq."
+    aperture: "f/2.2"
+    shutter: "1/10 s"
+    iso: "ISO 1250"
+    taken: "2025-10-30"
+  - src: ./11.jpg
+    camera: "iPhone 17 Pro"
+    focal: "48 mm eq."
+    aperture: "f/1.78"
+    shutter: "1/17 s"
+    iso: "ISO 1000"
+    taken: "2025-10-30"
+  - src: ./12.jpg
+    camera: "iPhone 17 Pro"
+    focal: "14 mm eq."
+    aperture: "f/2.2"
+    shutter: "1/7 s"
+    iso: "ISO 1250"
+    taken: "2025-10-30"
+---

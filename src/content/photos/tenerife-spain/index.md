@@ -1,0 +1,91 @@
+---
+title: "Tenerife, Spain"
+source: "Tenerife - Spain"
+year: 2022
+cover: ./01.jpg
+photos:
+  - src: ./01.jpg
+    camera: "iPhone 13 Pro"
+    focal: "77 mm eq."
+    aperture: "f/2.8"
+    shutter: "1/779 s"
+    iso: "ISO 32"
+    taken: "2022-08-19"
+  - src: ./02.jpg
+    camera: "iPhone 13 Pro"
+    focal: "14 mm eq."
+    aperture: "f/1.8"
+    shutter: "1/1553 s"
+    iso: "ISO 32"
+    taken: "2022-08-19"
+  - src: ./03.jpg
+    camera: "iPhone 13 Pro"
+    focal: "14 mm eq."
+    aperture: "f/1.8"
+    shutter: "1/1980 s"
+    iso: "ISO 32"
+    taken: "2022-08-19"
+  - src: ./04.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/9 s"
+    iso: "ISO 500"
+    taken: "2022-08-21"
+  - src: ./05.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/2252 s"
+    iso: "ISO 50"
+    taken: "2022-08-25"
+  - src: ./06.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/4115 s"
+    iso: "ISO 50"
+    taken: "2022-08-25"
+  - src: ./07.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/5587 s"
+    iso: "ISO 50"
+    taken: "2022-08-26"
+  - src: ./08.jpg
+    camera: "iPhone 13 Pro"
+    focal: "26 mm eq."
+    aperture: "f/1.5"
+    shutter: "1/5319 s"
+    iso: "ISO 50"
+    taken: "2022-08-26"
+  - src: ./09.jpg
+    camera: "iPhone 13 Pro"
+    focal: "77 mm eq."
+    aperture: "f/2.8"
+    shutter: "1/896 s"
+    iso: "ISO 32"
+    taken: "2022-08-26"
+  - src: ./10.jpg
+    camera: "iPhone 13 Pro"
+    focal: "13 mm eq."
+    aperture: "f/1.8"
+    shutter: "1/960 s"
+    iso: "ISO 32"
+    taken: "2022-08-26"
+  - src: ./11.jpg
+    camera: "iPhone 13 Pro"
+    focal: "13 mm eq."
+    aperture: "f/1.8"
+    shutter: "1/2053 s"
+    iso: "ISO 32"
+    taken: "2022-08-28"
+  - src: ./12.jpg
+    camera: "iPhone 13 Pro"
+    focal: "14 mm eq."
+    aperture: "f/1.8"
+    shutter: "1/60 s"
+    iso: "ISO 640"
+    taken: "2022-08-29"
+---

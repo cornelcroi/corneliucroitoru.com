@@ -1,0 +1,18 @@
+---
+import Base from "../../layouts/Base.astro";
+import PostRow from "../../components/PostRow.astro";
+import { getAllPosts } from "../../lib/content";
+
+const posts = await getAllPosts();
+---
+<Base title="Writing" description="Articles on building software with AI: the patterns that hold in production, with the code and numbers behind them.">
+  <main class="wrap narrow">
+    <h1 class="page-title">Writing</h1>
+    <p class="page-lede">Patterns from building with AI. Each one links to something that runs.</p>
+    {posts.map((post) => <PostRow post={post} />)}
+  </main>
+</Base>
+
+<style>
+  .narrow { max-width: calc(760px + 2 * var(--gutter)); }
+</style>
