@@ -20,7 +20,7 @@ export const EXPERIENCE = [
     role: "Senior GenAI Prototyping Architect",
     period: "Apr 2021 – Aug 2025",
     place: "Paris",
-    summary: "30+ prototypes for AWS customers across EMEA, 2 to 6 weeks each. GenAI-only after ChatGPT launched.",
+    summary: "Four years building prototypes. Designed and delivered 30+ production-ready prototypes, 2 to 6 weeks each, for AWS customers across EMEA: GenAI, serverless and media streaming. GenAI-only after ChatGPT launched.",
     points: [
       "Owned the full cycle: qualification, solution design, building inside the customer's own AWS accounts, then training their team to carry it forward.",
       "Banking, manufacturing, business information, media and sports streaming, online classifieds, e-commerce.",
@@ -33,8 +33,9 @@ export const EXPERIENCE = [
     role: "Solutions Architect",
     period: "Jul 2018 – Apr 2021",
     place: "Paris",
-    summary: "Hundreds of customers: enterprise, then digital natives, then startups.",
+    summary: "Hundreds of customers, from enterprise to digital natives to startups.",
     points: [
+      "Monthly office hours with early-stage startups: 30 minutes each to find the real problem and propose a solution.",
       "Cloud architectures, architecture reviews for reliability and security, C-level presentations.",
       "Member of the AWS Serverless and Edge specialty groups.",
     ],
