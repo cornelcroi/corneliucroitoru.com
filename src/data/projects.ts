@@ -41,26 +41,30 @@ export const EXPERIMENTS = [
 
 export const BUILT_AT_AWS = [
   {
-    name: "Food Analyzer",
+    name: "Food Analyzer (FoodLens)",
     url: "https://github.com/aws-samples/serverless-genai-food-analyzer-app",
+    architecture: "https://github.com/aws-samples/serverless-genai-food-analyzer-app#architecture",
     role: "Co-creator",
-    text: "A GenAI nutrition app on Amazon Bedrock with Claude Haiku and Sonnet. Built at a hackathon, demoed at AWS Summits.",
+    text: "A serverless GenAI web app for shopping and cooking, on Amazon Bedrock with Claude Haiku and Sonnet. Born at an internal AWS hackathon, which it won. I then rebuilt the UI and the UX so a demo would feel like a real product. Shown at more than 10 AWS Summits.",
   },
   {
     name: "Secure Media Delivery at the Edge",
     url: "https://github.com/aws-solutions-library-samples/secure-media-delivery-at-the-edge-on-aws",
+    architecture: "https://github.com/aws-solutions-library-samples/secure-media-delivery-at-the-edge-on-aws#architecture-overview",
     role: "Sole developer",
     text: "Protects premium video delivered through CloudFront. Now maintained by the AWS Solutions team.",
   },
   {
     name: "A/B Testing at the Edge",
     url: "https://github.com/aws-samples/ab-testing-at-edge",
+    architecture: "https://github.com/aws-samples/ab-testing-at-edge#architecture",
     role: "Owner, maintainer",
     text: "A/B testing on CloudFront with Lambda@Edge, CloudFront Functions and KeyValueStore. Comes with an AWS workshop.",
   },
   {
     name: "CloudFront Hosting Toolkit",
     url: "https://github.com/awslabs/cloudfront-hosting-toolkit",
+    architecture: "https://awslabs.github.io/cloudfront-hosting-toolkit/architecture/overview",
     role: "Main maintainer",
     text: "A CLI that builds a full frontend deployment pipeline on S3 and CloudFront in two commands.",
   },

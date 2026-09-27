@@ -6,7 +6,7 @@ import { SITE } from "../site";
 <Base title="Projects" description="The products Corneliu Croitoru co-founded, the open source he maintains, and what he built at AWS.">
   <main class="wrap narrow">
     <h1 class="page-title">Projects</h1>
-    <p class="page-lede">Two products I co-founded, both live, the open source I maintain, and what I built at AWS.</p>
+    <p class="page-lede">Two products I co-founded, both live, the open source I maintain, and the cloud architectures I built at AWS.</p>
 
     <h2 class="eyebrow group">Co-founder</h2>
     {BUILDING.map((p) => (
@@ -33,12 +33,13 @@ import { SITE } from "../site";
       {EXPERIMENTS.map((e) => <li><a href={e.url}>{e.name}</a>, {e.text}</li>)}
     </ul>
 
-    <h2 class="eyebrow group">Built at AWS</h2>
+    <h2 class="eyebrow group">Cloud architecture, built at AWS</h2>
     {BUILT_AT_AWS.map((p) => (
-      <a class="item" href={p.url}>
-        <span class="item__row"><span class="item__name">{p.name}</span><span class="meta">{p.role}</span></span>
+      <div class="item">
+        <span class="item__row"><a class="item__name" href={p.url}>{p.name}</a><span class="meta">{p.role}</span></span>
         <span class="item__text">{p.text}</span>
-      </a>
+        <a class="meta arch" href={p.architecture}>architecture →</a>
+      </div>
     ))}
   </main>
 </Base>
@@ -52,6 +53,8 @@ import { SITE } from "../site";
   .item__row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
   .item__name { font-family: var(--serif); font-size: 22px; font-weight: 700; }
   .item__text { font-family: var(--serif); font-size: 17px; line-height: 1.5; color: var(--muted); }
+  .arch { text-decoration: underline; text-underline-offset: 3px; }
+  div.item .item__name:hover { text-decoration: underline; text-underline-offset: 3px; }
   .shot { width: 100%; height: auto; margin-top: 14px; border: 1px solid var(--rule); border-radius: 6px; }
   .sub-group { margin: 20px 0 6px; font-size: 13px; font-weight: 600; color: var(--faint); letter-spacing: 0.04em; }
   .experiments { margin: 0; padding-left: 18px; font-family: var(--serif); font-size: 16px; line-height: 1.6; color: var(--muted); }
