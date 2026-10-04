@@ -16,6 +16,5 @@ export const SITE = {
     github: "https://github.com/cornelcroi",
     linkedin: "https://www.linkedin.com/in/corneliucroitoru",
     devto: "https://dev.to/cornelcroi",
-    instagram: "https://www.instagram.com/manbehindlenscom",
   },
 };

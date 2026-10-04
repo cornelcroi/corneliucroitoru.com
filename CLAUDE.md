@@ -6,7 +6,7 @@ Drafts, the publication calendar and the purpose/rules live in the private repo 
 
 ## Routines
 
-**Add photos.** New trip = new subfolder in the iCloud folder (`SOURCE` in `scripts/import_photos.py`, the old manbehindlens.com export folder), named like the others (`Porto - Portugal`).
+**Add photos.** New trip = new subfolder in the iCloud folder (`SOURCE` in `scripts/import_photos.py`, the old photo site export folder), named like the others (`Porto - Portugal`).
 
 ```bash
 npm run photos                          # imports only folders not on the site yet

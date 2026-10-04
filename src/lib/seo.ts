@@ -20,7 +20,7 @@ export const person = {
     "LLM evaluation", "AWS", "Serverless architecture", "Product design", "Photography",
   ],
   knowsLanguage: ["en", "fr", "ro"],
-  sameAs: [SITE.links.linkedin, SITE.links.github, SITE.links.devto, SITE.links.instagram],
+  sameAs: [SITE.links.linkedin, SITE.links.github, SITE.links.devto],
 };
 
 export const website = {
