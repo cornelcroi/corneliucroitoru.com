@@ -12,6 +12,14 @@ const writing = defineCollection({
     tags: z.array(z.string()).default([]),
     cover: z.string().optional(),
     devto: z.string().url().optional(),
+    // A YouTube video the article embeds. It becomes a VideoObject, so Google can list the article in video results.
+    video: z.object({
+      youtube: z.string(),
+      title: z.string(),
+      description: z.string(),
+      uploaded: z.coerce.date(),
+      duration: z.string(), // ISO 8601, e.g. PT1M49S
+    }).optional(),
     // Articles about one product; they link to each other in date order.
     series: z.string().optional(),
     draft: z.boolean().default(false),

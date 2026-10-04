@@ -12,7 +12,7 @@ export async function getStaticPaths() {
 
 const { article } = Astro.props;
 const { Content } = await render(article);
-const { title, description, date, cover, devto, tags, series } = article.data;
+const { title, description, date, cover, devto, tags, series, video } = article.data;
 const parts = series ? await getArticleSeries(series) : [];
 const url = `${SITE.url}/writing/${article.id}/`;
 // 1200x630 version of the cover for link previews, made by scripts/make_share_images.sh.
@@ -32,8 +32,19 @@ const posting = {
   inLanguage: "en",
   ...(series && { isPartOf: { "@type": "CreativeWorkSeries", name: series } }),
 };
+const videoObject = video && {
+  "@type": "VideoObject",
+  name: video.title,
+  description: video.description,
+  thumbnailUrl: `https://i.ytimg.com/vi/${video.youtube}/maxresdefault.jpg`,
+  uploadDate: video.uploaded.toISOString(),
+  duration: video.duration,
+  embedUrl: `https://www.youtube.com/embed/${video.youtube}`,
+  url: `https://www.youtube.com/watch?v=${video.youtube}`,
+  author: { "@id": PERSON_ID },
+};
 ---
-<Base title={title} description={description} image={shareImage} imageAlt={title} type="article" published={date} schema={[posting]}>
+<Base title={title} description={description} image={shareImage} imageAlt={title} type="article" published={date} schema={videoObject ? [posting, videoObject] : [posting]}>
   <article class="wrap article">
     <header class="article__head">
       <span class="meta">{[date && formatDate(date), `${readingMinutes(article.body ?? "")} min read`].filter(Boolean).join(" · ")}</span>

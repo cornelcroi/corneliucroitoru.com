@@ -1,7 +1,14 @@
 ---
 title: "The Search Grammar Pattern: Natural Language Search with LLMs"
 description: "How I built natural language search for my movie app with one small LLM call, and the pattern behind it: describe the offer by its dimensions, not its rows."
+date: 2026-10-04
 tags: [llm, ai, search, architecture]
+video:
+  youtube: hoCesxy2o08
+  title: "Natural Language Search with LLMs | The Search Grammar Pattern | Live Demo"
+  description: "Natural language search with an LLM over a whole movie catalog: one small LLM call per search, structured output, and code that decides what exists. 9 real searches in Tonight, every result checked against the catalog."
+  uploaded: 2026-10-04
+  duration: PT1M49S
 cover: /covers/search-grammar-pattern.png
 ---
 
