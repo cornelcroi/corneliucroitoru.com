@@ -1,0 +1,22 @@
+---
+import { aboutProject } from "../lib/content";
+
+interface Props { name: string }
+const items = aboutProject(Astro.props.name);
+---
+{items.length > 0 && (
+  <div class="about extra">
+    <span class="meta">Written and said about it</span>
+    <ul>
+      {items.map((i) => (
+        <li><a href={i.url}>{i.title}</a> <span class="meta">{[i.kind, i.where, i.year].filter(Boolean).join(" · ")}{i.also && <> · <a href={i.also.url}>{i.also.label}</a></>}</span></li>
+      ))}
+    </ul>
+  </div>
+)}
+
+<style>
+  ul { margin: 6px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; font-family: var(--serif); font-size: 16px; line-height: 1.45; }
+  li .meta { display: block; margin-top: 2px; font-family: var(--sans); }
+  a { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+</style>

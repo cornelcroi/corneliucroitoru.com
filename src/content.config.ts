@@ -7,10 +7,13 @@ const writing = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    date: z.coerce.date(),
+    // Optional: an article can go up before its scheduled day, undated, and get its date later.
+    date: z.coerce.date().optional(),
     tags: z.array(z.string()).default([]),
     cover: z.string().optional(),
     devto: z.string().url().optional(),
+    // Articles about one product; they link to each other in date order.
+    series: z.string().optional(),
     draft: z.boolean().default(false),
     // Shown on the home page. Pick three that show range, not the three newest.
     featured: z.boolean().default(false),

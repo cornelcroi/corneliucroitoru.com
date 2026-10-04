@@ -1,4 +1,5 @@
 // Articles published elsewhere. They link out; the site does not copy them.
+// `project` lists the article under that project on the Projects page.
 export const EXTERNAL = [
   {
     title: "Context-Lens: a serverless, open-source MCP server for AI document understanding",
@@ -13,6 +14,7 @@ export const EXTERNAL = [
     date: new Date("2024-11-28"),
     url: "https://community.aws/content/2pTsHrYPqvAbJBl9ht1XxPOSPjR/unlock-bedrock-invokeinlineagent-api-s-hidden-potential-with-multi-agent-orchestrator",
     where: "community.aws",
+    project: "Agent Squad",
   },
   {
     title: "Beyond auto-replies: building an AI-powered e-commerce support system",
@@ -20,6 +22,7 @@ export const EXTERNAL = [
     date: new Date("2024-09-12"),
     url: "https://community.aws/content/2lq6cYYwTYGc7S3Zmz28xZoQNQj/beyond-auto-replies-building-an-ai-powered-e-commerce-support-system",
     where: "community.aws",
+    project: "Agent Squad",
     featured: true,
   },
   {
@@ -28,6 +31,7 @@ export const EXTERNAL = [
     date: new Date("2024-06-04"),
     url: "https://aws.amazon.com/blogs/networking-and-content-delivery/introducing-cloudfront-hosting-toolkit/",
     where: "AWS Blog",
+    project: "CloudFront Hosting Toolkit",
   },
   {
     title: "How DAZN uses AWS Step Functions to orchestrate event-based video streaming at scale",

@@ -1,0 +1,68 @@
+---
+// One project, held in one tinted panel: name, role, what it is, then whatever else belongs to it (slot).
+interface Props {
+  name: string;
+  url: string;
+  role: string;
+  text: string;
+  line?: string;
+  // bare: the image already sits on the panel colour (cut-out phones), so no rounded corners.
+  // clipping: a press cut-out, small on the right with the text flowing around it, like a newspaper column.
+  image?: { src: string; alt: string; width: number; height: number; bare?: boolean; clipping?: boolean };
+  when?: string;
+  links?: { label: string; url: string }[];
+}
+const { name, url, role, text, line, image, when, links = [] } = Astro.props;
+const clipping = image?.clipping ? image : undefined;
+const shot = image && !image.clipping ? image : undefined;
+---
+<article class="panel">
+  <header class="panel__row">
+    <h3 class="panel__name"><a href={url}>{name}</a></h3>
+    <span class="meta">{[role, when].filter(Boolean).join(" · ")}</span>
+  </header>
+  {clipping ? (
+    <div class="panel__flow">
+      <a href={url} class="panel__clip" tabindex="-1">
+        <img src={clipping.src} alt={clipping.alt} width={clipping.width} height={clipping.height} loading="lazy" decoding="async">
+      </a>
+      <p class="panel__text">{text}</p>
+    </div>
+  ) : (
+    <p class="panel__text">{text}</p>
+  )}
+  {line && <p class="meta panel__line">{line}</p>}
+  {links.length > 0 && (
+    <p class="meta panel__links">{links.map((l) => <a href={l.url}>{l.label} ↗</a>)}</p>
+  )}
+  {shot && (
+    <a href={url} class:list={["panel__shot", { "panel__shot--bare": shot.bare }]} tabindex="-1">
+      <img src={shot.src} alt={shot.alt} width={shot.width} height={shot.height} loading="lazy" decoding="async">
+    </a>
+  )}
+  <slot />
+</article>
+
+<style>
+  .panel { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; padding: 28px; background: var(--code-bg); border-radius: 8px; }
+  .panel__row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+  .panel__name { margin: 0; font-family: var(--serif); font-size: 22px; font-weight: 700; line-height: 1.25; }
+  .panel__name a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .panel__text { margin: 0; font-family: var(--serif); font-size: 17px; line-height: 1.5; color: var(--muted); }
+  .panel__line { margin: 0; }
+  .panel__links { margin: 0; display: flex; flex-wrap: wrap; gap: 4px 18px; }
+  .panel__links a { text-decoration: underline; text-underline-offset: 3px; }
+  .panel__shot { display: block; margin-top: 8px; }
+  .panel__shot img { display: block; width: 100%; height: auto; border-radius: 6px; }
+  .panel__shot--bare img { border-radius: 0; }
+  .panel__flow { display: flow-root; }
+  .panel__clip { float: right; width: 42%; margin: 4px 0 10px 24px; }
+  .panel__clip img { display: block; width: 100%; height: auto; border-radius: 3px; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 8px 24px rgba(0, 0, 0, 0.1); }
+  /* What else belongs to the project sits under a hairline, still inside the panel. */
+  .panel > :global(.extra) { margin-top: 12px; padding-top: 16px; border-top: 1px solid var(--rule); }
+  @media (max-width: 560px) {
+    .panel { padding: 20px 18px; }
+    .panel__clip { float: none; display: block; width: 100%; margin: 4px 0 14px; }
+    .panel__row { flex-direction: column; gap: 2px; }
+  }
+</style>

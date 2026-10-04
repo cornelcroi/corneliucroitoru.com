@@ -3,6 +3,7 @@ title: "I pay an LLM to approve bad reviews"
 description: "Every trip report goes through a model before readers see it. The most important line in that prompt is not about catching bad content."
 date: 2026-09-14
 tags: [llm, ai, webdev, buildinpublic]
+series: "Building Back From My Trip"
 cover: /covers/llm-approves-bad-reviews.png
 devto: https://dev.to/cornelcroi/i-pay-an-llm-to-approve-bad-reviews-3be2
 ---
@@ -120,7 +121,7 @@ The model approves the boring majority so one human only ever looks at the inter
 
 ---
 
-*If you came back from a trip that disappointed you, that report is exactly the one worth writing. It cannot be softened or hidden: [backfrommytrip.com](https://backfrommytrip.com).*
+*If you came back from a trip that disappointed you, that report is exactly the one worth writing. It cannot be softened or hidden: [BackFromMyTrip.com](https://backfrommytrip.com).*
 
 *And a question for the builders: when your LLM pipeline fails, which way does it fall, toward "approved" or toward a human? And what's the best "dear moderator" attempt your logs have caught? Surprise me.*
 

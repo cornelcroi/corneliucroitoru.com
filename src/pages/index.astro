@@ -33,9 +33,9 @@ const tiles = series.filter((s) => s.id !== heroSeries.id).slice(0, PHOTO_TILES)
 
   <main class="wrap col">
     <section class="intro">
-      <p class="intro__lead">23 years of shipping software. The last few, with AI.</p>
-      <p>I design and build GenAI systems: agents, LLM pipelines, evaluation. Today as Staff GenAI Solutions Architect at Betclic, leading GenAI architecture and MCP adoption. Before that, 7 years at AWS: cloud architect for hundreds of customers, serverless and edge, then 30+ GenAI prototypes.</p>
-      <p>What I love is the whole product, not just the AI: the idea, the architecture, the code, the UX. Two of mine are live, and I co-founded both: <a href="https://streetlensapp.com">StreetLens</a> and <a href="https://www.backfrommytrip.com">Back From My Trip</a>.</p>
+      <p class="intro__lead">20+ years of shipping software. Since 2023, everything I build is GenAI-based.</p>
+      <p>I design and build GenAI systems: agents, LLM pipelines, evaluation. Today as Staff GenAI Solutions Architect at Betclic, leading GenAI architecture and MCP adoption. Before that, 7 years at AWS: cloud architect for hundreds of customers, serverless and edge, then 30+ prototypes built with customers.</p>
+      <p>What I love is the whole product, not just the AI: the idea, the architecture, the UX. Two of mine are live, and I co-founded both: <a href="https://streetlensapp.com">StreetLens</a> and <a href="https://www.backfrommytrip.com">Back From My Trip</a>.</p>
       <p>And I photograph the places I travel to.</p>
       <p class="facts">
         <span><strong>7.7k</strong> stars on Agent Squad</span>
@@ -52,7 +52,7 @@ const tiles = series.filter((s) => s.id !== heroSeries.id).slice(0, PHOTO_TILES)
         <a class="post" href={post.href}>
           <span class="post__title">{post.title}</span>
           <span class="post__excerpt">{post.description}</span>
-          <span class="meta">{formatDate(post.date)}{post.where ? ` · ${post.where} ↗` : ` · ${post.minutes} min read`}</span>
+          <span class="meta">{[post.date && formatDate(post.date), post.where ? `${post.where} ↗` : `${post.minutes} min read`].filter(Boolean).join(" · ")}</span>
         </a>
       ))}
       <a class="more" href="/writing/">Read all {allPosts.length} articles →</a>

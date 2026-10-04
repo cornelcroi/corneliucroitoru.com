@@ -21,9 +21,9 @@ git add -A && git commit && git push    # deploys
 - To choose a series cover: set `cover:` to another file of the series.
 - Folder names become titles through `TITLES` in the script; add an entry there for a new odd name, or edit `title:` in `index.md` after import.
 
-**Add an article.** `src/content/writing/<slug>.md` with `title`, `description` (one or two sentences, used as the excerpt), `date`, `tags`, `cover` (`/covers/<slug>.png`, 1000×420 rendered at 2×, in `public/covers/`; made in `~/projects/publications/covers/` with the Night plate, like every article image), and `devto` once cross-posted. The dev.to copy sets `canonical_url: https://corneliucroitoru.com/writing/<slug>/`. `draft: true` hides it; `featured: true` puts it on the home page (keep three, chosen for range, not recency; `featured: true` also works on entries in `src/data/external.ts`). Images go in `public/img/`.
+**Add an article.** `src/content/writing/<slug>.md` with `title`, `description` (one or two sentences, used as the excerpt), `date`, `tags`, `cover` (`/covers/<slug>.png`, 1000×420 rendered at 2×, in `public/covers/`; made in `~/projects/publications/covers/` with the Night plate, like every article image), and `devto` once cross-posted. The dev.to copy sets `canonical_url: https://corneliucroitoru.com/writing/<slug>/`. `series` (e.g. `"Building Back From My Trip"`) links the article to the others of its series, and to its product on the Projects page when the entry in `src/data/projects.ts` names the same series. `draft: true` hides it; `featured: true` puts it on the home page (keep three, chosen for range, not recency; `featured: true` also works on entries in `src/data/external.ts`). Images go in `public/img/`.
 
-**Articles published elsewhere** (AWS Blog, Medium…) go in `src/data/external.ts`; they link out.
+**Articles published elsewhere** (AWS Blog, Medium…) go in `src/data/external.ts`; they link out. Set `project` (on an article there or a talk in `src/data/talks.ts`) to list it under that project on the Projects page, in "Written and said about it"; the name must match the project's `name`.
 
 **Home page photo:** `hero` in `src/site.ts` (series slug + position + caption).
 
@@ -43,5 +43,5 @@ If the dev server shows a page without its styles or misses a front-matter chang
 
 - Light only, two faces: Instrument Sans (UI) and Source Serif 4 (titles, reading). Tokens in `src/styles/global.css`.
 - Photos are served through Astro's image pipeline at webp quality `PHOTO_QUALITY` (`src/lib/content.ts`). Don't add width variants without checking `du -sh dist` (GitHub Pages limit: 1 GB).
-- No client-side JavaScript. No analytics without asking.
-- The domain, wherever it is displayed (covers, share images, headings, text), is written **CorneliuCroitoru.com**. Lowercase only in URLs, `CNAME` and code.
+- No client-side JavaScript. No analytics without asking. One exception, chosen by the owner (2026-10-04): YouTube embeds, always from `youtube-nocookie.com`, `loading="lazy"`, inside a `.video-embed` div. Short videos are self-hosted MP4s in `public/video/`.
+- The domain, wherever it is displayed (covers, share images, headings, text), is written **CorneliuCroitoru.com**, and likewise **BackFromMyTrip.com** (streetlensapp.com stays lowercase). Lowercase only in URLs, `CNAME` and code.

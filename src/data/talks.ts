@@ -8,6 +8,7 @@ export const TALKS = [
     year: 2025,
     format: "Podcast, in French",
     url: "https://www.youtube.com/watch?v=kVVs9iLQEIE",
+    project: "Agent Squad",
   },
   {
     title: "An orchestrator for your AI agents",
@@ -15,6 +16,7 @@ export const TALKS = [
     year: 2024,
     format: "Podcast",
     url: "https://podcasts.apple.com/us/podcast/an-orchestrator-for-your-ai-agents/id1574162669?i=1000677039579",
+    project: "Agent Squad",
   },
   {
     title: "Beyond auto-replies: building an AI-powered e-commerce support system",
@@ -22,6 +24,7 @@ export const TALKS = [
     year: null,
     format: "Talk",
     url: "https://startups.aws.com/events/aws-genai-loft-multi-agent-orchestrator?lang=en-US",
+    project: "Agent Squad",
   },
   {
     title: "Build a complete livestreaming workflow using automated deployments (MAE301)",

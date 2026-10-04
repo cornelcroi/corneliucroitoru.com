@@ -6,6 +6,67 @@ import { PHOTO_QUALITY, getSeries } from "../../lib/content";
 
 const series = await getSeries();
 const photoCount = series.reduce((n, s) => n + s.data.photos.length, 0);
+
+// Tile sizes look random but are stable across builds: they come from a hash of the slug.
+// Portraits stand tall, the latest trip is big, dense grid packing fills the gaps.
+type Size = "big" | "wide" | "tall" | "normal";
+const SPAN: Record<Size, [number, number]> = { big: [2, 2], wide: [2, 1], tall: [1, 2], normal: [1, 1] };
+const COLUMNS = [4, 3, 2]; // one per breakpoint below
+const hash = (text: string) => [...text].reduce((h, ch) => (h * 31 + ch.charCodeAt(0)) >>> 0, 7);
+
+function firstGuess(s: (typeof series)[number], i: number): Size {
+  if (i === 0) return "big";
+  if (s.data.cover.height > s.data.cover.width) return "tall";
+  const roll = hash(s.id) % 8;
+  if (roll < 2) return "wide";
+  if (roll === 2) return "big";
+  return "normal";
+}
+
+// Replays CSS `grid-auto-flow: dense` and says whether the grid ends on a full row.
+function packsFlat(sizes: Size[], cols: number) {
+  const taken = new Set<string>();
+  let bottom = 0;
+  for (const size of sizes) {
+    const [w, h] = SPAN[size];
+    for (let r = 0, placed = false; !placed; r++) {
+      for (let c = 0; c + w <= cols && !placed; c++) {
+        const cells = Array.from({ length: w * h }, (_, k) => `${r + Math.floor(k / w)},${c + (k % w)}`);
+        if (cells.every((cell) => !taken.has(cell))) {
+          cells.forEach((cell) => taken.add(cell));
+          bottom = Math.max(bottom, r + h);
+          placed = true;
+        }
+      }
+    }
+  }
+  return taken.size === bottom * cols;
+}
+
+// If the guess leaves holes, change one or two landscape tiles, from the end, until every width packs flat.
+function layout(): Size[] {
+  const guess = series.map(firstGuess);
+  const flat = (sizes: Size[]) => COLUMNS.every((cols) => packsFlat(sizes, cols));
+  if (flat(guess)) return guess;
+  const free = guess.map((size, i) => i).filter((i) => i > 0 && guess[i] !== "tall").reverse();
+  const options: Size[] = ["normal", "wide", "big"];
+  for (const a of free) for (const sa of options) {
+    const one = guess.with(a, sa);
+    if (flat(one)) return one;
+    for (const b of free) if (b < a) for (const sb of options) {
+      const two = one.with(b, sb);
+      if (flat(two)) return two;
+    }
+  }
+  return guess;
+}
+const sizes = layout();
+const SIZES = {
+  big: "(max-width: 560px) 100vw, 560px",
+  wide: "(max-width: 560px) 100vw, 560px",
+  tall: "(max-width: 560px) 50vw, 280px",
+  normal: "(max-width: 560px) 50vw, 280px",
+};
 ---
 <Base title="Photography" description={`Travel photography by Corneliu Croitoru: ${series.length} series, one per trip, with the camera settings under every photo.`}>
   <main class="wrap">
@@ -17,30 +78,53 @@ const photoCount = series.reduce((n, s) => n + s.data.photos.length, 0);
       </div>
       <a class="meta" href={SITE.links.instagram}>Instagram ↗</a>
     </header>
-    <div class="grid">
-      {series.map((s) => (
-        <a class="card" href={`/photography/${s.id}/`}>
-          <Image src={s.data.cover} alt={s.data.title} widths={[400, 700]} sizes="(max-width: 700px) 100vw, 360px" quality={PHOTO_QUALITY} class="card__img" />
-          <span class="card__row">
-            <span class="card__title">{s.data.title}</span>
-            <span class="meta">{[s.data.year, `${s.data.photos.length} photos`].filter(Boolean).join(" · ")}</span>
-          </span>
-        </a>
-      ))}
+
+    <div class="mosaic">
+      {series.map((s, i) => {
+        const size = sizes[i];
+        return (
+          <a class={`tile tile--${size}`} href={`/photography/${s.id}/`}>
+            <Image src={s.data.cover} alt={s.data.title} widths={[400, 800, 1200]} sizes={SIZES[size]} quality={PHOTO_QUALITY} loading={i < 4 ? "eager" : "lazy"} />
+            <span class="tile__caption">
+              <span class="tile__title">{s.data.title}</span>
+              <span class="tile__meta">{[s.data.year, `${s.data.photos.length} photos`].filter(Boolean).join(" · ")}</span>
+            </span>
+          </a>
+        );
+      })}
     </div>
   </main>
 </Base>
 
 <style>
   .u { text-decoration: underline; text-underline-offset: 3px; }
-  .head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
-  .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px 28px; }
-  .card { display: flex; flex-direction: column; gap: 12px; }
-  .card:hover { text-decoration: none; }
-  .card:hover .card__title { text-decoration: underline; text-underline-offset: 3px; }
-  .card__img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
-  .card__row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
-  .card__title { font-family: var(--serif); font-size: 20px; font-weight: 600; }
-  @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  @media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
+  .head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 40px; }
+
+  /* One wall of photos, set on the paper with thin white joints. No frame: the edge is the photos. */
+  .mosaic { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: 200px; grid-auto-flow: dense; gap: 1px; background: var(--paper); }
+  .tile { position: relative; overflow: hidden; background: var(--rule); transition: filter 0.4s ease; }
+  .tile:hover { text-decoration: none; }
+  .tile--big { grid-column: span 2; grid-row: span 2; }
+  .tile--wide { grid-column: span 2; }
+  .tile--tall { grid-row: span 2; }
+  .tile :global(img) { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; }
+  /* The one under the cursor stays lit, the rest of the wall steps back. */
+  .mosaic:hover .tile { filter: brightness(0.55) saturate(0.8); }
+  .mosaic:hover .tile:hover { filter: none; }
+  .tile:hover :global(img) { transform: scale(1.04); }
+
+  /* A soft shade under the label, only as tall as it needs, so any sky stays readable. */
+  .tile::after { content: ""; position: absolute; inset: auto 0 0 0; height: 45%; max-height: 140px; background: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.25) 45%, rgba(0, 0, 0, 0)); pointer-events: none; }
+  .tile__caption { position: absolute; z-index: 1; left: 14px; bottom: 12px; right: 14px; display: flex; flex-direction: column; color: #fff; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); }
+  .tile__title { font-size: 14px; font-weight: 600; letter-spacing: 0.01em; line-height: 1.25; }
+  .tile--big .tile__title { font-size: 17px; }
+  .tile__meta { font-size: 11px; letter-spacing: 0.04em; opacity: 0.85; }
+
+  @media (max-width: 900px) { .mosaic { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: 170px; } }
+  @media (max-width: 560px) {
+    .mosaic { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 140px; }
+    .tile__caption { left: 10px; bottom: 8px; right: 10px; }
+    .tile__title, .tile--big .tile__title { font-size: 13px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .tile, .tile :global(img) { transition: none; } }
 </style>

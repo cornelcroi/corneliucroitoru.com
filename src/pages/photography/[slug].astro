@@ -1,18 +1,19 @@
 ---
-import { getImage } from "astro:assets";
+import { Image, getImage } from "astro:assets";
 import Base from "../../layouts/Base.astro";
 import { SITE } from "../../site";
 import { PHOTO_QUALITY, getSeries, shootingParts } from "../../lib/content";
 
 export async function getStaticPaths() {
   const series = await getSeries();
+  const n = series.length;
   return series.map((s, i) => ({
     params: { slug: s.id },
-    props: { series: s, next: series[(i + 1) % series.length] },
+    props: { series: s, prev: series[(i - 1 + n) % n], next: series[(i + 1) % n] },
   }));
 }
 
-const { series, next } = Astro.props;
+const { series, prev, next } = Astro.props;
 const { title, description, year, photos } = series.data;
 // One set of variants per photo; the link opens the largest one, so nothing is generated twice.
 const images = await Promise.all(
@@ -20,6 +21,15 @@ const images = await Promise.all(
 );
 const largest = (img: (typeof images)[number]) => img.srcSet.values.at(-1)?.url ?? img.src;
 const og = await getImage({ src: series.data.cover, width: 1200, format: "jpg" });
+
+// Two portraits in a row share a line; everything else gets its own.
+const ratio = (i: number) => photos[i].src.width / photos[i].src.height;
+const isPortrait = (i: number) => ratio(i) < 1;
+const rows: number[][] = [];
+for (let i = 0; i < photos.length; i++) {
+  if (isPortrait(i) && i + 1 < photos.length && isPortrait(i + 1)) rows.push([i, ++i]);
+  else rows.push([i]);
+}
 ---
 <Base title={title} description={description ?? `${title}${year ? `, ${year}` : ""}: ${photos.length} travel photographs by ${SITE.name}, with the camera settings under each one.`} image={og.src} imageAlt={`${title}, photograph by ${SITE.name}`}>
   <main class="wrap">
@@ -29,32 +39,69 @@ const og = await getImage({ src: series.data.cover, width: 1200, format: "jpg" }
       <p class="meta">{[year, `${photos.length} photographs`].filter(Boolean).join(" · ")}</p>
       {description && <p class="page-lede">{description}</p>}
     </header>
-    {photos.map((photo, i) => (
-      <figure>
-        <a href={largest(images[i])}>
-          <img src={images[i].src} srcset={images[i].srcSet.attribute} sizes="(max-width: 1180px) 100vw, 1100px"
-            width={images[i].attributes.width} height={images[i].attributes.height}
-            alt={`${title}, photograph ${i + 1}`} loading={i < 2 ? "eager" : "lazy"} decoding="async" />
-        </a>
-        {shootingParts(photo).length > 0 && (
-          <figcaption class="meta">{shootingParts(photo).map((part) => <span>{part}</span>)}</figcaption>
-        )}
-      </figure>
+
+    {rows.map((row) => (
+      <div class:list={["row", { "row--pair": row.length === 2 }]}>
+        {row.map((i) => (
+          <figure class:list={{ portrait: isPortrait(i) }} style={row.length === 2 ? `flex: ${ratio(i)} 1 0` : undefined}>
+            <a href={largest(images[i])}>
+              <img src={images[i].src} srcset={images[i].srcSet.attribute}
+                sizes={row.length === 2 ? "(max-width: 560px) 100vw, 560px" : "(max-width: 1180px) 100vw, 1120px"}
+                width={photos[i].src.width} height={photos[i].src.height}
+                alt={`${title}, photograph ${i + 1}`} loading={i < 2 ? "eager" : "lazy"} decoding="async" />
+            </a>
+            {shootingParts(photos[i]).length > 0 && (
+              <figcaption>{shootingParts(photos[i]).map((part) => <span>{part}</span>)}</figcaption>
+            )}
+          </figure>
+        ))}
+      </div>
     ))}
-    <footer class="series__foot">
-      <a href={SITE.links.instagram}>More on Instagram ↗</a>
-      <a href={`/photography/${next.id}/`}>Next: {next.data.title} →</a>
-    </footer>
+
+    <nav class="series__foot" aria-label="Other series">
+      {[{ s: prev, label: "Previous" }, { s: next, label: "Next" }].map(({ s, label }) => (
+        <a class="neighbour" href={`/photography/${s.id}/`}>
+          <Image src={s.data.cover} alt="" widths={[300, 600]} sizes="160px" quality={PHOTO_QUALITY} />
+          <span>
+            <span class="meta">{label}</span>
+            <span class="neighbour__title">{s.data.title}</span>
+          </span>
+        </a>
+      ))}
+    </nav>
+    <p class="meta more"><a href={SITE.links.instagram}>More on Instagram ↗</a></p>
   </main>
 </Base>
 
 <style>
   .series__head { display: flex; flex-direction: column; gap: 4px; margin: 32px 0 40px; }
   .series__head .page-title { margin-top: 24px; }
-  figure { margin: 0 0 48px; display: flex; flex-direction: column; gap: 10px; }
-  figure img { width: 100%; }
-  figcaption { display: flex; flex-wrap: wrap; column-gap: 6px; }
+
+  .row { display: flex; gap: 14px; margin-bottom: 56px; }
+  figure { margin: 0; flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+  figure img { display: block; width: 100%; height: auto; }
+  /* A lone portrait never fills more than one screen. */
+  .row:not(.row--pair) figure.portrait { align-items: center; }
+  .row:not(.row--pair) figure.portrait img { width: auto; max-width: 100%; max-height: 88vh; }
+
+  figcaption { display: flex; flex-wrap: wrap; column-gap: 6px; font-size: 12px; letter-spacing: 0.01em; color: var(--faint); }
   figcaption span { white-space: nowrap; }
   figcaption span + span::before { content: "·"; margin-right: 6px; }
-  .series__foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding-top: 24px; border-top: 1px solid var(--rule); font-size: 15px; color: var(--faint); }
+
+  .series__foot { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding-top: 32px; border-top: 1px solid var(--rule); }
+  .neighbour { display: flex; align-items: center; gap: 16px; }
+  .neighbour:last-child { flex-direction: row-reverse; text-align: right; }
+  .neighbour:hover { text-decoration: none; }
+  .neighbour:hover .neighbour__title { text-decoration: underline; text-underline-offset: 3px; }
+  .neighbour :global(img) { width: 160px; aspect-ratio: 3 / 2; object-fit: cover; flex-shrink: 0; }
+  .neighbour > span { display: flex; flex-direction: column; gap: 2px; }
+  .neighbour__title { font-family: var(--serif); font-size: 18px; font-weight: 600; }
+  .more { margin-top: 24px; }
+
+  @media (max-width: 560px) {
+    .row { flex-direction: column; margin-bottom: 40px; }
+    .row--pair figure { flex: none !important; }
+    .neighbour :global(img) { width: 96px; }
+    .neighbour__title { font-size: 16px; }
+  }
 </style>

@@ -3,6 +3,7 @@ title: "178 reports in one afternoon: what a publish burst does to an LLM pipeli
 description: "A traveller published 178 trip reports at once. My site had 9 before that. The queue between the trigger and the model, and what held."
 date: 2026-09-21
 tags: [ai, llm, webdev, buildinpublic]
+series: "Building Back From My Trip"
 cover: /covers/publish-burst.png
 devto: https://dev.to/cornelcroi/178-reports-in-one-afternoon-what-a-publish-burst-does-to-an-llm-pipeline-4jj9
 ---

@@ -3,10 +3,10 @@ import Base from "../layouts/Base.astro";
 import { SITE } from "../site";
 import { encodedEmailLink } from "../lib/content";
 import { BUILT_AT_AWS, CONTEXT_LENS } from "../data/projects";
-import { CERTIFICATIONS, EDUCATION, EXPERIENCE, LANGUAGES, SIDE_PROJECTS, SKILLS, WHAT_I_DO } from "../data/experience";
+import { CERTIFICATIONS, EDUCATION, EXPERIENCE, LANGUAGES, SIDE_PROJECTS, SKILLS } from "../data/experience";
 import { TALKS } from "../data/talks";
 ---
-<Base title="CV" type="profile" description="Corneliu Croitoru, AI Architect & Product Builder: 23 years of software, 7 at AWS, 30+ GenAI prototypes, co-author of Agent Squad.">
+<Base title="CV" type="profile" description="Corneliu Croitoru, AI Architect & Product Builder: 20+ years of software, 7 at AWS, 30+ prototypes, co-creator of Agent Squad.">
   <main class="wrap cv">
     <header class="cv__head">
       <h1 class="page-title">Corneliu Croitoru</h1>
@@ -16,15 +16,15 @@ import { TALKS } from "../data/talks";
         <a href={SITE.links.linkedin}>linkedin.com/in/corneliucroitoru</a>
         <a href={SITE.links.github}>github.com/cornelcroi</a>
       </p>
-      <p class="cv__summary">23 years of shipping software. The last few, with AI. I build AI products from the first prototype to production, and what I love is the whole product: the idea, the architecture, the code, the UX.</p>
+      <div class="cv__summary">
+        <p>I build AI products, from the first prototype to production. 20+ years of shipping software, and since 2023, everything I build is GenAI-based.</p>
+        <p>Today I lead GenAI architecture at Betclic. Before that, 7 years at AWS, where I built 30+ prototypes for customers across EMEA: each time me and the customer's team, from the architecture to a working prototype in 2 to 6 weeks. One customer's need became Agent Squad, a framework for multi-agent apps. We open-sourced it, it grew to 7.7k stars, and AWS now lists it in its official Guidance for Multi-Agent Orchestration, next to LangGraph.</p>
+        <p>Some problems I noticed turned into products I built: StreetLens and Back From My Trip today, and back in 2014 BandBike, one of the first peer-to-peer bike rental sites in France.</p>
+        <p>I start from the business and from the end result, the product people will use, then work backwards to how to build it. That is where I find the real problem, and often the idea for the next project or a better direction.</p>
+        <p>AI is in two places in my work. Inside the products, the model does only what a model is good at: it reads and understands what people write or ask. Code does the rest and keeps its answers within limits. And while I build, a coding assistant is a fast pair of hands: it writes code, docs and tests under my direction, and nothing ships that I can't explain. That is how StreetLens and Back From My Trip both went live in 2026, alongside my job at Betclic.</p>
+        <p>What I love is the whole product: the idea, the architecture and the UX.</p>
+      </div>
     </header>
-
-    <section>
-      <h2 class="eyebrow">What I do</h2>
-      <dl class="skills">
-        {WHAT_I_DO.map((w) => (<><dt>{w.title}</dt><dd>{w.text}</dd></>))}
-      </dl>
-    </section>
 
     <section>
       <h2 class="eyebrow">Experience</h2>
@@ -50,7 +50,7 @@ import { TALKS } from "../data/talks";
     <section>
       <h2 class="eyebrow">Open source and AWS projects</h2>
       <ul class="plain">
-        <li><a href="https://github.com/2fastlabs/agent-squad">Agent Squad</a>, co-author and lead maintainer. Multi-agent orchestration in Python, TypeScript and Swift, 7.7k stars. Formerly at AWS Labs.</li>
+        <li><a href="https://github.com/2fastlabs/agent-squad">Agent Squad</a>, co-creator and lead maintainer. Multi-agent orchestration in Python, TypeScript and Swift, 7.7k stars. Formerly at AWS Labs.</li>
         <li><a href={CONTEXT_LENS.url}>{CONTEXT_LENS.name}</a>, author. An MCP server for semantic search over local files and GitHub repositories.</li>
         <li>Built at AWS: {BUILT_AT_AWS.map((s, i) => <>{i > 0 && ", "}<a href={s.url}>{s.name}</a></>)}.</li>
         <li>Details on the <a href="/projects/">projects</a> page.</li>
@@ -97,7 +97,9 @@ import { TALKS } from "../data/talks";
   .cv__role { margin: 0; font-size: 19px; font-weight: 600; }
   .cv__contact { margin: 0; display: flex; flex-wrap: wrap; gap: 6px 20px; }
   .cv__contact :global(a), .cv a { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
-  .cv__summary { margin: 12px 0 0; font-family: var(--serif); font-size: 19px; line-height: 1.5; color: var(--text); }
+  .cv__summary { margin: 16px 0 0; font-family: var(--serif); font-size: 19px; line-height: 1.5; color: var(--text); }
+  .cv__summary p { margin: 0 0 0.8em; }
+  .cv__summary p:last-child { margin-bottom: 0; }
   section { margin-top: 40px; }
   section > h2 { margin: 0 0 8px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); font-weight: 400; }
   .job { padding-block: 16px; border-bottom: 1px solid var(--rule); }

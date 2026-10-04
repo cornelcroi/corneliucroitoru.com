@@ -3,6 +3,7 @@ title: "You just write. The places find themselves."
 description: "You write the trip the way you would tell a friend. Minutes later the places you mentioned are on a map. Where the model's job ends."
 date: 2026-09-07
 tags: [ai, llm, webdev, buildinpublic]
+series: "Building Back From My Trip"
 cover: /covers/places-find-themselves.png
 featured: true
 devto: https://dev.to/cornelcroi/you-just-write-the-places-find-themselves-2f2a

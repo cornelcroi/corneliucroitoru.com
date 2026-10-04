@@ -1,7 +1,7 @@
 ---
 import { render } from "astro:content";
 import Base from "../../layouts/Base.astro";
-import { formatDate, getArticles, readingMinutes } from "../../lib/content";
+import { formatDate, getArticleSeries, getArticles, readingMinutes } from "../../lib/content";
 import { SITE } from "../../site";
 import { PERSON_ID } from "../../lib/seo";
 
@@ -12,7 +12,8 @@ export async function getStaticPaths() {
 
 const { article } = Astro.props;
 const { Content } = await render(article);
-const { title, description, date, cover, devto, tags } = article.data;
+const { title, description, date, cover, devto, tags, series } = article.data;
+const parts = series ? await getArticleSeries(series) : [];
 const url = `${SITE.url}/writing/${article.id}/`;
 // 1200x630 version of the cover for link previews, made by scripts/make_share_images.sh.
 const shareImage = cover ? `/og/writing/${article.id}.jpg` : undefined;
@@ -21,7 +22,7 @@ const posting = {
   "@id": `${url}#article`,
   headline: title,
   description,
-  datePublished: date.toISOString(),
+  ...(date && { datePublished: date.toISOString() }),
   url,
   mainEntityOfPage: url,
   image: `${SITE.url}${shareImage ?? SITE.shareImage}`,
@@ -29,12 +30,13 @@ const posting = {
   publisher: { "@id": PERSON_ID },
   keywords: tags.join(", "),
   inLanguage: "en",
+  ...(series && { isPartOf: { "@type": "CreativeWorkSeries", name: series } }),
 };
 ---
 <Base title={title} description={description} image={shareImage} imageAlt={title} type="article" published={date} schema={[posting]}>
   <article class="wrap article">
     <header class="article__head">
-      <span class="meta">{formatDate(date)} · {readingMinutes(article.body ?? "")} min read</span>
+      <span class="meta">{[date && formatDate(date), `${readingMinutes(article.body ?? "")} min read`].filter(Boolean).join(" · ")}</span>
       <h1>{title}</h1>
       <p class="article__lede">{description}</p>
     </header>
@@ -42,6 +44,16 @@ const posting = {
     <div class="prose">
       <Content />
     </div>
+    {parts.length > 1 && (
+      <nav class="series" aria-label={series}>
+        <span class="meta">Part {parts.findIndex((p) => p.id === article.id) + 1} of {parts.length} · {series}</span>
+        <ol>
+          {parts.map((p) => (
+            <li>{p.id === article.id ? <span aria-current="page">{p.data.title}</span> : <a href={`/writing/${p.id}/`}>{p.data.title}</a>}</li>
+          ))}
+        </ol>
+      </nav>
+    )}
     <footer class="article__foot">
       {devto && <a href={devto}>Comments and discussion on dev.to →</a>}
       <a href="/writing/">← All writing</a>
@@ -55,6 +67,11 @@ const posting = {
   .article__head h1 { margin: 0; font-family: var(--serif); font-size: clamp(32px, 5vw, 44px); line-height: 1.12; font-weight: 700; letter-spacing: -0.015em; }
   .article__lede { margin: 0; font-family: var(--serif); font-size: 21px; line-height: 1.45; color: var(--muted); }
   .article__cover { width: 100%; margin-bottom: 40px; }
+  .series { margin-top: 56px; padding: 20px 24px; border: 1px solid var(--rule); border-radius: 4px; }
+  .series ol { margin: 10px 0 0; padding-left: 1.3em; font-size: 16px; line-height: 1.5; }
+  .series li { margin-bottom: 6px; }
+  .series a { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  .series [aria-current] { color: var(--faint); }
   .article__foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--rule); font-size: 15px; color: var(--faint); }
 
   .prose { font-family: var(--serif); font-size: 20px; line-height: 1.65; color: var(--ink); }
@@ -65,6 +82,9 @@ const posting = {
   .prose :global(li) { margin-bottom: 0.4em; }
   .prose :global(blockquote) { padding-left: 20px; border-left: 3px solid var(--ink); font-style: italic; color: var(--text); }
   .prose :global(img) { margin: 1.5em 0; }
+  .prose :global(.video-embed) { aspect-ratio: 16 / 9; margin: 1em 0 1.5em; border-radius: 6px; overflow: hidden; background: #000; }
+  .prose :global(.video-embed iframe) { display: block; width: 100%; height: 100%; border: 0; }
+  .prose :global(video) { display: block; width: 100%; height: auto; margin: 1.5em 0 0.6em; border-radius: 6px; background: #000; }
   .prose :global(code) { font-family: var(--mono); font-size: 0.8em; background: var(--code-bg); padding: 0.1em 0.35em; border-radius: 3px; }
   .prose :global(pre) { margin: 0 0 1.4em; padding: 18px 20px; overflow-x: auto; font-size: 15px; line-height: 1.55; border: 1px solid var(--rule); border-radius: 4px; background: var(--code-bg) !important; }
   .prose :global(pre code) { background: none; padding: 0; font-size: inherit; }

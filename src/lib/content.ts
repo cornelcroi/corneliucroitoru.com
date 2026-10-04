@@ -1,14 +1,16 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 import { EXTERNAL } from "../data/external";
+import { TALKS } from "../data/talks";
 
 export type ListedPost = {
   title: string;
   description: string;
-  date: Date;
+  date?: Date;
   href: string;
   // Set for articles hosted elsewhere; the row then links out.
   where?: string;
   minutes?: number;
+  series?: string;
   featured?: boolean;
 };
 
@@ -20,9 +22,34 @@ export function readingMinutes(markdown: string) {
   return Math.max(1, Math.round(markdown.split(/\s+/).length / WORDS_PER_MINUTE));
 }
 
+// Newest first; an undated article is the newest of all (it is waiting for its day).
+const when = (d?: Date) => d?.getTime() ?? Infinity;
+
 export async function getArticles() {
   const all = await getCollection("writing", ({ data }) => !data.draft);
-  return all.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+  return all.sort((a, b) => when(b.data.date) - when(a.data.date));
+}
+
+// Oldest first: a series is read in the order it was written.
+export async function getArticleSeries(name: string) {
+  return (await getArticles()).filter((a) => a.data.series === name).reverse();
+}
+
+// Articles, talks and podcasts about one project, newest first.
+// A talk that shares its article's title rides on the article's line instead of repeating it.
+export function aboutProject(name: string) {
+  const talks = TALKS.filter((t) => t.project === name && t.url);
+  const articles = EXTERNAL.filter((e) => e.project === name).map((e) => {
+    const talk = talks.find((t) => t.title === e.title);
+    return {
+      kind: "Article", title: e.title, where: e.where, year: e.date.getFullYear(), url: e.url,
+      also: talk && { label: `also a talk, ${talk.event}`, url: talk.url! },
+    };
+  });
+  const rest = talks.filter((t) => !articles.some((a) => a.title === t.title)).map((t) => ({
+    kind: t.format, title: t.title, where: t.event, year: t.year, url: t.url!, also: undefined,
+  }));
+  return [...articles, ...rest].sort((a, b) => (b.year ?? 0) - (a.year ?? 0));
 }
 
 export async function getAllPosts(): Promise<ListedPost[]> {
@@ -33,9 +60,10 @@ export async function getAllPosts(): Promise<ListedPost[]> {
     href: `/writing/${a.id}/`,
     minutes: readingMinutes(a.body ?? ""),
     featured: a.data.featured,
+    series: a.data.series,
   }));
-  const external = EXTERNAL.map((e) => ({ ...e, href: e.url }));
-  return [...own, ...external].sort((a, b) => b.date.getTime() - a.date.getTime());
+  const external = EXTERNAL.map((e) => ({ ...e, href: e.url, series: e.project }));
+  return [...own, ...external].sort((a, b) => when(b.date) - when(a.date));
 }
 
 export async function getSeries() {
@@ -52,7 +80,8 @@ export function shootingParts(photo: CollectionEntry<"photos">["data"]["photos"]
   );
 }
 
-export function formatDate(date: Date) {
+export function formatDate(date?: Date) {
+  if (!date) return "";
   return date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
 }
 

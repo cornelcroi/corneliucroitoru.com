@@ -1,33 +1,36 @@
 ---
 import Base from "../layouts/Base.astro";
 import { AGENT_SQUAD, BUILDING, BUILT_AT_AWS, CONTEXT_LENS, EXPERIMENTS } from "../data/projects";
-import { SITE } from "../site";
+import { getArticleSeries } from "../lib/content";
+import AboutProject from "../components/AboutProject.astro";
+import ProjectPanel from "../components/ProjectPanel.astro";
+
+const seriesOf = Object.fromEntries(
+  await Promise.all(BUILDING.filter((p) => p.series).map(async (p) => [p.name, await getArticleSeries(p.series!)])),
+);
 ---
 <Base title="Projects" description="The products Corneliu Croitoru co-founded, the open source he maintains, and what he built at AWS.">
   <main class="wrap narrow">
     <h1 class="page-title">Projects</h1>
-    <p class="page-lede">Two products I co-founded, both live, the open source I maintain, and the cloud architectures I built at AWS.</p>
+    <p class="page-lede">The products I co-founded, two of them live, the open source I maintain, and the cloud architectures I built at AWS. In my products, an LLM never works unchecked: it writes only from verified facts, a check follows it, and a person decides when it's unsure.</p>
 
-    <h2 class="eyebrow group">Co-founder</h2>
+    <h2 class="eyebrow group">Products I co-founded</h2>
     {BUILDING.map((p) => (
-      <a class="item" href={p.url}>
-        <span class="item__row"><span class="item__name">{p.name}</span><span class="meta">{p.role}</span></span>
-        <span class="item__text">{p.text}</span>
-        <span class="meta">{p.line}</span>
-        {p.image && <img class="shot" src={p.image.src} alt={p.image.alt} width={p.image.width} height={p.image.height} loading="lazy" decoding="async">}
-      </a>
+      <ProjectPanel name={p.name} url={p.url} role={p.role} text={p.text} line={p.line} image={p.image} when={p.when} links={p.links}>
+        {seriesOf[p.name]?.length > 0 && (
+          <div class="extra series">
+            <span class="meta">The series · {seriesOf[p.name].length} articles on how it's built</span>
+            <ol>{seriesOf[p.name].map((a) => <li><a href={`/writing/${a.id}/`}>{a.data.title}</a></li>)}</ol>
+          </div>
+        )}
+      </ProjectPanel>
     ))}
 
     <h2 class="eyebrow group">Open source</h2>
-    <a class="item" href={AGENT_SQUAD.url}>
-      <span class="item__row"><span class="item__name">{AGENT_SQUAD.name}</span><span class="meta">{AGENT_SQUAD.role}</span></span>
-      <span class="item__text">{AGENT_SQUAD.text}</span>
-      <span class="meta">{AGENT_SQUAD.line}</span>
-    </a>
-    <a class="item" href={CONTEXT_LENS.url}>
-      <span class="item__row"><span class="item__name">{CONTEXT_LENS.name}</span><span class="meta">{CONTEXT_LENS.role}</span></span>
-      <span class="item__text">{CONTEXT_LENS.text}</span>
-    </a>
+    <ProjectPanel name={AGENT_SQUAD.name} url={AGENT_SQUAD.url} role={AGENT_SQUAD.role} text={AGENT_SQUAD.text} line={AGENT_SQUAD.line} when={AGENT_SQUAD.when} links={AGENT_SQUAD.links}>
+      <AboutProject name={AGENT_SQUAD.name} />
+    </ProjectPanel>
+    <ProjectPanel name={CONTEXT_LENS.name} url={CONTEXT_LENS.url} role={CONTEXT_LENS.role} text={CONTEXT_LENS.text} when={CONTEXT_LENS.when} />
     <h3 class="sub-group">Experiments, one idea each</h3>
     <ul class="experiments">
       {EXPERIMENTS.map((e) => <li><a href={e.url}>{e.name}</a>, {e.text}</li>)}
@@ -35,30 +38,19 @@ import { SITE } from "../site";
 
     <h2 class="eyebrow group">Cloud architecture, built at AWS</h2>
     {BUILT_AT_AWS.map((p) => (
-      <div class="item">
-        <span class="item__row"><a class="item__name" href={p.url}>{p.name}</a><span class="meta">{p.role}</span></span>
-        <span class="item__text">{p.text}</span>
-        <a class="meta arch" href={p.architecture}>architecture →</a>
-      </div>
+      <ProjectPanel name={p.name} url={p.url} role={p.role} text={p.text} when={p.when} links={p.links}>
+        <AboutProject name={p.name} />
+      </ProjectPanel>
     ))}
   </main>
 </Base>
 
 <style>
   .narrow { max-width: calc(760px + 2 * var(--gutter)); }
-  .group { margin: 48px 0 0; font-weight: 400; }
-  .item { display: flex; flex-direction: column; gap: 6px; padding-block: 20px; }
-  a.item:hover { text-decoration: none; }
-  a.item:hover .item__name { text-decoration: underline; text-underline-offset: 3px; }
-  .item__row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
-  .item__name { font-family: var(--serif); font-size: 22px; font-weight: 700; }
-  .item__text { font-family: var(--serif); font-size: 17px; line-height: 1.5; color: var(--muted); }
-  .arch { text-decoration: underline; text-underline-offset: 3px; }
-  div.item .item__name:hover { text-decoration: underline; text-underline-offset: 3px; }
-  .shot { width: 100%; height: auto; margin-top: 14px; border: 1px solid var(--rule); border-radius: 6px; }
-  .sub-group { margin: 20px 0 6px; font-size: 13px; font-weight: 600; color: var(--faint); letter-spacing: 0.04em; }
+  .group { margin: 56px 0 0; font-weight: 400; }
+  .sub-group { margin: 28px 0 8px; font-size: 13px; font-weight: 600; color: var(--faint); letter-spacing: 0.04em; }
   .experiments { margin: 0; padding-left: 18px; font-family: var(--serif); font-size: 16px; line-height: 1.6; color: var(--muted); }
   .experiments a { font-weight: 600; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
-  .mcp { margin: 4px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
-  .mcp a { font-weight: 600; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  .series ol { margin: 6px 0 0; padding-left: 18px; font-family: var(--serif); font-size: 16px; line-height: 1.6; }
+  .series a { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 </style>
