@@ -48,12 +48,6 @@ The full tour, 9 searches, from Japanese animation to Italian westerns:
 
 <div class="video-embed"><iframe src="https://www.youtube-nocookie.com/embed/hoCesxy2o08" title="The Search Grammar Pattern: natural language movie search, live demo" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
 
-Three rules:
-
-- **Never invent.** Not a film, not an actor, not a service.
-- **Small and cheap.** A small model. One call.
-- **Honest.** "Not on your services" beats a confident wrong answer.
-
 ## How I got there
 
 I tested the simple patterns first. A prompt with tools: the model calls a search tool when it needs one. I ran them on the same list of test sentences, again and again. Typos, other languages, negations, people, films named through other films.
