@@ -1,6 +1,7 @@
 ---
 title: "Two towns named Calheta: debugging an LLM verification pipeline"
 description: "A real receipt, refused three times, for three different reasons. Three bugs at three layers, and why designing the failure direction first made being wrong survivable."
+date: 2026-10-04
 tags: [llm, ai, debugging, buildinpublic]
 series: "Building Back From My Trip"
 cover: /covers/two-towns-named-calheta.png
