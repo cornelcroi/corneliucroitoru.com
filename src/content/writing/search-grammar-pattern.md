@@ -203,14 +203,14 @@ Reading a sentence against a grammar is classification, not reasoning. A small m
 
 The search grammar pattern works wherever the offer is too big for the prompt and each item has options no model knows:
 
-| Domain | Each item has | What no model knows |
+| Domain | Someone types | What no model knows |
 |---|---|---|
-| Books | editions, formats, translations, sellers, prices | which translation this shop sells, in which format, at which price |
-| Hotels | rooms × rates × board × cancellation rules | that this "Superior Sea View" is non-refundable, with breakfast, at this price |
-| Flights | fare families × baggage × change rules | what this airline's "Light" fare includes on this route today |
-| Cars | trims × engines × colours × option packs | which pack this dealer has in stock, in which colour |
-| Fashion | sizes × colours × fits × stock | that the jacket comes in M, but only in Navy/Orange |
-| Concerts | categories × seats × prices | which seats are left in "Category 2" tonight |
+| Books | "the French translation of The Name of the Rose, as an audiobook" | which translation this shop sells, in which format, at which price |
+| Hotels | "a sea view room in Lisbon I can still cancel, breakfast included" | that this "Superior Sea View" is non-refundable, with breakfast, at this price |
+| Flights | "Paris to Lisbon in May, with a checked bag, cheapest fare I can change" | what this airline's "Light" fare includes on this route today |
+| Cars | "a hybrid SUV in dark blue with the winter pack, in stock near Lyon" | which pack this dealer has in stock, in which colour |
+| Fashion | "the running jacket in M, anything but black, under 150 €" | that the jacket comes in M, but only in Navy/Orange |
+| Concerts | "two seats together for Saturday, not behind the stage" | which seats are left in "Category 2" tonight |
 
 Always the same question: what does each item have that no model can know? That goes in its pack. A few values become a dimension. Everything big is left to code.
 
