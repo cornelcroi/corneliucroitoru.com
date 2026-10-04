@@ -245,11 +245,11 @@ A small model. One call. A few thousand tokens. An answer that never invents.
 ```bash
 git clone https://github.com/cornelcroi/llm-search-grammar
 cd llm-search-grammar
-export OPENAI_API_KEY=...
+cp .env.example .env        # your OpenAI key goes in .env
 python3 -m examples.movies "inceptoin with nolan talking over it"
 python3 -m examples.movies.measure Titanic
 ```
 
-No dependencies. 27 tests replay 7 real model answers, no key needed.
+No dependencies. 29 tests replay 9 real model answers, no key needed. The repo runs on 200 films, not Tonight's 19,072: its README says what you can ask.
 
 It's not the prompt. It's the grammar. That's the search grammar pattern.
