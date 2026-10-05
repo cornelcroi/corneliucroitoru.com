@@ -198,13 +198,13 @@ CODE        partial  Inception (2010) · RentBox · rent · theatrical · SD · 
 The dictionary says what exists in general. The pack says what exists here. Not in the pack means it doesn't exist.
 
 
-Reading a sentence against a grammar is classification, not reasoning. A small model does it well.
+Reading a sentence against a grammar is classification, not reasoning. A small model does it realy well.
 
 ## Natural language search for e-commerce, travel and more
 
 Movies are just my case. The same pattern works for natural language product search in an online shop, for hotel and flight search, car configurators, concert tickets. Anywhere the offer is too big for the prompt, and each item has options no model knows.
 
-It's always the same flow. Someone types a sentence. The model turns it into search filters, against the grammar. Code finds the real items, the prices, the stock.
+Its always the same flow. Someone types a sentence. The model turns it into search filters, against the grammar. Code finds the real items, the prices, the stock.
 
 | Domain | Someone types | What no model knows |
 |---|---|---|
@@ -223,7 +223,7 @@ Always the same question: what does each item have that no model can know? That 
 - A folded line lists what exists in it, not every combination. Code always checks the exact item.
 - The demo's offers are invented. Real ones fold less neatly. Tonight's numbers are real.
 
-Turning a sentence into filters from a schema is not new: LangChain's self-query retriever and Typesense's natural-language search do it. What I didn't find written up: describing the offer by its dimensions, listing only what the model can't know, folding each item's options into packs sent on demand, and a forgiving search doing the other half.
+Turning a sentence into filters from a schema is not new: LangChain's self-query retriever and Typesense's natural-language search do it. What I didn't find written up is the rest. The offer described by its dimensions. Only what the model can't know, listed. Each item's options folded into packs, sent on demand. And a forgiving search doing the other half.
 
 ## Why not a decision model?
 
