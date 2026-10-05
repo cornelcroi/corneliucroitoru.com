@@ -8,8 +8,8 @@ const LATEST_POSTS = 3;
 const PHOTO_TILES = 4;
 
 const allPosts = await getAllPosts();
-const featured = allPosts.filter((p) => p.featured);
-const posts = (featured.length ? featured : allPosts).slice(0, LATEST_POSTS);
+// The most recent, newest first (owner, 2026-10-05: a new article shows on the home page the day it goes live).
+const posts = allPosts.slice(0, LATEST_POSTS);
 const series = await getSeries();
 const heroSeries = series.find((s) => s.id === SITE.hero.series) ?? series[0];
 const hero = heroSeries.data.photos[SITE.hero.photo] ?? heroSeries.data.photos[0];
