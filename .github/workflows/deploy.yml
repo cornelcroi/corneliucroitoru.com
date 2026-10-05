@@ -1,9 +1,26 @@
 name: Deploy to GitHub Pages
 
+# Three ways in:
+#   - a push to main deploys the site;
+#   - every morning, a rebuild publishes the articles whose date has come (scheduled articles);
+#   - run by hand (Actions → Deploy to GitHub Pages → Run workflow): with an article and a date it
+#     schedules that article (removes draft: true, sets the date, commits), then deploys.
+#     Without them, it just deploys and shows the publishing table.
 on:
   push:
     branches: [main]
+  schedule:
+    - cron: "0 6 * * *" # 06:00 UTC: 08:00 Paris in summer, 07:00 in winter
   workflow_dispatch:
+    inputs:
+      article:
+        description: "Article to schedule (its slug, e.g. evaluating-llm-output-validate-repair-scrub). Empty: just deploy."
+        required: false
+        default: ""
+      date:
+        description: "Its publish date, YYYY-MM-DD (today or later)."
+        required: false
+        default: ""
 
 permissions:
   contents: read
@@ -15,15 +32,49 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  schedule:
+    if: github.event_name == 'workflow_dispatch' && inputs.article != ''
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Schedule the article
+        env:
+          ARTICLE: ${{ inputs.article }}
+          DATE: ${{ inputs.date }}
+        run: node scripts/publishing.mjs schedule "$ARTICLE" "$DATE"
+      - name: Commit
+        env:
+          ARTICLE: ${{ inputs.article }}
+          DATE: ${{ inputs.date }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "Schedule $ARTICLE for $DATE"
+          git push
+
   build:
+    needs: schedule
+    # Runs whether or not an article was scheduled, but never after a failed scheduling.
+    if: ${{ !cancelled() && needs.schedule.result != 'failure' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+        with:
+          ref: main # includes the scheduling commit, when there is one
+      - name: Publishing table
+        run: node scripts/publishing.mjs status >> "$GITHUB_STEP_SUMMARY"
       - uses: withastro/action@v5
         with:
           node-version: 24
+
   deploy:
     needs: build
+    if: ${{ !cancelled() && needs.build.result == 'success' }}
     runs-on: ubuntu-latest
     environment:
       name: github-pages

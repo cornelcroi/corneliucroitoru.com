@@ -1,5 +1,6 @@
 ---
 title: "You just write. The places find themselves."
+seoTitle: "LLM Place Extraction: From Free Text to Places on a Map"
 description: "You write the trip the way you would tell a friend. Minutes later the places you mentioned are on a map. Where the model's job ends."
 date: 2026-09-07
 tags: [ai, llm, webdev, buildinpublic]

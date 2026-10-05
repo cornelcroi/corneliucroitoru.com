@@ -1,5 +1,6 @@
 ---
 title: "The librarian pattern: how I keep my AI coding assistant from breaking my app"
+seoTitle: "The Librarian Pattern: Keep an AI Coding Assistant on Track"
 description: "One index file, one doc per feature flow, and a 40-line bash hook. How I keep an AI coding assistant from breaking my app."
 date: 2026-08-26
 tags: [ai, programming, productivity, claudecode]
@@ -31,7 +32,7 @@ My documentation works the same way:
 
 The assistant reads the index, finds the right file, and loads only that one. Small context, right context. It never needs the whole library. It needs the shelf.
 
-![The real FLOWS.md, as plain text: what the assistant reads](/img/librarian-pattern-549jxve4a9s3pts8quqw.png)
+[![The real FLOWS.md, as plain text: what the assistant reads](/img/librarian-pattern-549jxve4a9s3pts8quqw.png)](/img/librarian-pattern-549jxve4a9s3pts8quqw.png)
 
 That's the library. But a library is only useful if the books are true. Here is how I keep it in sync.
 
@@ -122,7 +123,7 @@ So every change runs the same cycle:
 4 - **Update:** the flow doc, in the same commit
 
 
-![The loop: flow docs → read → change → update, and back](/img/librarian-pattern-3ck64nbhdk9d7fhz0uqs.png)
+[![The loop: flow docs → read → change → update, and back](/img/librarian-pattern-3ck64nbhdk9d7fhz0uqs.png)](/img/librarian-pattern-3ck64nbhdk9d7fhz0uqs.png)
 
 The loop feeds itself. The doc the assistant reads next time is always true, because updating it was part of the last change. Documentation rot, the thing every team accepts as inevitable, becomes structurally impossible, not heroically avoided.
 

@@ -1,5 +1,6 @@
 ---
 title: "I pay an LLM to approve bad reviews"
+seoTitle: "LLM Content Moderation: Why My Prompt Approves Bad Reviews"
 description: "Every trip report goes through a model before readers see it. The most important line in that prompt is not about catching bad content."
 date: 2026-09-14
 tags: [llm, ai, webdev, buildinpublic]

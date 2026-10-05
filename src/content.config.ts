@@ -6,9 +6,14 @@ const writing = defineCollection({
   loader: glob({ pattern: "*.md", base: "./src/content/writing" }),
   schema: z.object({
     title: z.string(),
+    // Optional search title for <title> and link previews; the page keeps `title` as its headline.
+    // Keep it under 60 characters and saying the same thing as the headline, in the words people search.
+    seoTitle: z.string().max(60).optional(),
     description: z.string(),
     // Optional: an article can go up before its scheduled day, undated, and get its date later.
     date: z.coerce.date().optional(),
+    // Optional: the date of the last meaningful change, sent to search engines as dateModified.
+    updated: z.coerce.date().optional(),
     tags: z.array(z.string()).default([]),
     cover: z.string().optional(),
     devto: z.string().url().optional(),

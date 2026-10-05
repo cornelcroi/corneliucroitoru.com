@@ -1,5 +1,6 @@
 ---
 title: "178 reports in one afternoon: what a publish burst does to an LLM pipeline"
+seoTitle: "LLM Pipeline Under Load: 178 Reports in One Afternoon"
 description: "A traveller published 178 trip reports at once. My site had 9 before that. The queue between the trigger and the model, and what held."
 date: 2026-09-21
 tags: [ai, llm, webdev, buildinpublic]
@@ -73,7 +74,7 @@ The lesson is not about rate limits. It is that a failed check and a verdict mus
 One more number, because people assume the answer is "a lot". The model bill for that day, the whole burst, 178 reports through text moderation and place extraction, 465 photos through image moderation, every retry included:
 
 
-![Model spend for 2026-09-04: $0.29](/img/publish-burst-er9h4sozp26tw4rug13u.png)
+[![Model spend for 2026-09-04: $0.29](/img/publish-burst-er9h4sozp26tw4rug13u.png)](/img/publish-burst-er9h4sozp26tw4rug13u.png)
 
 Twenty-nine cents. The day before, a fraction of a cent. That is what "mini everywhere, and never ask the model to think" buys you. The queue was never about money. It was about the model's rate limit, and about failing in the right direction.
 

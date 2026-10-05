@@ -1,5 +1,6 @@
 ---
 title: "There are characters you cannot see"
+seoTitle: "Prompt Injection with Invisible Unicode Characters"
 description: "Some Unicode characters render as nothing, and a model reads them as text. How I made prompt injection useless on my travel site. Not resisted. Useless."
 date: 2026-09-28
 tags: [ai, llm, security, buildinpublic]

@@ -25,8 +25,15 @@ export function readingMinutes(markdown: string) {
 // Newest first; an undated article is the newest of all (it is waiting for its day).
 const when = (d?: Date) => d?.getTime() ?? Infinity;
 
+// Live on the site: not a draft, and its date has come (an undated article is live).
+// The daily build (.github/workflows/deploy.yml) is what makes a scheduled article appear on its day.
+export function isLive(data: { draft?: boolean; date?: Date }) {
+  return !data.draft && (!data.date || data.date.getTime() <= Date.now());
+}
+
 export async function getArticles() {
-  const all = await getCollection("writing", ({ data }) => !data.draft);
+  // Local dev shows everything, drafts and scheduled articles included, to review them.
+  const all = await getCollection("writing", ({ data }) => import.meta.env.DEV || isLive(data));
   return all.sort((a, b) => when(b.data.date) - when(a.data.date));
 }
 

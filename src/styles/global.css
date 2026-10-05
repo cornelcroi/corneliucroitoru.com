@@ -18,7 +18,8 @@
   --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   --gutter: clamp(16px, 5vw, 80px);
   --wide: 1120px;
-  --read: 680px;
+  --read: 800px;
+  --figure: var(--read);
 }
 
 *, *::before, *::after { box-sizing: border-box; }

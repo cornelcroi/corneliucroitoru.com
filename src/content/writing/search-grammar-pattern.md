@@ -2,6 +2,7 @@
 title: "The Search Grammar Pattern: Natural Language Search with LLMs"
 description: "How I built natural language search for my movie app with one small LLM call, and the pattern behind it: describe the offer by its dimensions, not its rows."
 date: 2026-10-04
+updated: 2026-10-05
 tags: [llm, ai, search, architecture]
 video:
   youtube: hoCesxy2o08
@@ -99,7 +100,7 @@ Measured on Tonight's real data, no model, one token per 4 characters:
 
 350 times smaller. As rows, it doesn't fit in the model. As a grammar, it's one small call. And it's the same on every request, so it's cached. You pay for it once.
 
-![The search grammar pattern: Tonight's 19,072 films as rows (about 1.1 million tokens) or as dimensions (about 3,200 tokens), and one film's 80 offers folded into 4 lines](/img/grammar-rows-vs-dimensions.png)
+[![The search grammar pattern: Tonight's 19,072 films as rows (about 1.1 million tokens) or as dimensions (about 3,200 tokens), and one film's 80 offers folded into 4 lines](/img/grammar-rows-vs-dimensions.png)](/img/grammar-rows-vs-dimensions.png)
 
 ## What goes in, and what stays out
 
@@ -112,7 +113,7 @@ Measured on Tonight's real data, no model, one token per 4 characters:
 
 "a movie with the leading actors from titanic, directed by scorcese". Here code does the work before any SQL. The model writes a reference, `{film: "titanic", wants: "lead_actors"}`, and "Martin Scorsese". It fixed the spelling. It never saw the list of people. It never writes an id. Code finds Titanic (1997), the best known of three. It takes its two leads, DiCaprio and Winslet. It finds the real Scorsese, one of five in the catalog. Then the search runs. 4 films, from The Wolf of Wall Street to Killers of the Flower Moon.
 
-![The search grammar pattern in action: two real natural language searches, each phrase lighting up the field it fills, then what code and the resolver find](/img/grammar-sentence-match.png)
+[![The search grammar pattern in action: two real natural language searches, each phrase lighting up the field it fills, then what code and the resolver find](/img/grammar-sentence-match.png)](/img/grammar-sentence-match.png)
 
 ## It only works with a forgiving (fuzzy) search
 
@@ -199,9 +200,11 @@ The dictionary says what exists in general. The pack says what exists here. Not 
 
 Reading a sentence against a grammar is classification, not reasoning. A small model does it well.
 
-## Not just movies: where the search grammar pattern fits
+## Natural language search for e-commerce, travel and more
 
-The search grammar pattern works wherever the offer is too big for the prompt and each item has options no model knows:
+Movies are just my case. The same pattern works for natural language product search in an online shop, for hotel and flight search, car configurators, concert tickets. Anywhere the offer is too big for the prompt, and each item has options no model knows.
+
+It's always the same flow. Someone types a sentence. The model turns it into search filters, against the grammar. Code finds the real items, the prices, the stock.
 
 | Domain | Someone types | What no model knows |
 |---|---|---|
