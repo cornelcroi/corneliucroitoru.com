@@ -1,24 +1,21 @@
 name: Deploy to GitHub Pages
 
-# Three ways in:
+# Two ways in, nothing automatic:
 #   - a push to main deploys the site;
-#   - every morning, a rebuild publishes the articles whose date has come (scheduled articles);
-#   - run by hand (Actions → Deploy to GitHub Pages → Run workflow): with an article and a date it
-#     schedules that article (removes draft: true, sets the date, commits), then deploys.
-#     Without them, it just deploys and shows the publishing table.
+#   - run by hand (Actions → Deploy to GitHub Pages → Run workflow): with an article it publishes that
+#     draft now (removes draft: true, sets the date, commits), then deploys. Without one, it just deploys.
+#     Every run shows the publishing table (live / draft) in its summary.
 on:
   push:
     branches: [main]
-  schedule:
-    - cron: "0 6 * * *" # 06:00 UTC: 08:00 Paris in summer, 07:00 in winter
   workflow_dispatch:
     inputs:
       article:
-        description: "Article to schedule (its slug, e.g. evaluating-llm-output-validate-repair-scrub). Empty: just deploy."
+        description: "Draft to publish now (its slug, e.g. evaluating-llm-output-validate-repair-scrub). Empty: just deploy."
         required: false
         default: ""
       date:
-        description: "Its publish date, YYYY-MM-DD (today or later)."
+        description: "Date shown on the article, YYYY-MM-DD. Empty: today. Not in the future."
         required: false
         default: ""
 
@@ -32,7 +29,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  schedule:
+  publish:
     if: github.event_name == 'workflow_dispatch' && inputs.article != ''
     runs-on: ubuntu-latest
     permissions:
@@ -42,11 +39,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-      - name: Schedule the article
+      - name: Publish the article
         env:
           ARTICLE: ${{ inputs.article }}
           DATE: ${{ inputs.date }}
-        run: node scripts/publishing.mjs schedule "$ARTICLE" "$DATE"
+        run: node scripts/publishing.mjs publish "$ARTICLE" "$DATE"
       - name: Commit
         env:
           ARTICLE: ${{ inputs.article }}
@@ -54,18 +51,18 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -am "Schedule $ARTICLE for $DATE"
+          git commit -am "Publish $ARTICLE"
           git push
 
   build:
-    needs: schedule
-    # Runs whether or not an article was scheduled, but never after a failed scheduling.
-    if: ${{ !cancelled() && needs.schedule.result != 'failure' }}
+    needs: publish
+    # Runs whether or not an article was published, but never after a failed publish.
+    if: ${{ !cancelled() && needs.publish.result != 'failure' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
         with:
-          ref: main # includes the scheduling commit, when there is one
+          ref: main # includes the publishing commit, when there is one
       - name: Publishing table
         run: node scripts/publishing.mjs status >> "$GITHUB_STEP_SUMMARY"
       - uses: withastro/action@v5
