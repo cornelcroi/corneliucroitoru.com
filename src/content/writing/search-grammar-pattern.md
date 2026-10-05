@@ -43,7 +43,7 @@ You get films you can start now, on the services you already pay for. I use it a
   <source src="/video/search-grammar-pattern.mp4" type="video/mp4">
 </video>
 
-*Tonight on my machine, real searches, one model call each, no cuts. Every result checked against the catalog.*
+**Does it work? Here it is, live:** Tonight on my machine, real searches, one model call each, no cuts. Every result checked against the catalog.
 
 The full tour, 9 searches, from Japanese animation to Italian westerns:
 
@@ -139,7 +139,7 @@ Tonight knows which of my services has each film. That's a filter in code. A rea
 
 Someone types "inceptoin with nolan talking over it". They mean the director's commentary. By spelling, "nolan talking over it" and "with commentary by Christopher Nolan" score 0.26. No forgiving search bridges that. Only reading can.
 
-To show this level, I rebuilt the pattern in a small open repo. 200 real films from Wikidata. 17,262 ways to watch them, invented: fictional services, made-up prices, but the shape of a real offer.
+To show this level, I rebuilt the pattern in a small open repo, [llm-search-grammar](https://github.com/cornelcroi/llm-search-grammar), with a web demo you can run. 200 real films from Wikidata. 17,262 ways to watch them, invented: fictional services, made-up prices, but the shape of a real offer.
 
 **One film, in full.** Titanic, 80 offers:
 
@@ -249,10 +249,10 @@ A small model. One call. A few thousand tokens. An answer that never invents.
 git clone https://github.com/cornelcroi/llm-search-grammar
 cd llm-search-grammar
 cp .env.example .env        # your OpenAI key goes in .env
-python3 -m examples.movies "inceptoin with nolan talking over it"
-python3 -m examples.movies.measure Titanic
+python3 -m examples.movies.web          # the web demo, with posters: http://127.0.0.1:8000
+python3 -m examples.movies "inceptoin with nolan talking over it"   # the same steps, in the terminal
 ```
 
-No dependencies. 29 tests replay 9 real model answers, no key needed. The repo runs on 200 films, not Tonight's 19,072: its README says what you can ask.
+No dependencies. 35 tests, no key needed: they replay real model answers. The repo runs on 200 films, not Tonight's 19,072: its README says what you can ask.
 
 It's not the prompt. It's the grammar. That's the search grammar pattern.
