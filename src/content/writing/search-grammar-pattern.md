@@ -211,14 +211,6 @@ A small model. One call. A few thousand tokens. An answer that never invents.
 
 ## Try it
 
-```bash
-git clone https://github.com/cornelcroi/llm-search-grammar
-cd llm-search-grammar
-cp .env.example .env        # your OpenAI key goes in .env
-python3 -m examples.movies.web          # the web demo, with posters: http://127.0.0.1:8000
-python3 -m examples.movies "the leading actors from titanic, directed by scorcese"   # the same steps, in the terminal
-```
-
 I rebuilt the pattern in a small open repo, [llm-search-grammar](https://github.com/cornelcroi/llm-search-grammar), with a web demo. 200 real films from Wikidata, not Tonight's 19,072: its README says what you can ask. No dependencies. 35 tests, no key needed: they replay real model answers.
 
 It's not the prompt. It's the grammar. That's the search grammar pattern.
