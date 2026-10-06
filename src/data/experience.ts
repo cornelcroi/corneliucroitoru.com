@@ -7,7 +7,7 @@ export const EXPERIENCE = [
     role: "Staff GenAI Solutions Architect",
     period: "Sep 2025 – now",
     place: "Paris",
-    summary: "Leads GenAI architecture across the company.",
+    summary: "The technical reference for GenAI across the company.",
     points: [
       "Leads the adoption of MCP: guidelines used by every squad, reference patterns for agentic apps.",
       "Reviews and approves every new GenAI project: architecture, implementation choices, how it will be evaluated.",
