@@ -100,8 +100,9 @@ const videoObject = video && {
   .prose :global(p:has(img) img) { width: 100%; }
   /* Two screens side by side, the same height: each link grows by its image's width-to-height ratio. */
   .prose > :global(.devices) { max-width: var(--figure); display: flex; align-items: center; gap: 24px; margin-block: 0 1.2em; }
-  .prose :global(.devices a) { flex: var(--ratio) 1 0; min-width: 0; }
+  .prose :global(.devices figure) { flex: var(--ratio) 1 0; min-width: 0; margin: 0; }
   .prose :global(.devices img) { display: block; width: 100%; height: auto; margin: 0; }
+  .prose :global(.devices figcaption) { margin-top: 10px; text-align: center; font-family: var(--sans); font-size: 15px; color: var(--faint); }
   /* A diagram links to its own file: one click opens it at full size. */
   .prose :global(a:has(> img)) { display: block; cursor: zoom-in; text-decoration: none; }
   .prose :global(p), .prose :global(ul), .prose :global(ol), .prose :global(blockquote) { margin-block: 0 1.2em; }
@@ -130,8 +131,8 @@ const videoObject = video && {
     .prose > :global(p:has(img)) { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); }
     .prose :global(p:has(img) img) { width: auto; max-width: none; height: auto; min-width: 0; width: 760px; }
     .prose > :global(.devices) { flex-direction: column; }
-    .prose :global(.devices a) { flex: none; width: 100%; }
-    .prose :global(.devices a:first-child) { width: 60%; }
+    .prose :global(.devices figure) { flex: none; width: 100%; }
+    .prose :global(.devices figure:first-child) { width: 60%; }
     .article__lede { font-size: 19px; }
   }
 </style>

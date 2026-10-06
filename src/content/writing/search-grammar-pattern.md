@@ -33,9 +33,11 @@ I looked for an app that does this. I found nothing I liked so, naturally, I bui
 
 Here is how it looks, on my phone and on my Apple TV. Looks cool, right?
 
-<div class="devices"><a href="/img/tonight-phone.png" style="--ratio: 0.473"><img src="/img/tonight-phone.png" alt="Tonight on a phone: The Wolf of Wall Street in the web app, saved for tonight" width="848" height="1792" loading="lazy"></a><a href="/img/tonight-tv.jpg" style="--ratio: 1.778"><img src="/img/tonight-tv.jpg" alt="Tonight on the Apple TV: the same film's page, with Open in Prime Video, saved for tonight" width="2400" height="1350" loading="lazy"></a></div>
+Why a phone app too? Because typing on my phone is easier. I could type with the Apple TV remote, or with my iPhone as a keyboard, but it's a bit of a hassle.
 
-*Left, the web app on my phone. Right, the Apple TV app. Same film, saved for tonight on the phone, already there on the TV.*
+<div class="devices"><figure style="--ratio: 0.473"><a href="/img/tonight-phone.png"><img src="/img/tonight-phone.png" alt="Tonight on a phone: The Wolf of Wall Street in the web app, saved for tonight" width="848" height="1792" loading="lazy"></a><figcaption>My phone</figcaption></figure><figure style="--ratio: 1.778"><a href="/img/tonight-tv.jpg"><img src="/img/tonight-tv.jpg" alt="Tonight on the Apple TV: the same film's page, with Open in Prime Video, saved for tonight" width="2400" height="1350" loading="lazy"></a><figcaption>My Apple TV</figcaption></figure></div>
+
+*Same film, saved for tonight on the phone, already there on the TV.*
 
 You say what you feel like watching, the way you would say it. Any sentence:
 
@@ -58,8 +60,6 @@ And there is a second problem. The answer must come from what I can actually wat
 You get films you can start now, on the services you already pay for. I use it at home.
 
 It's an Apple TV app. Pick a film, press play, and it opens in its own app: Disney+, Prime Video, Canal+, HBO Max. Netflix ignores the link and opens its home screen, nothing I can do about that.
-
-And you don't search with the remote. Typing on a TV is a sign you're on the wrong device. So you ask on your phone, the way you talk, save a film for tonight, and it's on the TV before you put the phone down.
 
 **Does it work? Here it is, live:** 9 real searches, one model call each, no cuts. Every result checked against the catalog.
 
