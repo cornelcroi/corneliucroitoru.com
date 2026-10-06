@@ -13,21 +13,23 @@ video:
 cover: /covers/search-grammar-pattern.png
 ---
 
-**Natural language search over a catalog the LLM has never seen. The whole offer, described by its dimensions instead of its rows. The model reads. Code decides.**
+**Natural language search over a catalog the LLM has never seen. The whole offer, condensed into a few thousand tokens. The model reads. Code decides.**
 
 ## The problem
 
-At home we pay for several streaming services. Netflix, Prime Video, Disney+, HBO Max, Canal+.
+At home I pay for several streaming services: Netflix, Prime Video, Disney+, HBO Max, Canal+ and a few others ;) .
 
-Every evening is the same. Twenty minutes of scrolling, app after app. Often no film at all.
+Every time is the same thing: twenty minutes of scrolling, app after app and often no film at all.
 
 I'm a film buff. I love movies, but not all of them. I have my taste, and what everyone is watching this week is usually not for me.
 
 Each app pushes exactly that. What's new. What's hot for them this week. Not what fits my taste.
 
-I've seen a lot of good films. I want more like those. Across all my services, not inside one. And a chatbot doesn't help: it answers with what it knows, not with what's on my services.
+I've seen a lot of good films and I want more like those, across all my services, not inside one. 
 
-I looked for an app that does this. I found nothing I liked. So, naturally, I built one for my own taste. I called it Tonight. You say what you feel like watching, the way you would say it. Any sentence:
+What I wanted was simple. **One catalog with every film from all my services, the ones I can watch here in France. And a way to search it the way I talk.**
+
+I looked for an app that does this. I found nothing I liked so, naturally, I built one for my own taste. I called it Tonight. You say what you feel like watching, the way you would say it. Any sentence:
 
 - "a French crime drama, not a comedy, from before 1980"
 - "a movie with the leading actors from titanic, directed by scorcese"
@@ -35,17 +37,19 @@ I looked for an app that does this. I found nothing I liked. So, naturally, I bu
 - "a film by the director of Heat"
 - "godfathr"
 
-Pulling fields out of the sentence is not enough for these. "crime drama" is two genres at once, not either. "the leading actor from titanic" and "the director of Heat" are people nobody named. "scorcese" and "godfathr" are names nobody spelled right. Each one needs the system to know the catalog. The model doesn't.
+Some are simple. "a French crime drama from before 1980" is just filters. Language, genre, year.
+
+Most are not. People search the way they remember. You forgot the actor's name, so you type "with the actors from Meet the Fockers". You don't know who directed Heat, so you type "the director of Heat". You type "scorcese" and "godfathr", because nobody spells right in a search box. And "crime drama" is two genres at once, not either.
+
+Pulling fields out of the sentence works for the simple ones. Not for these.
+
+And there is a second problem. The answer must come from what I can actually watch. My catalog: every film on my services, in France. Not a film the model remembers. Not one that is only on Netflix in the US.
+
+**Every search needs the system to know that catalog. The model doesn't.**
 
 You get films you can start now, on the services you already pay for. I use it at home.
 
-<video controls muted playsinline preload="metadata" poster="/video/search-grammar-pattern-poster.jpg" width="1440" height="900">
-  <source src="/video/search-grammar-pattern.mp4" type="video/mp4">
-</video>
-
-**Does it work? Here it is, live:** Tonight on my machine, real searches, one model call each, no cuts. Every result checked against the catalog.
-
-The full tour, 9 searches, from Japanese animation to Italian westerns:
+**Does it work? Here it is, live:** 9 real searches, one model call each, no cuts. Every result checked against the catalog.
 
 <div class="video-embed"><iframe src="https://www.youtube-nocookie.com/embed/hoCesxy2o08" title="The Search Grammar Pattern: natural language movie search, live demo" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
 
@@ -57,13 +61,25 @@ They failed in the same places. The model decided when to search and what to cal
 
 Everything you hand the model, you can only **ask**. Everything you keep in code, you can **guarantee**.
 
-So I moved the work. Less for the model to do. Something precise for it to read. After several rounds of tests, I ended up with this. I call it the search grammar pattern. Here is how it works.
+So I moved the work towards less for the model to do. After several rounds of tests, I ended up with this: I call it **the search grammar pattern**. 
+
+Here is how it works.
 
 ## What is the search grammar pattern?
 
-The offer, described by its dimensions instead of its rows.
+Tonight has 19,072 films on 14 services. The obvious idea: put them all in the prompt and let the model pick.
 
-Tonight has 19,072 films on 14 services. **As rows**, one line per film:
+That doesn't work. 19,072 films is about 1.1 million tokens. It doesn't fit in most models. The ones where it fits get lost in so much data and don't pick the best film. And you pay for 1.1 million tokens on every search, and you wait for them.
+
+So I needed the opposite. Not the catalog in the prompt. A short description of it.
+
+That's the search grammar. The whole offer, condensed. The fields a person can ask about, what each one means, and the few values that are fixed. A few thousand tokens, the same on every request.
+
+The model doesn't search. It reads the sentence against the grammar and fills the fields. Code does the rest.
+
+How do you condense a whole catalog? You describe it by its dimensions, not its rows.
+
+**As rows**, one line per film:
 
 ```
 Le Parrain (1972) · 175 min · Drame, Crime · Francis Ford Coppola · Marlon Brando, Al Pacino · Paramount+
@@ -72,20 +88,26 @@ Heat (1995) · 170 min · Drame, Action · Michael Mann · Al Pacino, Robert De 
 ... 19,069 more films
 ```
 
-**As dimensions**, a few of the 32 fields the model actually reads:
+**As dimensions**, a few of the 32 fields the model actually reads. Title and genre are there too. These are the ones that make it work:
 
 ```
-people        people named directly with no role stated: 'with Tom Hanks', 'a Meryl Streep film'
 references    a person reached THROUGH a film rather than named: 'actors from Titanic', 'the director of Heat'
-genre         genre words, only from the list given
-year_min      earliest year. 'the 90s' is 1990, 'recent' is 2015
-runtime_max   longest, in minutes. 'under two hours' is 120, 'short' is 100
+films         a film named for any reason other than wanting something like it
+directed_by   people the sentence says DIRECTED it: 'a Nolan film', 'réalisé par Audiard'
+genre_mode    'all' when it must be every genre at once ('a crime drama'), 'any' when either will do ('comedy or romcom')
+cast_mode     'all' when everyone named must be in the same film ('De Niro AND Pacino'), 'any' otherwise
+country       where the FILM is from, when a language cannot say it: British, American, Australian are all English
+keywords      what the film is ABOUT. Narrower than a genre and never flattened into one
 age           the age of the youngest person watching. A NUMBER, never a rating
+audience      who is watching, in the sentence's own words: kids, my mother, a first date
+pick          reception, never content: popular, blockbuster, acclaimed, classic
+exact         true only if the viewer insisted: only, must, exactly. It stops the search widening
+year_max      latest year. 'the 90s' is 1999, 'a classic' is 1990
 ...
 GENRES, use these words exactly: Action, Comedy, Drama, Romance ... (19 in total)
 ```
 
-The model doesn't search. It reads the sentence against the grammar and fills the fields. Code does the rest.
+I chose these dimensions. Some are columns of my database: year, runtime, language. Most are not. They are the ways a person asks for a film, and each of those comes with code that does the work before the SQL: a film becomes its cast, an age becomes the genres allowed, "scorcese" becomes Martin Scorsese.
 
 Not "parse this query". Parse it **against this grammar**.
 
@@ -100,7 +122,7 @@ Measured on Tonight's real data, no model, one token per 4 characters:
 
 350 times smaller. As rows, it doesn't fit in the model. As a grammar, it's one small call. And it's the same on every request, so it's cached. You pay for it once.
 
-[![The search grammar pattern: Tonight's 19,072 films as rows (about 1.1 million tokens) or as dimensions (about 3,200 tokens), and one film's 80 offers folded into 4 lines](/img/grammar-rows-vs-dimensions.png)](/img/grammar-rows-vs-dimensions.png)
+[![The search grammar pattern: Tonight's 19,072 films as rows (about 1.1 million tokens) or as dimensions (about 3,200 tokens)](/img/grammar-rows-vs-dimensions.png)](/img/grammar-rows-vs-dimensions.png)
 
 ## What goes in, and what stays out
 
@@ -117,92 +139,24 @@ Measured on Tonight's real data, no model, one token per 4 characters:
 
 ## It only works with a forgiving (fuzzy) search
 
-A compact grammar has a price. The model no longer picks exact items. It writes loose words. So the other half is code that forgives them, and says how sure it is:
+A compact grammar has a price. The model never sees the 57,913 people or the 19,072 titles. So it writes what you typed, not what the catalog calls it. "de nino". "godfathr". "le parrain".
+
+A plain database search finds nothing for those. So code searches the forgiving way. First the exact name. Then names spelled almost the same. In every title, in every language. And it says how sure it is:
 
 ```
 "de nino"       ->  Robert De Niro          close   among 57,913 people
 "godfathr"      ->  The Godfather (1972)    close
 "le parrain"    ->  The Godfather (1972)    exact   every title, in every language
 "titanic"       ->  Titanic (1997)          exact   1953 and 1943 reported, never hidden
-"Japanese"      ->  ja                      code knows the codes; the model never writes one
 ```
 
-The last line is a real bug. An early version asked the model for the language code. It returned "japanese". The filter compared it to "ja". The screen said "in Japanese" over an empty wall. Now the model says the word. Code finds the code.
-
-Exact first, fuzzy after. The answer says `exact` or `close`, never a number. A weak match comes back as a question, never applied silently.
+Exact first, fuzzy after. The answer says `exact` or `close`, never a number. A weak match comes back as a question ("did you mean"), never applied silently.
 
 Neither works alone. Without the forgiving search, the model's loose words match nothing. Without the grammar, the model has nothing precise to aim at. Together, the model can be approximate and the answer is still exact.
 
-## A large catalog where each item has its own options
-
-Tonight knows which of my services has each film. That's a filter in code. A real offer goes deeper: which service, rent or buy, which edition, which audio, at which price. Different for every film. No model knows it.
-
-Someone types "inceptoin with nolan talking over it". They mean the director's commentary. By spelling, "nolan talking over it" and "with commentary by Christopher Nolan" score 0.26. No forgiving search bridges that. Only reading can.
-
-To show this level, I rebuilt the pattern in a small open repo, [llm-search-grammar](https://github.com/cornelcroi/llm-search-grammar), with a web demo you can run. 200 real films from Wikidata. 17,262 ways to watch them, invented: fictional services, made-up prices, but the shape of a real offer.
-
-**One film, in full.** Titanic, 80 offers:
-
-```
-of5304  RentBox  rent  theatrical          SD  audio en  stereo  2.49 €
-of5305  RentBox  rent  theatrical          SD  audio es  stereo  2.49 €
-of5307  RentBox  rent  theatrical          HD  audio en  stereo  3.49 €
-of5322  RentBox  rent  extended (+37 min)  SD  audio en  stereo  3.49 €
-... 76 more
-```
-
-**The same film, as its pack:**
-
-```
-f1  StreamOne · subscription · theatrical · HD · audio en · included
-f2  CinePass · subscription · theatrical · HD · audio en,fr,it · included
-f3  RentBox · rent · 25th anniversary/Cameron's cut/extended (+37 min)/theatrical
-    · HD/SD · audio en,es,it · 2.49–4.99 €
-f4  RentBox · buy · the same 4 editions · HD/SD · audio en,es,it · 5.99–13.99 €
-```
-
-The same idea, one level down. Three moves:
-
-- **Fold.** Offers that differ in a few values become one line. Values become sets, prices a range. 80 offers, 4 lines.
-- **Write it once.** What every film shares goes in a dictionary, once, with variables. `{director}'s cut`. `with commentary by {person}`.
-- **Send only what the sentence names.** Code spots the films in the sentence before the call, typos and all, and sends their packs. The model still decides if a film is really meant: "something taken seriously" is not the film *Taken*.
-
-| On the demo | In full | As grammar | |
-|---|---:|---:|---:|
-| Titanic (1997), 80 offers | 1,626 | 144 | 11× smaller |
-| The biggest film, 408 offers | 9,695 | 292 | 33× smaller |
-| Every offer, every film | 396,929 | 2,676 with two films named | 148× smaller |
-
-The more offers, the better it folds. 408 offers is 6 lines. In full, the prompt grows with every offer. As a grammar, it grows with the number of distinct ways to watch.
-
-## What the model does with it
-
-Real output, `gpt-6-luna`, a small, cheap OpenAI model, reasoning off:
-
-```
-$ python3 -m examples.movies "inceptoin with nolan talking over it"
-
-CODE        loaded m142 Inception (2010), 3 families
-THE MODEL   edition "with commentary by Christopher Nolan", pointing at f1, f2, f3
-CODE        partial  Inception (2010) · RentBox · rent · theatrical · SD · 2.99 €  [of11110]
-                     missing  edition with commentary by Christopher Nolan (nowhere for this film)
-            ... the same for f1 and f3
-
-1 model call · 5,492 prompt tokens · 265 completion tokens
-```
-
-"inceptoin" is a typo. Code found the film before the call.
-
-"nolan talking over it" is a meaning. The model found it in the dictionary: `with commentary by {person}`. Code checked Inception's pack: theatrical only. So the answer is honest and certain. That version doesn't exist for this film. Here is what does, with real ids and prices that never passed through the model.
-
-The dictionary says what exists in general. The pack says what exists here. Not in the pack means it doesn't exist.
-
-
-Reading a sentence against a grammar is classification, not reasoning. A small model does it realy well.
-
 ## Natural language search for e-commerce, travel and more
 
-Movies are just my case. The same pattern works for natural language product search in an online shop, for hotel and flight search, car configurators, concert tickets. Anywhere the offer is too big for the prompt, and each item has options no model knows.
+Movies are just my case. The same pattern works for natural language product search in an online shop, for hotel and flight search, car configurators, concert tickets. Anywhere the offer is too big for the prompt.
 
 Its always the same flow. Someone types a sentence. The model turns it into search filters, against the grammar. Code finds the real items, the prices, the stock.
 
@@ -215,31 +169,31 @@ Its always the same flow. Someone types a sentence. The model turns it into sear
 | Fashion | "the running jacket in M, anything but black, under 150 €" | that the jacket comes in M, but only in Navy/Orange |
 | Concerts | "two seats together for Saturday, not behind the stage" | which seats are left in "Category 2" tonight |
 
-Always the same question: what does each item have that no model can know? That goes in its pack. A few values become a dimension. Everything big is left to code.
+Always the same question: how does a person ask for it? That gives the dimensions. A few values are listed. Everything big is left to code.
 
 ## The limits
 
-- The model can still misread a sentence. It can't invent a film, an offer or a price.
-- A folded line lists what exists in it, not every combination. Code always checks the exact item.
-- The demo's offers are invented. Real ones fold less neatly. Tonight's numbers are real.
+- The model can still misread a sentence. It can't invent a film.
+- Every dimension is code you write. A new way to ask is work, not a prompt edit.
+- The repo runs on 200 films. Tonight's numbers are real.
 
-Turning a sentence into filters from a schema is not new: LangChain's self-query retriever and Typesense's natural-language search do it. What I didn't find written up is the rest. The offer described by its dimensions. Only what the model can't know, listed. Each item's options folded into packs, sent on demand. And a forgiving search doing the other half.
+Turning a sentence into filters from a schema is not new: LangChain's self-query retriever and Typesense's natural-language search do it. What I didn't find written up is the rest. The whole offer condensed into its dimensions. Only the few fixed values listed, everything big left to code. Code that does the work before the SQL. And a forgiving search doing the other half.
 
 ## Why not a decision model?
 
 A decision model like [Jev](https://typesafe.ai), from TypeSafe AI, picks one of your options with a calibrated confidence. It looks like the perfect fit.
 
-It isn't. A decision model needs a finite set of answers. A search sentence has none: a price, a year, a name, an edition, in any combination. And listing them costs more than it saves. On the demo, the people alone are about 4,850 tokens, more than one question can hold. With editions and titles, about 6,700, more than the small model's whole prompt.
+It isn't. A decision model needs a finite set of answers. A search sentence has none: a year, a name, a genre, a person reached through a film, in any combination. And listing them costs more than it saves. On the demo, the people alone are about 4,850 tokens, more than one question can hold.
 
-It fits after the grammar, choosing between the few lines the small model already found. Step two, never step one.
+It fits after the grammar, choosing between the few films the search already found. Step two, never step one.
 
 ## What I took from it
 
 The model doesn't decide. It reads.
 
-Code decides. What exists, what applies, what it costs, and what to say when it's not there.
+Code decides. What exists, what applies, and what to say when it's not there.
 
-`gpt-6-luna` is not the best model. It doesn't need to be. The hard part is in the grammar and in code.
+The model behind it is `gpt-6-luna`, a small, cheap OpenAI model, reasoning off. Not the best model. It doesn't need to be. Reading a sentence against a grammar is classification, not reasoning. The hard part is in the grammar and in code.
 
 A small model. One call. A few thousand tokens. An answer that never invents.
 
@@ -250,9 +204,9 @@ git clone https://github.com/cornelcroi/llm-search-grammar
 cd llm-search-grammar
 cp .env.example .env        # your OpenAI key goes in .env
 python3 -m examples.movies.web          # the web demo, with posters: http://127.0.0.1:8000
-python3 -m examples.movies "inceptoin with nolan talking over it"   # the same steps, in the terminal
+python3 -m examples.movies "the leading actors from titanic, directed by scorcese"   # the same steps, in the terminal
 ```
 
-No dependencies. 35 tests, no key needed: they replay real model answers. The repo runs on 200 films, not Tonight's 19,072: its README says what you can ask.
+I rebuilt the pattern in a small open repo, [llm-search-grammar](https://github.com/cornelcroi/llm-search-grammar), with a web demo. 200 real films from Wikidata, not Tonight's 19,072: its README says what you can ask. No dependencies. 35 tests, no key needed: they replay real model answers.
 
 It's not the prompt. It's the grammar. That's the search grammar pattern.
