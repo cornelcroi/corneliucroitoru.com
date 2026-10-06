@@ -29,7 +29,15 @@ I've seen a lot of good films and I want more like those, across all my services
 
 What I wanted was simple. **One catalog with every film from all my services, the ones I can watch here in France. And a way to search it the way I talk.**
 
-I looked for an app that does this. I found nothing I liked so, naturally, I built one for my own taste. I called it Tonight. You say what you feel like watching, the way you would say it. Any sentence:
+I looked for an app that does this. I found nothing I liked so, naturally, I built one for my own taste. I called it Tonight.
+
+Here is how it looks, on my phone and on my Apple TV. Looks cool, right?
+
+<div class="devices"><a href="/img/tonight-phone.png" style="--ratio: 0.473"><img src="/img/tonight-phone.png" alt="Tonight on a phone: The Wolf of Wall Street in the web app, saved for tonight" width="848" height="1792" loading="lazy"></a><a href="/img/tonight-tv.jpg" style="--ratio: 1.778"><img src="/img/tonight-tv.jpg" alt="Tonight on the Apple TV: the same film's page, with Open in Prime Video, saved for tonight" width="2400" height="1350" loading="lazy"></a></div>
+
+*Left, the web app on my phone. Right, the Apple TV app. Same film, saved for tonight on the phone, already there on the TV.*
+
+You say what you feel like watching, the way you would say it. Any sentence:
 
 - "a French crime drama, not a comedy, from before 1980"
 - "a movie with the leading actors from titanic, directed by scorcese"
@@ -51,15 +59,7 @@ You get films you can start now, on the services you already pay for. I use it a
 
 It's an Apple TV app. Pick a film, press play, and it opens in its own app: Disney+, Prime Video, Canal+, HBO Max. Netflix ignores the link and opens its home screen, nothing I can do about that.
 
-[![Tonight on the Apple TV: the film page of The Wolf of Wall Street, with Open in Prime Video and the film saved for tonight](/img/tonight-tv-film-page.jpg)](/img/tonight-tv-film-page.jpg)
-
-*The film page on the Apple TV. "Open in Prime Video" opens the film in Prime Video's own app.*
-
 And you don't search with the remote. Typing on a TV is a sign you're on the wrong device. So you ask on your phone, the way you talk, save a film for tonight, and it's on the TV before you put the phone down.
-
-<a href="/img/tonight-phone.png"><img class="phone" src="/img/tonight-phone.png" alt="Tonight on a phone: the same film, The Wolf of Wall Street, saved for tonight in the web app" width="848" height="1792" loading="lazy"></a>
-
-*The same film on the phone, saved for tonight. A second later it's first in Tonight on the TV.*
 
 **Does it work? Here it is, live:** 9 real searches, one model call each, no cuts. Every result checked against the catalog.
 
