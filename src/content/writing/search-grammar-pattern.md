@@ -49,6 +49,18 @@ And there is a second problem. The answer must come from what I can actually wat
 
 You get films you can start now, on the services you already pay for. I use it at home.
 
+It's an Apple TV app. Pick a film, press play, and it opens in its own app: Disney+, Prime Video, Canal+, HBO Max. Netflix ignores the link and opens its home screen, nothing I can do about that.
+
+[![Tonight on the Apple TV: the film page of The Wolf of Wall Street, with Open in Prime Video and the film saved for tonight](/img/tonight-tv-film-page.jpg)](/img/tonight-tv-film-page.jpg)
+
+*The film page on the Apple TV. "Open in Prime Video" opens the film in Prime Video's own app.*
+
+And you don't search with the remote. Typing on a TV is a sign you're on the wrong device. So you ask on your phone, the way you talk, save a film for tonight, and it's on the TV before you put the phone down.
+
+<a href="/img/tonight-phone.png"><img class="phone" src="/img/tonight-phone.png" alt="Tonight on a phone: the same film, The Wolf of Wall Street, saved for tonight in the web app" width="848" height="1792" loading="lazy"></a>
+
+*The same film on the phone, saved for tonight. A second later it's first in Tonight on the TV.*
+
 **Does it work? Here it is, live:** 9 real searches, one model call each, no cuts. Every result checked against the catalog.
 
 <div class="video-embed"><iframe src="https://www.youtube-nocookie.com/embed/hoCesxy2o08" title="The Search Grammar Pattern: natural language movie search, live demo" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>

@@ -98,6 +98,8 @@ const videoObject = video && {
   .prose > :global(*) { max-width: var(--read); margin-inline: auto; }
   .prose > :global(p:has(img)), .prose > :global(video), .prose > :global(.video-embed) { max-width: var(--figure); }
   .prose :global(p:has(img) img) { width: 100%; }
+  /* A phone screen shows at phone size, not stretched to the column. */
+  .prose :global(p:has(img.phone) img) { display: block; width: 360px; max-width: 100%; margin-inline: auto; }
   /* A diagram links to its own file: one click opens it at full size. */
   .prose :global(a:has(> img)) { display: block; cursor: zoom-in; text-decoration: none; }
   .prose :global(p), .prose :global(ul), .prose :global(ol), .prose :global(blockquote) { margin-block: 0 1.2em; }
@@ -125,6 +127,7 @@ const videoObject = video && {
     /* Diagrams keep a readable size on a phone: they scroll sideways instead of shrinking to 6px text. */
     .prose > :global(p:has(img)) { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); }
     .prose :global(p:has(img) img) { width: auto; max-width: none; height: auto; min-width: 0; width: 760px; }
+    .prose :global(p:has(img.phone) img) { width: 280px; max-width: 100%; }
     .article__lede { font-size: 19px; }
   }
 </style>
