@@ -44,14 +44,6 @@ photos:
     shutter: "1/250 s"
     iso: "ISO 200"
     taken: "2020-07-13"
-  - src: ./06.jpg
-    camera: "Canon EOS 6D Mark II"
-    lens: "TAMRON SP 24-70mm F/2.8 Di VC USD G2 A032"
-    focal: "45 mm"
-    aperture: "f/8"
-    shutter: "1/640 s"
-    iso: "ISO 200"
-    taken: "2020-07-13"
   - src: ./07.jpg
     camera: "Canon EOS 6D Mark II"
     lens: "TAMRON SP 24-70mm F/2.8 Di VC USD G2 A032"

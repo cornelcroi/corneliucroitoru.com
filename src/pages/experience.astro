@@ -113,6 +113,8 @@ import { TALKS } from "../data/talks";
   .plain { margin: 12px 0 0; padding-left: 20px; }
   .talks__lede { margin: 12px 0 0; font-family: var(--serif); font-size: 17px; line-height: 1.5; color: var(--text); }
   .plain li { margin-bottom: 8px; }
+  /* Event, year and format on their own line: inline, they wrap into stray "· Talk" fragments. */
+  .plain li > .meta { display: block; margin-top: 2px; }
   .skills { display: grid; grid-template-columns: 170px 1fr; gap: 10px 24px; margin: 12px 0 0; }
   .skills dt { font-weight: 600; font-size: 15px; padding-top: 2px; }
   .skills dd { margin: 0; }
@@ -120,6 +122,8 @@ import { TALKS } from "../data/talks";
   .cv__two h2 { margin: 0 0 8px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); font-weight: 400; }
   .cv__two p { margin: 12px 0 24px; }
   @media (max-width: 640px) {
+    /* The date goes under the title every time, not only when the title is too long to share the line. */
+    .job__row { flex-direction: column; gap: 2px; }
     .skills { grid-template-columns: 1fr; gap: 2px; }
     .skills dd { margin-bottom: 10px; }
     .cv__two { grid-template-columns: 1fr; gap: 0; }

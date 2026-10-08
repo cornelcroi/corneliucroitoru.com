@@ -25,7 +25,7 @@ Ten a minute is not a limit I hit by accident. It is the pace at which three job
 
 Six minutes after the publish I ran the first query. This is what the queue looked like:
 
-```plaintext
+```text
 extract-places    done 28   pending 151
 moderate-content  done 27   pending 152
 moderate-image    done  0   pending  18

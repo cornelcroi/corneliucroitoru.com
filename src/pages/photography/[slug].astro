@@ -41,9 +41,9 @@ for (let i = 0; i < photos.length; i++) {
     </header>
 
     {rows.map((row) => (
-      <div class:list={["row", { "row--pair": row.length === 2 }]}>
+      <div class:list={["row", { "row--pair": row.length === 2 }]} style={`--ratios: ${row.reduce((sum, i) => sum + ratio(i), 0)}`}>
         {row.map((i) => (
-          <figure class:list={{ portrait: isPortrait(i) }} style={row.length === 2 ? `flex: ${ratio(i)} 1 0` : undefined}>
+          <figure style={`--ratio: ${ratio(i)}`}>
             <a href={largest(images[i])}>
               <img src={images[i].src} srcset={images[i].srcSet.attribute}
                 sizes={row.length === 2 ? "(max-width: 560px) 100vw, 560px" : "(max-width: 1180px) 100vw, 1120px"}
@@ -79,16 +79,20 @@ for (let i = 0; i < photos.length; i++) {
   .row { display: flex; gap: 14px; margin-bottom: 56px; }
   figure { margin: 0; flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
   figure img { display: block; width: 100%; height: auto; }
-  /* A lone portrait never fills more than one screen. */
-  .row:not(.row--pair) figure.portrait { align-items: center; }
-  .row:not(.row--pair) figure.portrait img { width: auto; max-width: 100%; max-height: 88vh; }
+  /* No photo is taller than the screen. The width comes from the ratio, not the loaded file,
+     so the space is reserved before a lazy image arrives and the caption starts at the photo's edge. */
+  .row:not(.row--pair) figure { align-items: center; }
+  .row:not(.row--pair) figure > * { width: min(100%, calc(88vh * var(--ratio))); }
+  .row--pair { max-width: calc(88vh * var(--ratios) + 14px); margin-inline: auto; }
+  .row--pair figure { flex: var(--ratio) 1 0; }
 
   figcaption { display: flex; flex-wrap: wrap; column-gap: 6px; font-size: 12px; letter-spacing: 0.01em; color: var(--faint); }
   figcaption span { white-space: nowrap; }
-  figcaption span + span::before { content: "·"; margin-right: 6px; }
+  /* The dot ends a line, never starts one: it belongs to the item before it. */
+  figcaption span:not(:last-child)::after { content: "·"; margin-left: 6px; }
 
   .series__foot { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding-top: 32px; border-top: 1px solid var(--rule); }
-  .neighbour { display: flex; align-items: center; gap: 16px; }
+  .neighbour { display: flex; align-items: center; gap: 16px; min-width: 0; }
   .neighbour:last-child { flex-direction: row-reverse; text-align: right; }
   .neighbour:hover { text-decoration: none; }
   .neighbour:hover .neighbour__title { text-decoration: underline; text-underline-offset: 3px; }
@@ -98,7 +102,12 @@ for (let i = 0; i < photos.length; i++) {
 
   @media (max-width: 560px) {
     .row { flex-direction: column; margin-bottom: 40px; }
-    .row--pair figure { flex: none !important; }
+    .row--pair { max-width: none; }
+    .row--pair figure { flex: none; align-items: center; }
+    .row--pair figure > * { width: min(100%, calc(88vh * var(--ratio))); }
+    /* A stacked pair is two photos like any other: same gap as between rows. */
+    .row--pair { gap: 40px; }
+    .series__foot { grid-template-columns: 1fr; }
     .neighbour :global(img) { width: 96px; }
     .neighbour__title { font-size: 16px; }
   }

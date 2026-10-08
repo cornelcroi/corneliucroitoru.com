@@ -93,7 +93,7 @@ How do you condense a whole catalog? You describe it by its dimensions, not its 
 
 **As rows**, one line per film:
 
-```
+```text
 Le Parrain (1972) · 175 min · Drame, Crime · Francis Ford Coppola · Marlon Brando, Al Pacino · Paramount+
 Titanic (1997) · 194 min · Drame, Romance · James Cameron · Leonardo DiCaprio, Kate Winslet · Disney+
 Heat (1995) · 170 min · Drame, Action · Michael Mann · Al Pacino, Robert De Niro · Disney+, HBO Max
@@ -102,7 +102,7 @@ Heat (1995) · 170 min · Drame, Action · Michael Mann · Al Pacino, Robert De 
 
 **As dimensions**, a few of the 32 fields the model actually reads. Title and genre are there too. These are the ones that make it work:
 
-```
+```text
 references    a person reached THROUGH a film rather than named: 'actors from Titanic', 'the director of Heat'
 films         a film named for any reason other than wanting something like it
 directed_by   people the sentence says DIRECTED it: 'a Nolan film', 'réalisé par Audiard'
@@ -155,7 +155,7 @@ A compact grammar has a price. The model never sees the 57,913 people or the 19,
 
 A plain database search finds nothing for those. So code searches the forgiving way. First the exact name. Then names spelled almost the same. In every title, in every language. And it says how sure it is:
 
-```
+```text
 "de nino"       ->  Robert De Niro          close   among 57,913 people
 "godfathr"      ->  The Godfather (1972)    close
 "le parrain"    ->  The Godfather (1972)    exact   every title, in every language

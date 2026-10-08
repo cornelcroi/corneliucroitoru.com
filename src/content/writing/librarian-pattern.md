@@ -16,7 +16,7 @@ I build [Back From My Trip](https://www.backfrommytrip.com), a travel site where
 
 Every AI-assisted project I've seen hits the same two walls:
 
-1 - The assistant changes code without knowing the rules of the feature it just touched. Tests pass. The flow is broken.
+1 - The assistant changes code without knowing the rules of the feature it just touched. Tests pass. The flow is broken.\
 2 - You try to fix that by feeding it more context. And now every session starts by loading half the repo into the model.
 
 The fix I use is old. Librarians solved it before computers existed.
@@ -117,9 +117,9 @@ The second line matters more than it looks. The assistant can fix bugs freely, b
 
 So every change runs the same cycle:
 
-1 - **Flow docs:** one file per flow, one index
-2 - **Read:** the assistant loads only the flow concerned
-3 - **Change:** the code, guided by the doc
+1 - **Flow docs:** one file per flow, one index\
+2 - **Read:** the assistant loads only the flow concerned\
+3 - **Change:** the code, guided by the doc\
 4 - **Update:** the flow doc, in the same commit
 
 

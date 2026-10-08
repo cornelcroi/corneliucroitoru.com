@@ -93,6 +93,8 @@ const videoObject = video && {
   .series a { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
   .series [aria-current] { color: var(--faint); }
   .article__foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--rule); font-size: 15px; color: var(--faint); }
+  /* "All writing" stays on the right, with or without a dev.to link before it. */
+  .article__foot a:last-child { margin-left: auto; }
 
   .prose { font-family: var(--serif); font-size: 20px; line-height: 1.65; color: var(--ink); }
   .prose > :global(*) { max-width: var(--read); margin-inline: auto; }
@@ -118,18 +120,19 @@ const videoObject = video && {
   .prose :global(code) { font-family: var(--mono); font-size: 0.8em; background: var(--code-bg); padding: 0.1em 0.35em; border-radius: 3px; }
   .prose :global(pre) { margin-block: 0 1.4em; padding: 18px 20px; overflow-x: auto; font-size: 15px; line-height: 1.55; border: 1px solid var(--rule); border-radius: 4px; background: var(--code-bg) !important; }
   .prose :global(pre code) { background: none; padding: 0; font-size: inherit; }
-  /* Prompts and code wrap rather than scroll: most blocks here are prose-like lines. */
-  .prose :global(pre), .prose :global(pre code) { white-space: pre-wrap; overflow-wrap: anywhere; }
-  .prose :global(table) { display: block; overflow-x: auto; border-collapse: collapse; margin-block: 0 1.4em; font-family: var(--sans); font-size: 15px; }
+  /* Prompts are prose-like lines: they wrap. Code keeps its lines and scrolls; a regex cut in two reads as a bug. */
+  .prose :global(pre[data-language="plaintext"]), .prose :global(pre[data-language="plaintext"] code) { white-space: pre-wrap; overflow-wrap: anywhere; }
+  .prose :global(table) { width: 100%; border-collapse: collapse; margin-block: 0 1.4em; font-family: var(--sans); font-size: 15px; }
   .prose :global(th), .prose :global(td) { padding: 8px 12px; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
+  .prose :global(:is(th, td):first-child) { padding-left: 0; }
+  .prose :global(:is(th, td):last-child) { padding-right: 0; }
   .prose :global(hr) { border: 0; border-top: 1px solid var(--rule); margin-block: 2.5em; }
   @media (max-width: 560px) {
     .prose { font-size: 18px; line-height: 1.6; }
     .prose :global(h2) { font-size: 23px; }
     .prose :global(pre) { font-size: 13px; padding: 14px 16px; }
-    /* Diagrams keep a readable size on a phone: they scroll sideways instead of shrinking to 6px text. */
-    .prose > :global(p:has(img)) { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); }
-    .prose :global(p:has(img) img) { width: auto; max-width: none; height: auto; min-width: 0; width: 760px; }
+    .prose :global(table) { font-size: 14px; }
+    .prose :global(th), .prose :global(td) { padding: 8px 6px; }
     .prose > :global(.devices) { flex-direction: column; }
     .prose :global(.devices figure) { flex: none; width: 100%; }
     .prose :global(.devices figure:first-child) { width: 60%; }

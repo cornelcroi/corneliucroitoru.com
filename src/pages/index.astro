@@ -93,6 +93,8 @@ const tiles = series.filter((s) => s.id !== heroSeries.id).slice(0, PHOTO_TILES)
   .intro .facts { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 14px; font-family: var(--sans); font-size: 14px; color: var(--faint); }
   .facts strong { color: var(--ink); font-weight: 600; }
   .intro .facts a { color: var(--ink); text-decoration: none; font-weight: 500; }
+  /* On a phone the facts wrap raggedly and the link lands among them: one per line, link last. */
+  @media (max-width: 560px) { .intro .facts { flex-direction: column; gap: 6px; } .intro .facts a { margin-top: 6px; } }
 
   .block { padding-top: 88px; }
   .block__head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
