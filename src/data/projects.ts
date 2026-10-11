@@ -1,4 +1,4 @@
-// `when` sits next to the role; `links` is the row of links under the text.
+// `when` sits next to the role; `links` is the row of links under the text; `short` is the home page line.
 export const BUILDING = [
   {
     name: "StreetLens",
@@ -10,7 +10,8 @@ export const BUILDING = [
       { label: "how it works", url: "https://streetlensapp.com/technology/" },
     ],
     line: "GPS audio guides · 6 cities · 8 languages · on the App Store",
-    text: "Hear the story of the places around you, in your language. Search for what you like, \"Emily in Paris filming spots\" or \"buildings by I.M. Pei\", and it builds a walking tour on the fly: an LLM reads the search, code picks the places and the route. Behind every story, a multi-step LLM pipeline: it extracts facts from sources, writes the story from those facts only, evaluates it against them, repairs what fails (90–95% fixed automatically), then voices it in 8 languages. A new city in days.",
+    short: "Hear the story of the places around you, as you walk. 6 cities, 8 languages, on the App Store.",
+    text: "Hear the story of the places around you, in your language. You search for what you like, \"Emily in Paris filming spots\" or \"buildings by I.M. Pei\", and it builds a walking tour on the fly. Behind every story, a multi-step LLM pipeline researches sources, extracts the facts, writes the story from them and checks every line against those facts. What fails is repaired, 90–95% of it automatically. Then text-to-speech turns it into audio in 8 languages. A new city in days.",
     role: "Co-founder",
     image: { bare: true, src: "/img/projects/streetlens.jpg", alt: "StreetLens on iPhone: searching Honfleur, a story of Notre-Dame in Japanese, and the lock screen playing", width: 1400, height: 900 },
   },
@@ -20,7 +21,8 @@ export const BUILDING = [
     when: "live since August 2026",
     links: [{ label: "BackFromMyTrip.com", url: "https://www.backfrommytrip.com" }],
     line: "Trip reports · one verdict: would I go back?",
-    text: "Travellers write trip reports that end with one question: would I go back? No AI you can see. LLMs work in the background, on the boring parts: they moderate every report, find the places it mentions and check the photos. Anything uncertain goes to a person, never to the bin. They only read. They never write a word of the story.",
+    short: "Trip reports that end with one question: would I go back?",
+    text: "Travellers write trip reports that end with one question: would I go back? LLMs work in the background. They moderate every report, find the places it mentions and check the photos. When they are not sure, a person decides. They never write a word of the story.",
     role: "Co-founder",
     series: "Building Back From My Trip",
     image: { src: "/img/projects/backfrommytrip.jpg", alt: "The Back From My Trip home page: the trip report of the week, its verdict and its verified badge", width: 1280, height: 680 },
@@ -47,6 +49,7 @@ export const AGENT_SQUAD = {
   url: "https://github.com/2fastlabs/agent-squad",
   when: "2024 – now",
   line: "Multi-agent orchestration · 7.7k stars",
+  short: "Open source. It sends each request to the right AI agent and keeps the conversation across them. 7.7k stars.",
   text: "Routes each request to the right agent and keeps the conversation across them. Python and TypeScript, plus a Swift runtime that runs entirely on the device. Includes GroundedAgent: the agent that calls the tools never writes the reply. Born from a customer need at AWS, open-sourced as Multi-Agent Orchestrator. AWS lists it in its official Guidance for Multi-Agent Orchestration, next to Amazon Bedrock AgentCore and LangGraph.",
   links: [{ label: "GitHub", url: "https://github.com/2fastlabs/agent-squad" }, { label: "AWS Guidance", url: "https://docs.aws.amazon.com/solutions/multi-agent-orchestration-on-aws/" }],
   role: "Co-creator, lead maintainer",

@@ -2,10 +2,14 @@
 import { Image } from "astro:assets";
 import Base from "../layouts/Base.astro";
 import { SITE } from "../site";
+import { AGENT_SQUAD, BUILDING } from "../data/projects";
 import { PHOTO_QUALITY, formatDate, getAllPosts, getSeries } from "../lib/content";
 
 const LATEST_POSTS = 3;
 const PHOTO_TILES = 4;
+
+// The two live products and the open source, in that order; the rest is on the Projects page.
+const projects = [...BUILDING.filter((p) => p.name !== "BandBike"), AGENT_SQUAD];
 
 const allPosts = await getAllPosts();
 // The most recent, newest first (owner, 2026-10-05: a new article shows on the home page the day it goes live).
@@ -33,17 +37,31 @@ const tiles = series.filter((s) => s.id !== heroSeries.id).slice(0, PHOTO_TILES)
 
   <main class="wrap col">
     <section class="intro">
-      <p class="intro__lead">20+ years of shipping software. Since 2023, everything I build is GenAI-based.</p>
-      <p>I design and build GenAI systems: agents, LLM pipelines, evaluation. Today as Staff GenAI Solutions Architect at Betclic, where I review every GenAI initiative and lead MCP adoption. Before that, 7 years at AWS: cloud architect for hundreds of customers, serverless and edge, then 30+ prototypes built with customers.</p>
-      <p>What I love is the whole product, not just the AI: the idea, the architecture, the UX. Two of mine are live, and I co-founded both: <a href="https://streetlensapp.com">StreetLens</a> and <a href="https://www.backfrommytrip.com">Back From My Trip</a>.</p>
+      <p class="intro__lead">20+ years of shipping software. GenAI since 2023: at AWS, at Betclic and in my own products.</p>
+      <p>What I do best: take a business problem, find the architecture that fits, and build it, from the first prototype to production. At AWS I did it 30+ times with customers, 2 to 6 weeks each. Before GenAI, I was a cloud architect for hundreds of AWS customers.</p>
+      <p>Today at Betclic, as Staff GenAI Solutions Architect, I review GenAI projects, build prototypes with product teams and lead MCP adoption.</p>
+      <p>I do it for myself too: <a href="https://streetlensapp.com">StreetLens</a> and <a href="https://www.backfrommytrip.com">Back From My Trip</a>, two products I co-founded, both live.</p>
       <p>And I photograph the places I travel to.</p>
       <p class="facts">
-        <span><strong>7.7k</strong> stars on Agent Squad</span>
+        <span><strong>Hundreds</strong> of customers as an AWS architect</span>
+        <span><strong>30+</strong> prototypes at AWS</span>
         <span><strong>10</strong> talks, including re:Invent</span>
-        <span><strong>3</strong> AWS certifications</span>
+        <span><strong>1</strong> official AWS Solution</span>
         <span>French, English, Romanian</span>
-        <a href="/experience/">Experience →</a>
+        <a href="/experience/">Full experience →</a>
       </p>
+    </section>
+
+    <section class="block">
+      <div class="block__head"><h2>Projects</h2></div>
+      {projects.map((p) => (
+        <a class="post" href={p.url}>
+          <span class="post__title">{p.name}</span>
+          <span class="post__excerpt">{p.short ?? p.line}</span>
+          <span class="meta">{[p.role, p.when].filter(Boolean).join(" · ")}</span>
+        </a>
+      ))}
+      <a class="more" href="/projects/">All projects →</a>
     </section>
 
     <section class="block">
@@ -60,11 +78,11 @@ const tiles = series.filter((s) => s.id !== heroSeries.id).slice(0, PHOTO_TILES)
 
     <section class="block">
       <div class="block__head"><h2>Photography</h2></div>
-      <p class="block__lede">Photography is my other passion. I shoot the places I travel to. For years that meant a Canon, APS-C then full frame, and later a Sony mirrorless. Now it's mostly my iPhone: the best camera is the one you always have with you, and the Pro models have been really good these last few years.</p>
+      <p class="block__lede">Photography is my other passion. I shoot the places I travel to, mostly on my iPhone now.</p>
       <div class="tiles">
         {tiles.map((s) => (
           <a href={`/photography/${s.id}/`} class="tile">
-            <Image src={s.data.cover} alt={s.data.title} widths={[400, 700]} sizes="(max-width: 760px) 50vw, 360px" quality={PHOTO_QUALITY} />
+            <Image src={s.data.cover} alt={s.data.title} widths={[400, 700]} sizes="(max-width: 640px) 50vw, 180px" quality={PHOTO_QUALITY} />
             <span class="meta">{s.data.title}</span>
           </a>
         ))}
@@ -109,7 +127,9 @@ const tiles = series.filter((s) => s.id !== heroSeries.id).slice(0, PHOTO_TILES)
   .post__title { font-family: var(--serif); font-size: 22px; line-height: 1.25; font-weight: 700; }
   .post__excerpt { font-family: var(--serif); font-size: 17px; line-height: 1.5; color: var(--muted); }
 
-  .tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 16px; }
+  /* One row of four on desktop and iPad; two by two on a phone. */
+  .tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 16px; }
+  @media (max-width: 640px) { .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; } }
   .tile { display: flex; flex-direction: column; gap: 8px; }
   .tile img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
   @media (max-width: 560px) { .hero__caption { display: none; } }
