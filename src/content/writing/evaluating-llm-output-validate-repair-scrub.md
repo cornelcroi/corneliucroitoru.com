@@ -4,10 +4,10 @@ draft: true
 description: "Checking LLM output is easy. The hard part is what to do when it fails: a repair that fixes only the failing sentence, and a scrubber that cuts it."
 tags: [llm, ai, evaluation, hallucinations]
 video:
-  youtube: VIDEO_ID
+  youtube: 7sKgGatdKIM
   title: "How to Fix LLM Hallucinations (Without Regenerating)"
   description: "Checking what an LLM writes is easy, the hard part is the FAIL: a repair that fixes only the failing sentence, a scrubber that cuts it, and the same validator after every step. How StreetLens checks every script."
-  uploaded: 2026-10-12
+  uploaded: 2026-10-11
   duration: PT1M14S
 series: "Building StreetLens"
 cover: /covers/evaluating-llm-output-validate-repair-scrub.png
@@ -27,7 +27,7 @@ cover: /covers/evaluating-llm-output-validate-repair-scrub.png
 
 **The whole idea in one minute:** a wrong date the repair fixes, and an invented sentence it can't.
 
-<div class="video-embed"><iframe src="https://www.youtube-nocookie.com/embed/VIDEO_ID" title="Validate, repair, scrub: what to do when an LLM check fails" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+<div class="video-embed"><iframe src="https://www.youtube-nocookie.com/embed/7sKgGatdKIM" title="Validate, repair, scrub: what to do when an LLM check fails" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
 
 ## The situation
 
