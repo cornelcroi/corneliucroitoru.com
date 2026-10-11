@@ -7,7 +7,7 @@ tags: [llm, ai, search, architecture]
 video:
   youtube: hoCesxy2o08
   title: "Natural Language Search with LLMs | The Search Grammar Pattern | Live Demo"
-  description: "Natural language search with an LLM over a whole movie catalog: one small LLM call per search, structured output, and code that decides what exists. 9 real searches in Tonight, every result checked against the catalog."
+  description: "Natural language search over 19,072 films with one small LLM call. No RAG, no agent loop: the model reads the sentence, code decides what exists, so every result is a real film."
   uploaded: 2026-10-04
   duration: PT1M49S
 cover: /covers/search-grammar-pattern.png
