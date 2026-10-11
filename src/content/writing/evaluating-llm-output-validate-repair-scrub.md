@@ -1,6 +1,6 @@
 ---
 title: "Evaluating LLM Output in Production: Validate, Repair, Scrub"
-draft: true
+date: 2026-10-11
 description: "Checking LLM output is easy. The hard part is what to do when it fails: a repair that fixes only the failing sentence, and a scrubber that cuts it."
 tags: [llm, ai, evaluation, hallucinations]
 video:
