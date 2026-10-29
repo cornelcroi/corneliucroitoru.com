@@ -74,7 +74,7 @@ export const PROTOTYPES = [
   { name: "Tonight", url: "/writing/search-grammar-pattern/", text: "A film search: ask in plain words, across the 14 streaming services we pay for at home", thumb: "/img/projects/tonight-thumb.jpg", thumbAlt: "Tonight on the TV: a film page with the service to open it in" },
 ];
 
-// Small MCP servers, one tool each. Listed under Open source, next to Context Lens.
+// Small MCP servers. Listed under Open source, next to Context Lens.
 export const MCP_SERVERS = [
   { name: "Ask James", url: "https://github.com/cornelcroi/ask-james", text: "a second opinion from another LLM, inside your assistant" },
   { name: "Data Lens", url: "https://github.com/cornelcroi/data-lens", text: "ask questions about spreadsheets in plain English" },
