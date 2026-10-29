@@ -12,6 +12,7 @@ export type ListedPost = {
   minutes?: number;
   series?: string;
   featured?: boolean;
+  prototype?: boolean;
 };
 
 const WORDS_PER_MINUTE = 230;
@@ -68,6 +69,7 @@ export async function getAllPosts(): Promise<ListedPost[]> {
     minutes: readingMinutes(a.body ?? ""),
     featured: a.data.featured,
     series: a.data.series,
+    prototype: a.data.prototype,
   }));
   const external = EXTERNAL.map((e) => ({ ...e, href: e.url, series: e.project }));
   return [...own, ...external].sort((a, b) => when(b.date) - when(a.date));

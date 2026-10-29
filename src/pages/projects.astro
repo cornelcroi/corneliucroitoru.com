@@ -1,6 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import { AGENT_SQUAD, BUILDING, BUILT_AT_AWS, CONTEXT_LENS, EXPERIMENTS } from "../data/projects";
+import { AGENT_SQUAD, BUILDING, BUILT_AT_AWS, CONTEXT_LENS, PROTOTYPES } from "../data/projects";
 import { getArticleSeries } from "../lib/content";
 import AboutProject from "../components/AboutProject.astro";
 import ProjectPanel from "../components/ProjectPanel.astro";
@@ -31,9 +31,9 @@ const seriesOf = Object.fromEntries(
       <AboutProject name={AGENT_SQUAD.name} />
     </ProjectPanel>
     <ProjectPanel name={CONTEXT_LENS.name} url={CONTEXT_LENS.url} role={CONTEXT_LENS.role} text={CONTEXT_LENS.text} when={CONTEXT_LENS.when} />
-    <h3 class="sub-group">Experiments, one idea each</h3>
-    <ul class="experiments">
-      {EXPERIMENTS.map((e) => <li><a href={e.url}>{e.name}</a>, {e.text}</li>)}
+    <h3 class="sub-group">Prototypes, one idea each</h3>
+    <ul class="prototypes">
+      {PROTOTYPES.map((e) => <li><a href={e.url}>{e.name}</a>, {e.text}</li>)}
     </ul>
 
     <h2 class="eyebrow group">Cloud architecture, built at AWS</h2>
@@ -49,8 +49,8 @@ const seriesOf = Object.fromEntries(
   .narrow { max-width: calc(760px + 2 * var(--gutter)); }
   .group { margin: 56px 0 0; font-weight: 400; }
   .sub-group { margin: 28px 0 8px; font-size: 13px; font-weight: 600; color: var(--faint); letter-spacing: 0.04em; }
-  .experiments { margin: 0; padding-left: 18px; font-family: var(--serif); font-size: 16px; line-height: 1.6; color: var(--muted); }
-  .experiments a { font-weight: 600; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  .prototypes { margin: 0; padding-left: 18px; font-family: var(--serif); font-size: 16px; line-height: 1.6; color: var(--muted); }
+  .prototypes a { font-weight: 600; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
   .series ol { margin: 6px 0 0; padding-left: 18px; font-family: var(--serif); font-size: 16px; line-height: 1.6; }
   .series a { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 </style>

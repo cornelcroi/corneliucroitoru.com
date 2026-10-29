@@ -11,6 +11,7 @@ video:
   uploaded: 2026-10-04
   duration: PT1M49S
 cover: /covers/search-grammar-pattern.png
+prototype: true
 ---
 
 **Natural language search over a catalog the LLM has never seen. The whole offer, condensed into a few thousand tokens. The model reads. Code decides.**

@@ -27,6 +27,8 @@ const writing = defineCollection({
     }).optional(),
     // Articles about one product; they link to each other in date order.
     series: z.string().optional(),
+    // A small tool built for a real need, shown as an experiment. Listed under « Prototypes » on the Writing page.
+    prototype: z.boolean().default(false),
     draft: z.boolean().default(false),
     // Shown on the home page. Pick three that show range, not the three newest.
     featured: z.boolean().default(false),

@@ -12,7 +12,7 @@ export async function getStaticPaths() {
 
 const { article } = Astro.props;
 const { Content } = await render(article);
-const { title, seoTitle, description, date, updated, cover, devto, tags, series, video } = article.data;
+const { title, seoTitle, description, date, updated, cover, devto, tags, series, video, prototype } = article.data;
 const parts = series ? await getArticleSeries(series) : [];
 // Local dev only: say why an article is not on the live site yet.
 const status = import.meta.env.DEV && !isLive(article.data)
@@ -53,6 +53,7 @@ const videoObject = video && {
   <article class="wrap article">
     <header class="article__head">
       {status && <span class="status">{status}</span>}
+      {prototype && <a class="proto" href="/writing/#prototypes">Prototype</a>}
       <span class="meta">{[date && formatDate(date), `${readingMinutes(article.body ?? "")} min read`].filter(Boolean).join(" · ")}</span>
       <h1>{title}</h1>
       <p class="article__lede">{description}</p>
@@ -84,6 +85,7 @@ const videoObject = video && {
   .article__head, .series, .article__foot { max-width: var(--read); margin-inline: auto; }
   .article__head { display: flex; flex-direction: column; gap: 14px; margin-block: 56px 32px; }
   .article__head h1 { margin: 0; font-family: var(--serif); font-size: clamp(32px, 5vw, 44px); line-height: 1.12; font-weight: 700; letter-spacing: -0.015em; }
+  .proto { align-self: flex-start; padding: 3px 10px; border: 1px solid var(--rule); border-radius: 4px; color: var(--muted); font-size: 13px; font-weight: 600; text-decoration: none; }
   .status { align-self: flex-start; padding: 4px 10px; border-radius: 4px; background: #fff4d6; color: #7a5300; font-size: 13px; font-weight: 600; }
   .article__lede { margin: 0; font-family: var(--serif); font-size: 21px; line-height: 1.45; color: var(--muted); }
   .article__cover { width: 100%; max-width: var(--read); margin: 0 auto 40px; }

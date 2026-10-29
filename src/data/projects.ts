@@ -63,8 +63,9 @@ export const CONTEXT_LENS = {
   role: "Author",
 };
 
-// Small experiments, one idea each: a short list, never full entries.
-export const EXPERIMENTS = [
+// Small prototypes, one idea each: a short list, never full entries. Their articles are under « Prototypes » on the Writing page.
+export const PROTOTYPES = [
+  { name: "Garage & Route", url: "https://cornelcroi.github.io/how-a-car-works/", text: "a 3D car to see how a car works, and how to park it" },
   { name: "Ask James", url: "https://github.com/cornelcroi/ask-james", text: "a second opinion from another LLM, inside your assistant" },
   { name: "Data Lens", url: "https://github.com/cornelcroi/data-lens", text: "ask questions about spreadsheets in plain English" },
   { name: "Bookmark Lens", url: "https://github.com/cornelcroi/bookmark-lens", text: "your bookmarks, searchable by meaning" },
