@@ -1,6 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import { AGENT_SQUAD, BUILDING, BUILT_AT_AWS, CONTEXT_LENS, PROTOTYPES } from "../data/projects";
+import { AGENT_SQUAD, BUILDING, BUILT_AT_AWS, CONTEXT_LENS, MCP_SERVERS, PROTOTYPES } from "../data/projects";
 import { getArticleSeries } from "../lib/content";
 import AboutProject from "../components/AboutProject.astro";
 import ProjectPanel from "../components/ProjectPanel.astro";
@@ -31,10 +31,22 @@ const seriesOf = Object.fromEntries(
       <AboutProject name={AGENT_SQUAD.name} />
     </ProjectPanel>
     <ProjectPanel name={CONTEXT_LENS.name} url={CONTEXT_LENS.url} role={CONTEXT_LENS.role} text={CONTEXT_LENS.text} when={CONTEXT_LENS.when} />
-    <h3 class="sub-group">Prototypes, one idea each</h3>
+    <h3 class="sub-group">More MCP servers, one tool each</h3>
     <ul class="prototypes">
-      {PROTOTYPES.map((e) => <li><a href={e.url}>{e.name}</a>, {e.text}</li>)}
+      {MCP_SERVERS.map((e) => <li><a href={e.url}>{e.name}</a>, {e.text}</li>)}
     </ul>
+
+    <h2 class="eyebrow group" id="prototypes">Prototypes</h2>
+    <p class="protos-lede">Always building something. Small tools for a real need at home, open to try.</p>
+    <div class="proto-cards">
+      {PROTOTYPES.map((e) => (
+        <a class="proto-card" href={e.url}>
+          <img src={e.thumb} alt={e.thumbAlt} width="640" height="400" loading="lazy" decoding="async">
+          <span class="proto-card__name">{e.name}</span>
+          <span class="proto-card__text">{e.text}</span>
+        </a>
+      ))}
+    </div>
 
     <h2 class="eyebrow group">Cloud architecture, built at AWS</h2>
     {BUILT_AT_AWS.map((p) => (
@@ -49,6 +61,14 @@ const seriesOf = Object.fromEntries(
   .narrow { max-width: calc(760px + 2 * var(--gutter)); }
   .group { margin: 56px 0 0; font-weight: 400; }
   .sub-group { margin: 28px 0 8px; font-size: 13px; font-weight: 600; color: var(--faint); letter-spacing: 0.04em; }
+  .proto-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .proto-card { display: flex; flex-direction: column; gap: 6px; padding: 12px; background: var(--code-bg); border-radius: 10px; text-decoration: none; }
+  .proto-card img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 6px; }
+  .proto-card__name { margin-top: 4px; font-family: var(--serif); font-size: 19px; font-weight: 700; color: var(--ink); }
+  .proto-card:hover .proto-card__name { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+  .proto-card__text { font-family: var(--serif); font-size: 16px; line-height: 1.45; color: var(--muted); }
+  @media (max-width: 560px) { .proto-cards { grid-template-columns: 1fr; } }
+  .protos-lede { margin: 0 0 12px; font-family: var(--serif); font-size: 17px; line-height: 1.5; color: var(--text); }
   .prototypes { margin: 0; padding-left: 18px; font-family: var(--serif); font-size: 16px; line-height: 1.6; color: var(--muted); }
   .prototypes a { font-weight: 600; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
   .series ol { margin: 6px 0 0; padding-left: 18px; font-family: var(--serif); font-size: 16px; line-height: 1.6; }
