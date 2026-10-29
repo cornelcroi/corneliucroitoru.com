@@ -10,7 +10,6 @@ video:
   description: "A 3D car in the browser: see every part move, the electric car recharging when it brakes, joining the motorway and the blind spot, and parallel parking, step by step."
   uploaded: 2026-10-29
   duration: PT2M27S
-draft: true
 prototype: true
 ---
 
