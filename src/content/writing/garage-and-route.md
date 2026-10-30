@@ -5,17 +5,17 @@ description: "Before his driving lessons, my son couldn't picture what happens i
 date: 2026-10-29
 tags: [ai, claudecode, threejs, sideproject]
 video:
-  youtube: l2wo4F_K5eM
+  youtube: NLF0tzihFMU
   title: "I built a tool with a 3D car to help my son learn to drive"
   description: "A 3D car in the browser: see every part move, the electric car recharging when it brakes, joining the motorway and the blind spot, and parallel parking, step by step."
-  uploaded: 2026-10-29
-  duration: PT2M27S
+  uploaded: 2026-10-30
+  duration: PT3M13S
 prototype: true
 ---
 
 <!-- DRAFT 2026-10-29. Facts checked in ~/projects/comment-marche-une-voiture (repo cornelcroi/how-a-car-works):
      src/page.html + src/js/*.js = 3,079 lines; 13 videos (9 Explore, 4 Drive); three.js from a CDN, no build-time deps.
-     Video: https://youtu.be/l2wo4F_K5eM (docs/media/youtube-4k.mp4, 2:27, rendered by tools/render-video.mjs). -->
+     Video: https://youtu.be/NLF0tzihFMU (docs/media/youtube-4k.mp4, 3:13, rendered by tools/render-video.mjs). -->
 
 **My son starts driving lessons soon. The clutch, the gearbox, idle, manual or automatic: he had trouble picturing how it all works inside. What is connected to what, and what moves when you press a pedal.**
 
@@ -25,9 +25,9 @@ I started with my coding assistant: a 3D car with all the parts, that you can ac
 
 Then I couldn't stop.
 
-**The whole thing in two and a half minutes:**
+**The whole thing in three minutes:**
 
-<div class="video-embed"><iframe src="https://www.youtube-nocookie.com/embed/l2wo4F_K5eM" title="I built a tool with a 3D car to help my son learn to drive" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+<div class="video-embed"><iframe src="https://www.youtube-nocookie.com/embed/NLF0tzihFMU" title="I built a tool with a 3D car to help my son learn to drive" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
 
 [![The car opened up, every part labelled](/img/garage-and-route/overview.jpg)](/img/garage-and-route/overview.jpg)
 
